@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: rook-ceph-csi-cephfs-provisioner
   namespace: ns-rook-ceph
-  labels:
-    app: rook-ceph-csi-cephfs-provisioner
 spec:
   replicas: 1
   selector:
@@ -18,20 +16,31 @@ spec:
       serviceAccountName: rook-csi-cephfs-provisioner-sa
       containers:
         - name: csi-provisioner
-          image: quay.io/cephcsi/cephcsi:v3.9.0
+          image: quay.io/k8scsi/csi-provisioner:v3.5.0
           args:
-            - "--provisioner=cephfs.csi.ceph.com"
             - "--csi-address=$(ADDRESS)"
-            - "--v=5"
-            - "--feature-gates=Topology=true"
+            - "--leader-election"
           env:
             - name: ADDRESS
               value: /csi/csi.sock
           volumeMounts:
             - name: socket-dir
               mountPath: /csi
+
+        - name: cephcsi
+          image: quay.io/cephcsi/cephcsi:v3.9.0
+          args:
+            - "--type=cephfs"
+            - "--drivername=cephfs.csi.ceph.com"
+            - "--endpoint=$(CSI_ENDPOINT)"
+            - "--v=5"
+          env:
+            - name: CSI_ENDPOINT
+              value: unix:///csi/csi.sock
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+
       volumes:
         - name: socket-dir
-          hostPath:
-            path: /var/lib/kubelet/plugins/cephfs.csi.ceph.com
-            type: DirectoryOrCreate
+          emptyDir: {}

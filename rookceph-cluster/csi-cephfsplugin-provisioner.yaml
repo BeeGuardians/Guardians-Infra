@@ -32,6 +32,7 @@ spec:
           args:
             - "--type=cephfs"
             - "--drivername=cephfs.csi.ceph.com"
+            - "--endpoint=unix:///csi/csi.sock"
             - "--endpoint=$(CSI_ENDPOINT)"
             - "--v=5"
           env:

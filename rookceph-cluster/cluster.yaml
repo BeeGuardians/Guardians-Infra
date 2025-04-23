@@ -1,0 +1,32 @@
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+spec:
+  cephVersion:
+    image: quay.io/ceph/ceph:v18.2.0
+    allowUnsupported: false
+  dataDirHostPath: /var/lib/rook
+  mon:
+    count: 3
+    allowMultiplePerNode: false
+  dashboard:
+    enabled: true
+  network:
+    hostNetwork: false
+  storage:
+    useAllNodes: false
+    useAllDevices: false
+    nodes:
+      - name: "guardians2"
+        devices:
+          - name: "sdb"
+      - name: "guardians3"
+        devices:
+          - name: "sdb"
+      - name: "guardians4"
+        devices:
+          - name: "sdb"
+  disruptionManagement:
+    managePodBudgets: true

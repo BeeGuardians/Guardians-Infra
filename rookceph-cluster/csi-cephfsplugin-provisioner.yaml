@@ -33,9 +33,14 @@ spec:
             - "--type=cephfs"
             - "--drivername=cephfs.csi.ceph.com"
             - "--endpoint=unix:///csi/csi.sock"
-            - "--endpoint=$(CSI_ENDPOINT)"
+            - "--nodeid=$(NODE_ID)"
+            - "--controllerserver=true"
             - "--v=5"
           env:
+            - name: NODE_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
             - name: CSI_ENDPOINT
               value: unix:///csi/csi.sock
           volumeMounts:

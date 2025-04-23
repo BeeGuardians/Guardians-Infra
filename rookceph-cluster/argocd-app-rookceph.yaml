@@ -11,7 +11,7 @@ spec:
     path: rookceph-cluster
   destination:
     server: https://kubernetes.default.svc
-    namespace: rook-ceph
+    namespace: ns-rook-ceph
   syncPolicy:
     automated:
       prune: true

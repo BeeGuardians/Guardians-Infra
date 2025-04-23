@@ -8,8 +8,5 @@ roleRef:
   name: rook-csi-cephfs-clusterrole
 subjects:
   - kind: ServiceAccount
-    name: rook-csi-cephfs-nodeplugin
-    namespace: ns-rook-ceph
-  - kind: ServiceAccount
     name: rook-csi-cephfs-provisioner-sa
-    namespace: ns-rook-ceph
+    namespace: rook-ceph

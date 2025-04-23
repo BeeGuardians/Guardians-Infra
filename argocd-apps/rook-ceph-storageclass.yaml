@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rook-ceph
+  name: rook-ceph-storageclass
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
     targetRevision: dev
-    path: rookceph-cluster
+    path: rookceph-cluster/storageclass
   destination:
     server: https://kubernetes.default.svc
-    namespace: ns-rook-ceph
+    namespace: rook-ceph
   syncPolicy:
     automated:
       prune: true

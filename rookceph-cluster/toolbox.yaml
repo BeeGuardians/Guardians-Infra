@@ -18,8 +18,6 @@ spec:
       containers:
         - name: rook-ceph-tools
           image: rook/ceph:v1.13.3
-          command: ["/tini"]
-          args: ["-g", "--", "/usr/local/bin/toolbox.sh"]
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true

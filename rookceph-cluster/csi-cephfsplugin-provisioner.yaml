@@ -23,6 +23,7 @@ spec:
             - "--provisioner=cephfs.csi.ceph.com"
             - "--csi-address=$(ADDRESS)"
             - "--v=5"
+            - "--feature-gates=Topology=true"
           env:
             - name: ADDRESS
               value: /csi/csi.sock

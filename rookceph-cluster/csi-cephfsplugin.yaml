@@ -19,9 +19,10 @@ spec:
         - name: csi-cephfsplugin
           image: quay.io/cephcsi/cephcsi:v3.9.0
           args:
-            - "--type=cephfs"
             - "--nodeid=$(NODE_ID)"
             - "--endpoint=$(CSI_ENDPOINT)"
+            - "--drivername=cephfs.csi.ceph.com"
+            - "--type=cephfs"
             - "--v=5"
           env:
             - name: NODE_ID

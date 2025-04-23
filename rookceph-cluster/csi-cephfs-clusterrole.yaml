@@ -4,10 +4,10 @@ metadata:
   name: rook-csi-cephfs-clusterrole
 rules:
   - apiGroups: [""]
-    resources: ["persistentvolumes", "nodes", "pods"]
+    resources: ["persistentvolumes", "nodes", "pods", "persistentvolumeclaims"]
     verbs: ["get", "list", "watch"]
   - apiGroups: ["storage.k8s.io"]
-    resources: ["csinodes"]
+    resources: ["csinodes", "storageclasses"]
     verbs: ["get", "list", "watch"]
   - apiGroups: ["coordination.k8s.io"]
     resources: ["leases"]

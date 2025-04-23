@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: rook-ceph-csi-cephfs-plugin
+  namespace: ns-rook-ceph
+  labels:
+    app: rook-ceph-csi-cephfs-plugin
+spec:
+  selector:
+    matchLabels:
+      app: rook-ceph-csi-cephfs-plugin
+  template:
+    metadata:
+      labels:
+        app: rook-ceph-csi-cephfs-plugin
+    spec:
+      serviceAccountName: rook-csi-cephfs-nodeplugin
+      containers:
+        - name: csi-cephfsplugin
+          image: quay.io/cephcsi/cephcsi:v3.9.0
+          args:
+            - "--type=cephfs"
+            - "--nodeid=$(NODE_ID)"
+            - "--endpoint=$(CSI_ENDPOINT)"
+            - "--v=5"
+          env:
+            - name: NODE_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: CSI_ENDPOINT
+              value: unix:///csi/csi.sock
+          volumeMounts:
+            - name: plugin-dir
+              mountPath: /csi
+      volumes:
+        - name: plugin-dir
+          hostPath:
+            path: /var/lib/kubelet/plugins/cephfs.csi.ceph.com
+            type: DirectoryOrCreate

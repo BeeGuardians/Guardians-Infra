@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: rook-csi-cephfs-clusterrolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rook-csi-cephfs-clusterrole
+subjects:
+  - kind: ServiceAccount
+    name: rook-csi-cephfs-nodeplugin
+    namespace: ns-rook-ceph
+  - kind: ServiceAccount
+    name: rook-csi-cephfs-provisioner-sa
+    namespace: ns-rook-ceph

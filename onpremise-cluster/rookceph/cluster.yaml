@@ -9,24 +9,26 @@ spec:
     allowUnsupported: false
   dataDirHostPath: /var/lib/rook
   mon:
-    count: 3
-    allowMultiplePerNode: false
+    count: 1
+    allowMultiplePerNode: true
   dashboard:
     enabled: true
+    ssl: false
   network:
     hostNetwork: false
   storage:
     useAllNodes: false
     useAllDevices: false
     nodes:
-      - name: "guardians2"
+      - name: guardians2
         devices:
           - name: "sdb"
-      - name: "guardians3"
+      - name: guardians3
         devices:
           - name: "sdb"
-      - name: "guardians4"
+      - name: guardians4
         devices:
           - name: "sdb"
-  disruptionManagement:
-    managePodBudgets: true
+    config:
+      osdsPerDevice: "1"
+      encryptedDevice: "false"

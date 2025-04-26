@@ -14,8 +14,6 @@ spec:
       labels:
         app: redis
     spec:
-      nodeSelector:
-        db-node: "true"
       containers:
       - name: redis
         image: redis:latest

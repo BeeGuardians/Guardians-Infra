@@ -24,3 +24,7 @@ persistence:
       storageClass: rook-ceph-block
     trivy:
       storageClass: rook-ceph-block
+
+  imageChartStorage:
+    disableredirect: true
+    storageClass: rook-ceph-block

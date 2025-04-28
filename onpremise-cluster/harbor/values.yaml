@@ -28,7 +28,6 @@ persistence:
 
   imageChartStorage:
     disableredirect: true
-    type: filesystem
     filesystem:
       rootdirectory: /storage
       storageClass: rook-ceph-block

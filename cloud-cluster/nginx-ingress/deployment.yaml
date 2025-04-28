@@ -21,10 +21,15 @@ spec:
           image: k8s.gcr.io/ingress-nginx/controller:v1.9.4
           args:
             - /nginx-ingress-controller
+            - --publish-service=$(POD_NAMESPACE)/ingress-nginx-controller
             - --election-id=ingress-controller-leader
             - --controller-class=k8s.io/ingress-nginx
             - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
-            - --publish-service=$(POD_NAMESPACE)/ingress-nginx-controller
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           ports:
             - name: http
               containerPort: 80

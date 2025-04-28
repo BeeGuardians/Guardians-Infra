@@ -11,30 +11,18 @@ spec:
     targetRevision: 1.14.0
     helm:
       parameters:
-        - name: persistence.persistentVolumeClaim.registry.storageClass
-          value: rook-ceph-block
-        - name: persistence.persistentVolumeClaim.registry.size
-          value: 5Gi
-        - name: persistence.persistentVolumeClaim.jobservice.storageClass
-          value: rook-ceph-block
-        - name: persistence.persistentVolumeClaim.jobservice.size
-          value: 2Gi
-        - name: persistence.persistentVolumeClaim.database.storageClass
-          value: rook-ceph-block
-        - name: persistence.persistentVolumeClaim.database.size
-          value: 5Gi
-        - name: persistence.persistentVolumeClaim.redis.storageClass
-          value: rook-ceph-block
-        - name: persistence.persistentVolumeClaim.redis.size
-          value: 500Mi
-        - name: persistence.persistentVolumeClaim.trivy.storageClass
-          value: rook-ceph-block
-        - name: persistence.persistentVolumeClaim.trivy.size
-          value: 500Mi
-        - name: persistence.imageChartStorage.filesystem.storageClass
-          value: rook-ceph-block
-        - name: persistence.imageChartStorage.filesystem.size
-          value: 2Gi
+        - name: persistence.persistentVolumeClaim.registry.existingClaim
+          value: harbor-inner-registry
+        - name: persistence.persistentVolumeClaim.jobservice.existingClaim
+          value: harbor-inner-jobservice
+        - name: persistence.persistentVolumeClaim.database.existingClaim
+          value: harbor-inner-database
+        - name: persistence.persistentVolumeClaim.redis.existingClaim
+          value: harbor-inner-redis
+        - name: persistence.persistentVolumeClaim.trivy.existingClaim
+          value: harbor-inner-trivy
+        - name: persistence.imageChartStorage.filesystem.existingClaim
+          value: harbor-inner-registry
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-devops

@@ -18,6 +18,9 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+  claimRef:
+    namespace: ns-devops
+    name: data-harbor-inner-redis-0
 ---
 # pv-harbor-inner-trivy
 apiVersion: v1
@@ -39,6 +42,9 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+  claimRef:
+    namespace: ns-devops
+    name: data-harbor-inner-trivy-0
 ---
 # pv-harbor-inner-database
 apiVersion: v1
@@ -60,6 +66,9 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+  claimRef:
+    namespace: ns-devops
+    name: database-data-harbor-inner-database-0
 ---
 # pv-harbor-inner-registry
 apiVersion: v1
@@ -81,6 +90,9 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+  claimRef:
+    namespace: ns-devops
+    name: harbor-inner-registry
 ---
 # pv-harbor-inner-jobservice
 apiVersion: v1
@@ -102,3 +114,6 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+  claimRef:
+    namespace: ns-devops
+    name: harbor-inner-jobservice

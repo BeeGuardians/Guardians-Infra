@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ingress-nginx-controller
-  namespace: ingress-nginx
-data: {}
+  name: nginx-ingress-controller
+  namespace: nginx-ingress
+data:
+  enable-ssl-passthrough: "false"

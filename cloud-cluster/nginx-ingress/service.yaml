@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ingress-nginx-controller
-  namespace: ingress-nginx
+  name: nginx-ingress-controller
+  namespace: nginx-ingress
 spec:
   type: LoadBalancer
   selector:
-    app: ingress-nginx
+    app: nginx-ingress-controller
   ports:
     - name: http
       port: 80

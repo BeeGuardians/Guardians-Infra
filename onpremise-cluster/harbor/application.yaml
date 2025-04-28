@@ -10,8 +10,19 @@ spec:
     chart: harbor
     targetRevision: 1.14.0
     helm:
-      valueFiles:
-        - values.yaml
+      parameters:
+        - name: persistence.persistentVolumeClaim.registry.storageClass
+          value: rook-ceph-block
+        - name: persistence.persistentVolumeClaim.jobservice.storageClass
+          value: rook-ceph-block
+        - name: persistence.persistentVolumeClaim.database.storageClass
+          value: rook-ceph-block
+        - name: persistence.persistentVolumeClaim.redis.storageClass
+          value: rook-ceph-block
+        - name: persistence.persistentVolumeClaim.trivy.storageClass
+          value: rook-ceph-block
+        - name: persistence.imageChartStorage.filesystem.storageClass
+          value: rook-ceph-block
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-devops

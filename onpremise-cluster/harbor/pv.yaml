@@ -1,0 +1,104 @@
+# pv-harbor-inner-redis
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-harbor-inner-redis
+spec:
+  capacity:
+    storage: 500Mi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: rook-ceph-block
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: rook-ceph.rbd.csi.ceph.com
+    fsType: ext4
+    volumeHandle: pv-harbor-inner-redis
+    volumeAttributes:
+      clusterID: rook-ceph
+      pool: rook-ceph-blockpool
+      imageFeatures: layering
+---
+# pv-harbor-inner-trivy
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-harbor-inner-trivy
+spec:
+  capacity:
+    storage: 500Mi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: rook-ceph-block
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: rook-ceph.rbd.csi.ceph.com
+    fsType: ext4
+    volumeHandle: pv-harbor-inner-trivy
+    volumeAttributes:
+      clusterID: rook-ceph
+      pool: rook-ceph-blockpool
+      imageFeatures: layering
+---
+# pv-harbor-inner-database
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-harbor-inner-database
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: rook-ceph-block
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: rook-ceph.rbd.csi.ceph.com
+    fsType: ext4
+    volumeHandle: pv-harbor-inner-database
+    volumeAttributes:
+      clusterID: rook-ceph
+      pool: rook-ceph-blockpool
+      imageFeatures: layering
+---
+# pv-harbor-inner-registry
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-harbor-inner-registry
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: rook-ceph-block
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: rook-ceph.rbd.csi.ceph.com
+    fsType: ext4
+    volumeHandle: pv-harbor-inner-registry
+    volumeAttributes:
+      clusterID: rook-ceph
+      pool: rook-ceph-blockpool
+      imageFeatures: layering
+---
+# pv-harbor-inner-jobservice
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-harbor-inner-jobservice
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: rook-ceph-block
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: rook-ceph.rbd.csi.ceph.com
+    fsType: ext4
+    volumeHandle: pv-harbor-inner-jobservice
+    volumeAttributes:
+      clusterID: rook-ceph
+      pool: rook-ceph-blockpool
+      imageFeatures: layering

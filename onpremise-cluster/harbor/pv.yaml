@@ -1,3 +1,5 @@
+# 수정된 pv.yaml (모든 PV에 imageName 추가 완료)
+
 # pv-harbor-inner-redis
 apiVersion: v1
 kind: PersistentVolume
@@ -18,6 +20,7 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+      imageName: pv-harbor-inner-redis
     nodeStageSecretRef:
       name: rook-csi-rbd-node
       namespace: rook-ceph
@@ -45,6 +48,7 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+      imageName: pv-harbor-inner-trivy
     nodeStageSecretRef:
       name: rook-csi-rbd-node
       namespace: rook-ceph
@@ -72,6 +76,7 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+      imageName: pv-harbor-inner-database
     nodeStageSecretRef:
       name: rook-csi-rbd-node
       namespace: rook-ceph
@@ -99,6 +104,7 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+      imageName: pv-harbor-inner-registry
     nodeStageSecretRef:
       name: rook-csi-rbd-node
       namespace: rook-ceph
@@ -126,6 +132,7 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+      imageName: pv-harbor-inner-jobservice
     nodeStageSecretRef:
       name: rook-csi-rbd-node
       namespace: rook-ceph

@@ -18,6 +18,9 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+    nodeStageSecretRef:
+      name: rook-csi-rbd-node
+      namespace: rook-ceph
   claimRef:
     namespace: ns-devops
     name: data-harbor-inner-redis-0
@@ -42,6 +45,9 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+    nodeStageSecretRef:
+      name: rook-csi-rbd-node
+      namespace: rook-ceph
   claimRef:
     namespace: ns-devops
     name: data-harbor-inner-trivy-0
@@ -66,6 +72,9 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+    nodeStageSecretRef:
+      name: rook-csi-rbd-node
+      namespace: rook-ceph
   claimRef:
     namespace: ns-devops
     name: database-data-harbor-inner-database-0
@@ -90,6 +99,9 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+    nodeStageSecretRef:
+      name: rook-csi-rbd-node
+      namespace: rook-ceph
   claimRef:
     namespace: ns-devops
     name: harbor-inner-registry
@@ -114,6 +126,9 @@ spec:
       clusterID: rook-ceph
       pool: rook-ceph-blockpool
       imageFeatures: layering
+    nodeStageSecretRef:
+      name: rook-csi-rbd-node
+      namespace: rook-ceph
   claimRef:
     namespace: ns-devops
     name: harbor-inner-jobservice

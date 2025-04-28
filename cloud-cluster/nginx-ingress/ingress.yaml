@@ -5,7 +5,13 @@ metadata:
   namespace: nginx-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
+  tls:
+    - hosts:
+        - bee-guardians.com
+      secretName: bee-guardians-tls
   rules:
     - host: bee-guardians.com
       http:

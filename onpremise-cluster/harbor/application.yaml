@@ -1,0 +1,37 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: harbor
+  namespace: harbor
+spec:
+  chart: harbor
+  repo: https://helm.goharbor.io
+  targetNamespace: harbor
+  version: 1.14.0
+  valuesContent: |
+    expose:
+      type: ingress
+      tls:
+        enabled: false
+      ingress:
+        hosts:
+          core: harbor.guardians.com
+
+    externalURL: http://harbor.guardians.com
+
+    existingSecret: harbor-admin-password
+
+    persistence:
+      enabled: true
+      resourcePolicy: "retain"
+      persistentVolumeClaim:
+        registry:
+          storageClass: rook-ceph-block
+        jobservice:
+          storageClass: rook-ceph-block
+        database:
+          storageClass: rook-ceph-block
+        redis:
+          storageClass: rook-ceph-block
+        trivy:
+          storageClass: rook-ceph-block

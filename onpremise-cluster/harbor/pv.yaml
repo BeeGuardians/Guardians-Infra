@@ -5,7 +5,7 @@ metadata:
   name: pv-harbor-inner-redis
 spec:
   capacity:
-    storage: 500Mi
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   storageClassName: rook-ceph-block

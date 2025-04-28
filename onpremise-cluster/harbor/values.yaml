@@ -16,14 +16,19 @@ persistence:
 
   persistentVolumeClaim:
     registry:
+      existingClaim: ""
       storageClass: rook-ceph-block
     jobservice:
+      existingClaim: ""
       storageClass: rook-ceph-block
     database:
+      existingClaim: ""
       storageClass: rook-ceph-block
     redis:
+      existingClaim: ""
       storageClass: rook-ceph-block
     trivy:
+      existingClaim: ""
       storageClass: rook-ceph-block
 
   imageChartStorage:

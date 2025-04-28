@@ -89,7 +89,7 @@ metadata:
   name: pv-harbor-inner-jobservice
 spec:
   capacity:
-    storage: 1Gi
+    storage: 2Gi
   accessModes:
     - ReadWriteOnce
   storageClassName: rook-ceph-block

@@ -3,6 +3,4 @@ kind: ConfigMap
 metadata:
   name: ingress-nginx-controller
   namespace: ingress-nginx
-data:
-  proxy-body-size: "10m"
-  use-forwarded-headers: "true"
+data: {}

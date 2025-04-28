@@ -16,11 +16,11 @@ spec:
         - name: persistence.persistentVolumeClaim.jobservice.existingClaim
           value: harbor-inner-jobservice
         - name: persistence.persistentVolumeClaim.database.existingClaim
-          value: harbor-inner-database
+          value: 	database-data-harbor-inner-database-0
         - name: persistence.persistentVolumeClaim.redis.existingClaim
-          value: harbor-inner-redis
+          value: data-harbor-inner-redis-0
         - name: persistence.persistentVolumeClaim.trivy.existingClaim
-          value: harbor-inner-trivy
+          value: 	data-harbor-inner-trivy-0
         - name: persistence.imageChartStorage.filesystem.existingClaim
           value: harbor-inner-registry
   destination:

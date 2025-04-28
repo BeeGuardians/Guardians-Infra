@@ -1,37 +1,23 @@
-apiVersion: helm.cattle.io/v1
-kind: HelmChart
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: harbor
-  namespace: harbor
+  name: harbor-inner
+  namespace: ns-devops
 spec:
-  chart: harbor
-  repo: https://helm.goharbor.io
-  targetNamespace: harbor
-  version: 1.14.0
-  valuesContent: |
-    expose:
-      type: ingress
-      tls:
-        enabled: false
-      ingress:
-        hosts:
-          core: harbor.guardians.com
-
-    externalURL: http://harbor.guardians.com
-
-    existingSecret: harbor-admin-password
-
-    persistence:
-      enabled: true
-      resourcePolicy: "retain"
-      persistentVolumeClaim:
-        registry:
-          storageClass: rook-ceph-block
-        jobservice:
-          storageClass: rook-ceph-block
-        database:
-          storageClass: rook-ceph-block
-        redis:
-          storageClass: rook-ceph-block
-        trivy:
-          storageClass: rook-ceph-block
+  project: default
+  source:
+    repoURL: https://helm.goharbor.io
+    chart: harbor
+    targetRevision: 1.14.0
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ns-devops
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

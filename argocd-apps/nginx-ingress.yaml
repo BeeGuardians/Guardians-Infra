@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cloud-nginx-ingress
+  name: nginx-ingress
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
-    targetRevision: feat/nginx-ingress
+    targetRevision: dev
     path: cloud-cluster/nginx-ingress
   destination:
     server: https://43.202.32.34:6443

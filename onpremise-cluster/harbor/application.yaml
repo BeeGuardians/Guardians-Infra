@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: harbor-inner
-  namespace: ns-devops
+  namespace: argocd
 spec:
   project: default
   source:

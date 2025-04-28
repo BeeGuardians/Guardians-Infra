@@ -18,7 +18,7 @@ spec:
         - name: persistence.persistentVolumeClaim.jobservice.storageClass
           value: rook-ceph-block
         - name: persistence.persistentVolumeClaim.jobservice.size
-          value: 5Gi
+          value: 1Gi
         - name: persistence.persistentVolumeClaim.database.storageClass
           value: rook-ceph-block
         - name: persistence.persistentVolumeClaim.database.size
@@ -26,15 +26,15 @@ spec:
         - name: persistence.persistentVolumeClaim.redis.storageClass
           value: rook-ceph-block
         - name: persistence.persistentVolumeClaim.redis.size
-          value: 5Gi
+          value: 500Mi
         - name: persistence.persistentVolumeClaim.trivy.storageClass
           value: rook-ceph-block
         - name: persistence.persistentVolumeClaim.trivy.size
-          value: 5Gi
+          value: 500Mi
         - name: persistence.imageChartStorage.filesystem.storageClass
           value: rook-ceph-block
         - name: persistence.imageChartStorage.filesystem.size
-          value: 5Gi
+          value: 2Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-devops

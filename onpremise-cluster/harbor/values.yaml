@@ -13,6 +13,7 @@ existingSecret: harbor-admin-password
 persistence:
   enabled: true
   resourcePolicy: "retain"
+
   persistentVolumeClaim:
     registry:
       storageClass: rook-ceph-block
@@ -27,4 +28,7 @@ persistence:
 
   imageChartStorage:
     disableredirect: true
-    storageClass: rook-ceph-block
+    type: filesystem
+    filesystem:
+      rootdirectory: /storage
+      storageClass: rook-ceph-block

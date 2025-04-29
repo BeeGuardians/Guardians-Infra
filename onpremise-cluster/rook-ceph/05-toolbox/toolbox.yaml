@@ -16,8 +16,8 @@ spec:
       containers:
         - name: rook-ceph-tools
           image: rook/ceph:v1.13.2
-          command: ["/tini"]
-          args: ["-g", "--", "/usr/local/bin/toolbox.sh"]
+          command: ["/bin/bash"]
+          args: ["-c", "sleep infinity"]
           tty: true
           stdin: true
           securityContext:

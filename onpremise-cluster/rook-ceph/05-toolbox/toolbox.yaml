@@ -16,9 +16,31 @@ spec:
       containers:
         - name: rook-ceph-tools
           image: rook/ceph:v1.13.2
-          command: ["/bin/bash"]
-          args: ["-c", "sleep infinity"]
+          command: ["/tini"]
+          args: ["-g", "--", "/usr/local/bin/toolbox.sh"]
           tty: true
           stdin: true
           securityContext:
             privileged: true
+          env:
+            - name: ROOK_CEPH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: rook-ceph-mon
+                  key: user
+            - name: ROOK_CEPH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: rook-ceph-mon
+                  key: key
+          volumeMounts:
+            - name: ceph-config
+              mountPath: /etc/ceph
+      volumes:
+        - name: ceph-config
+          projected:
+            sources:
+              - configMap:
+                  name: rook-ceph-config
+              - secret:
+                  name: rook-ceph-mon

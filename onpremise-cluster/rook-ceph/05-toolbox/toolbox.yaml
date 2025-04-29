@@ -34,13 +34,9 @@ spec:
                   name: rook-ceph-mon
                   key: key
           volumeMounts:
-            - name: ceph-config
+            - name: rook-ceph-config
               mountPath: /etc/ceph
       volumes:
-        - name: ceph-config
-          projected:
-            sources:
-              - configMap:
-                  name: rook-ceph-config
-              - secret:
-                  name: rook-ceph-mon
+        - name: rook-ceph-config
+          secret:
+            secretName: rook-ceph-mon

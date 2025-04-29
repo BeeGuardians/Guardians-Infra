@@ -16,17 +16,17 @@ persistence:
 
   persistentVolumeClaim:
     registry:
-      existingClaim: ""
+      existingClaim: harbor-inner-registry
       storageClass: rook-ceph-block
     jobservice:
-      existingClaim: ""
+      existingClaim: harbor-inner-jobservice
       storageClass: rook-ceph-block
     database:
-      existingClaim: ""
+      existingClaim: database-data-harbor-inner-database-0
       storageClass: rook-ceph-block
     redis:
-      existingClaim: ""
+      existingClaim: data-harbor-inner-redis-0
       storageClass: rook-ceph-block
     trivy:
-      existingClaim: ""
+      existingClaim: data-harbor-inner-trivy-0
       storageClass: rook-ceph-block

@@ -10,7 +10,19 @@ spec:
     chart: harbor
     targetRevision: 1.14.0
     helm:
-      parameters: []
+      parameters:
+        - name: persistence.persistentVolumeClaim.registry.existingClaim
+          value: harbor-inner-registry
+        - name: persistence.persistentVolumeClaim.jobservice.existingClaim
+          value: harbor-inner-jobservice
+        - name: persistence.persistentVolumeClaim.database.existingClaim
+          value: 	database-data-harbor-inner-database-0
+        - name: persistence.persistentVolumeClaim.redis.existingClaim
+          value: data-harbor-inner-redis-0
+        - name: persistence.persistentVolumeClaim.trivy.existingClaim
+          value: 	data-harbor-inner-trivy-0
+        - name: persistence.imageChartStorage.filesystem.existingClaim
+          value: harbor-inner-registry
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-devops

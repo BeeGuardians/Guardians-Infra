@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault
+  namespace: ns-vault
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vault
+  template:
+    metadata:
+      labels:
+        app: vault
+    spec:
+      containers:
+        - name: vault
+          image: hashicorp/vault:1.14.5
+          ports:
+            - containerPort: 8200
+          volumeMounts:
+            - mountPath: /vault/data
+              name: vault-storage
+          env:
+            - name: VAULT_LOCAL_CONFIG
+              value: |
+                {
+                  "backend": {
+                    "file": {
+                      "path": "/vault/data"
+                    }
+                  },
+                  "listener": {
+                    "tcp": {
+                      "address": "0.0.0.0:8200",
+                      "tls_disable": 1
+                    }
+                  },
+                  "ui": true
+                }
+      volumes:
+        - name: vault-storage
+          persistentVolumeClaim:
+            claimName: vault-data

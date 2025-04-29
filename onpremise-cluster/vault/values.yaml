@@ -1,0 +1,23 @@
+server:
+  ha:
+    enabled: true
+  dataStorage:
+    enabled: true
+    size: 10Gi
+    storageClass: rook-cephfs # 필요한 경우 스토리지클래스 없으면 주석 처리해도 됨
+
+  standalone:
+    enabled: false
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - host: vault.example.com
+        paths:
+          - path: /
+            pathType: Prefix
+
+ui:
+  enabled: true

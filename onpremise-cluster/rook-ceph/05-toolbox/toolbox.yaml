@@ -27,16 +27,20 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: rook-ceph-mon
-                  key: user
+                  key: ceph-username
             - name: ROOK_CEPH_SECRET
               valueFrom:
                 secretKeyRef:
                   name: rook-ceph-mon
-                  key: key
+                  key: ceph-secret
           volumeMounts:
-            - name: rook-ceph-config
+            - name: ceph-config
               mountPath: /etc/ceph
       volumes:
-        - name: rook-ceph-config
-          secret:
-            secretName: rook-ceph-mon
+        - name: ceph-config
+          projected:
+            sources:
+              - configMap:
+                  name: rook-ceph-config
+              - secret:
+                  name: rook-ceph-mon

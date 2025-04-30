@@ -33,3 +33,23 @@ spec:
                 secretKeyRef:
                   name: rook-ceph-mon
                   key: ceph-secret
+          volumeMounts:
+            - name: ceph-conf
+              mountPath: /etc/ceph/ceph.conf
+              subPath: ceph.conf
+            - name: ceph-keyring
+              mountPath: /etc/ceph/ceph.client.admin.keyring
+              subPath: ceph.client.admin.keyring
+      volumes:
+        - name: ceph-conf
+          configMap:
+            name: rook-ceph-config
+            items:
+              - key: config
+                path: ceph.conf
+        - name: ceph-keyring
+          secret:
+            secretName: rook-ceph-mon
+            items:
+              - key: ceph-secret
+                path: ceph.client.admin.keyring

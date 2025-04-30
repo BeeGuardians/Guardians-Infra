@@ -22,14 +22,3 @@ spec:
           stdin: true
           securityContext:
             privileged: true
-          volumeMounts:
-            - name: ceph-conf
-              mountPath: /etc/ceph/ceph.conf
-              subPath: ceph.conf
-      volumes:
-        - name: ceph-conf
-          configMap:
-            name: rook-ceph-config
-            items:
-              - key: config
-                path: ceph.conf

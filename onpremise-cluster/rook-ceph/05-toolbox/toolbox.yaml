@@ -13,26 +13,6 @@ spec:
       labels:
         app: rook-ceph-tools
     spec:
-      initContainers:
-        - name: init-keyring
-          image: busybox
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              echo "[client.admin]
-              key = $(CEPH_SECRET)
-              caps mon = \"allow *\"
-              caps osd = \"allow *\"
-              caps mds = \"allow *\"" > /etc/ceph/ceph.client.admin.keyring
-          env:
-            - name: CEPH_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: rook-ceph-mon
-                  key: ceph-secret
-          volumeMounts:
-            - name: ceph-keyring
-              mountPath: /etc/ceph
       containers:
         - name: rook-ceph-tools
           image: rook/ceph:v1.13.2
@@ -46,8 +26,6 @@ spec:
             - name: ceph-conf
               mountPath: /etc/ceph/ceph.conf
               subPath: ceph.conf
-            - name: ceph-keyring
-              mountPath: /etc/ceph
       volumes:
         - name: ceph-conf
           configMap:
@@ -55,5 +33,3 @@ spec:
             items:
               - key: config
                 path: ceph.conf
-        - name: ceph-keyring
-          emptyDir: {}

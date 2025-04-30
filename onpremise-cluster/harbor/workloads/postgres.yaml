@@ -1,0 +1,55 @@
+# postgres.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: harbor-database
+  namespace: ns-devops
+  labels:
+    app: harbor-postgres
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app: harbor-postgres
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harbor-postgres
+  namespace: ns-devops
+  labels:
+    app: harbor-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harbor-postgres
+  template:
+    metadata:
+      labels:
+        app: harbor-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:13
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: registry
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: harbor-postgres-secret
+                  key: POSTGRES_PASSWORD
+          volumeMounts:
+            - name: db-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: harbor-database

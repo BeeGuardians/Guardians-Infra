@@ -17,18 +17,19 @@ persistence:
   enabled: true
   persistentVolumeClaim:
     registry:
-      existingClaim: harbor-registry-pvc
+      existingClaim: harbor-registry
     jobservice:
-      existingClaim: harbor-jobservice-pvc
+      existingClaim: harbor-jobservice
     database:
-      existingClaim: harbor-database-pvc
+      existingClaim: database-data-harbor-database-0
     redis:
-      existingClaim: harbor-redis-pvc
-    trivy:
-      existingClaim: harbor-trivy-pvc
+      existingClaim: data-harbor-redis-0
 
 database:
   type: internal
 
 trivy:
   enabled: true
+  persistence:
+    enabled: true
+    existingClaim: data-harbor-trivy-0

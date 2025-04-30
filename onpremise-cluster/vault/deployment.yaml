@@ -16,8 +16,6 @@ spec:
       containers:
         - name: vault
           image: hashicorp/vault:1.14.5
-          ports:
-            - containerPort: 8200
           volumeMounts:
             - mountPath: /vault/data
               name: vault-storage
@@ -36,10 +34,9 @@ spec:
                       "tls_disable": 1
                     }
                   },
-                  "ui": true
+                  "ui": true,
+                  "api_addr": "http://127.0.0.1:8200"
                 }
-            - name: VAULT_API_ADDR
-              value: "http://localhost:8200"
           securityContext:
             capabilities:
               add:

@@ -5,8 +5,8 @@ metadata:
   namespace: ns-devops
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
-  storageClassName: rook-cephfs
+  storageClassName: rook-ceph-fs

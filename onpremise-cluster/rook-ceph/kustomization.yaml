@@ -9,7 +9,6 @@ resources:
   - 04-storageclass/rbd-storageclass.yaml
   - 04-storageclass/cephfs-storageclass.yaml
   - 05-toolbox/toolbox.yaml
-  - 05-toolbox/rook-ceph-config.yaml
 
 patches:
   - target:

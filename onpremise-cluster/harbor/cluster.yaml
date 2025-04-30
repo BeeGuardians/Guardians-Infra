@@ -1,0 +1,36 @@
+apiVersion: goharbor.io/v1alpha1
+kind: HarborCluster
+metadata:
+  name: my-harbor
+  namespace: ns-devops
+spec:
+  harborAdminPasswordRef:
+    name: harbor-admin-password
+    key: password
+
+  storageClass: rook-ceph-block
+
+  expose:
+    type: NodePort
+    tls:
+      enabled: false
+    nodePorts:
+      http: 30401
+      https: 30402
+      notary: 30403
+
+  components:
+    core:
+      replicas: 2
+    jobservice:
+      replicas: 2
+    registry:
+      replicas: 2
+    portal:
+      replicas: 2
+    trivy:
+      replicas: 2
+    redis:
+      replicas: 1
+    database:
+      replicas: 1

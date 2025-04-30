@@ -61,8 +61,6 @@ spec:
                   fieldPath: metadata.namespace
       volumes:
         - name: rook-config
-          hostPath:
-            path: /var/lib/rook
-            type: DirectoryOrCreate
+          emptyDir: {}
         - name: default-config-dir
           emptyDir: {}

@@ -8,8 +8,6 @@ expose:
     https:
       port: 30402
 
-externalURL: http://harbor.local:30401
-
 harborAdminPassword:
   existingSecret: harbor-admin-password
 

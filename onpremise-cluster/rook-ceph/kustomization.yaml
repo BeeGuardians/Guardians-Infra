@@ -6,6 +6,7 @@ resources:
   - 01-common/common.yaml
   - 02-operator/operator.yaml
   - 03-cluster/cluster.yaml
+  - 03-cluster/filesystem.yaml
   - 04-storageclass/rbd-storageclass.yaml
   - 04-storageclass/cephfs-storageclass.yaml
   - 05-toolbox/toolbox.yaml

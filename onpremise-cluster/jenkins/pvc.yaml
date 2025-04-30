@@ -5,7 +5,7 @@ metadata:
   namespace: ns-devops
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 5Gi

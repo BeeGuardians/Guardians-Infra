@@ -24,6 +24,7 @@ persistence:
       existingClaim: database-data-harbor-database-0
     redis:
       existingClaim: data-harbor-redis-0
+  resourcePolicy: "keep"
 
 database:
   type: internal
@@ -33,3 +34,4 @@ trivy:
   persistence:
     enabled: true
     existingClaim: data-harbor-trivy-0
+    resourcePolicy: "keep"

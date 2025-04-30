@@ -9,8 +9,12 @@ spec:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
     targetRevision: feat/harbor
     path: onpremise-cluster/harbor
-    #directory:
-      #recurse: true
+    helm:
+      releaseName: harbor
+      valueFiles:
+        - values.yaml
+    chart: harbor
+    repoURL: https://helm.goharbor.io
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-devops

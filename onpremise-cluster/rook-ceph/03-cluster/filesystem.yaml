@@ -8,8 +8,7 @@ spec:
     replicated:
       size: 3
   dataPools:
-    - name: myfs-data0
-      replicated:
+    - replicated:
         size: 3
   metadataServer:
     activeCount: 1

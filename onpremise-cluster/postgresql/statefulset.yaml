@@ -43,7 +43,7 @@ spec:
         name: pgdata
       spec:
         accessModes: ["ReadWriteMany"]
-        storageClassName: rook-cephfs
+        storageClassName: rook-ceph-fs
         resources:
           requests:
             storage: 10Gi

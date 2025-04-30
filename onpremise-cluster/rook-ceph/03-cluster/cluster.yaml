@@ -13,7 +13,7 @@ spec:
   dashboard:
     enabled: true
   storage:
-    useAllNodes: true
+    useAllNodes: false
     useAllDevices: false
     nodes:
       - name: "guardians2"
@@ -27,3 +27,6 @@ spec:
           - name: "sdb"
     config:
       osdsPerDevice: "1"
+      databaseSizeMB: "1024" # 블루스토어용 DB 사이즈 (선택)
+      journalSizeMB: "1024" # 저널 사이즈 (선택)
+      osdMemoryTarget: "4096" # OSD 프로세스 메모리 타겟 (선택)

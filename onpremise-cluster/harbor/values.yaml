@@ -11,7 +11,7 @@ expose:
 externalURL: http://harbor.local:30401
 
 harborAdminPassword:
-  existingSecret: "harbor-admin-password"
+  existingSecret: harbor-admin-password
 
 persistence:
   enabled: true

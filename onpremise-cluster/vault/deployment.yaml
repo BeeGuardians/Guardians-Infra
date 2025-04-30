@@ -38,6 +38,12 @@ spec:
                   },
                   "ui": true
                 }
+            - name: VAULT_API_ADDR
+              value: "http://localhost:8200"
+          securityContext:
+            capabilities:
+              add:
+                - IPC_LOCK
       volumes:
         - name: vault-storage
           persistentVolumeClaim:

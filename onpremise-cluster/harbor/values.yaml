@@ -1,0 +1,34 @@
+expose:
+  type: nodePort
+  tls:
+    enabled: false
+  nodePort:
+    http:
+      port: 30401
+    https:
+      port: 30402
+
+externalURL: http://harbor.local:30401
+
+harborAdminPassword:
+  existingSecret: "harbor-admin-password"
+
+persistence:
+  enabled: true
+  persistentVolumeClaim:
+    registry:
+      existingClaim: harbor-registry-pvc
+    jobservice:
+      existingClaim: harbor-jobservice-pvc
+    database:
+      existingClaim: harbor-database-pvc
+    redis:
+      existingClaim: harbor-redis-pvc
+    trivy:
+      existingClaim: harbor-trivy-pvc
+
+database:
+  type: internal
+
+trivy:
+  enabled: true

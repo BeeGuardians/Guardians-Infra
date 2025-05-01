@@ -1,5 +1,7 @@
 expose:
   type: ingress
+  tls:
+    enabled: false
   ingress:
     hosts:
       core: harbor.local
@@ -7,33 +9,35 @@ expose:
     className: nginx
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    tls:
-      enabled: false
 
 externalURL: http://harbor.local
+
+harborAdminPassword:
+  existingSecret: harbor-admin-password
 
 persistence:
   enabled: true
   persistentVolumeClaim:
     registry:
       existingClaim: harbor-registry
+      enabled: true
     jobservice:
       existingClaim: harbor-jobservice
+      enabled: true
     database:
-
-      existingClaim: harbor-database
+      existingClaim: database-data-harbor-database-0
+      enabled: true
     redis:
-      existingClaim: harbor-redis
-    trivy:
-      existingClaim: harbor-trivy
-  imageChartStorage:
-    disableredirect: true
+      existingClaim: data-harbor-redis-0
+      enabled: true
+  resourcePolicy: "keep"
 
 database:
-  internal:
-    password: "Harbor12345"
-
-harborAdminPassword: "Harbor12345"
+  type: internal
 
 trivy:
   enabled: true
+  persistence:
+    enabled: true
+    existingClaim: data-harbor-trivy-0
+    resourcePolicy: "keep"

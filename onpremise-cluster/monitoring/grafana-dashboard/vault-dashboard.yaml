@@ -1,0 +1,27 @@
+# 📄 grafana-dashboard/vault-dashboard.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vault-dashboard
+  namespace: ns-monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  vault-dashboard.json: |
+    {
+      "title": "Vault Dashboard",
+      "panels": [
+        {
+          "type": "graph",
+          "title": "Seal Status",
+          "targets": [
+            {
+              "expr": "vault_core_sealed",
+              "refId": "A"
+            }
+          ]
+        }
+      ],
+      "schemaVersion": 16,
+      "version": 1
+    }

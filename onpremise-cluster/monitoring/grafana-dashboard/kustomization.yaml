@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: ns-monitoring
+
+resources:
+  - backend-dashboard.yaml
+  - postgresql-dashboard.yaml
+  - redis-dashboard.yaml
+  - vault-dashboard.yaml
+  - ceph-dashboard.yaml
+  - harbor-dashboard.yaml
+  - jenkins-dashboard.yaml
+  - argocd-dashboard.yaml

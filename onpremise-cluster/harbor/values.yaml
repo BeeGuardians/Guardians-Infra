@@ -1,0 +1,29 @@
+expose:
+  type: ingress
+  tls:
+    enabled: false
+  ingress:
+    hosts:
+      core: harbor.example.com
+      notary: notary.harbor.example.com
+    ingressClassName: nginx-onpremise
+
+externalURL: http://harbor.example.com
+
+harborAdminPassword: "admin12345"
+
+persistence:
+  persistentVolumeClaim:
+    enabled: true
+    registry:
+      storageClass: rook-ceph-fs
+      size: 5Gi
+    chartmuseum:
+      storageClass: rook-ceph-fs
+      size: 2Gi
+    jobservice:
+      storageClass: rook-ceph-fs
+    database:
+      storageClass: rook-ceph-fs
+    redis:
+      storageClass: rook-ceph-fs

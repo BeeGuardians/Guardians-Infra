@@ -21,16 +21,16 @@ persistence:
   enabled: true
   persistentVolumeClaim:
     registry:
-      enabled: false
+      enabled: true
       existingClaim: harbor-registry
     jobservice:
-      enabled: false
+      enabled: true
       existingClaim: harbor-jobservice
     database:
-      enabled: false
+      enabled: true
       existingClaim: database-data-harbor-database-0
     redis:
-      enabled: false
+      enabled: true
       existingClaim: data-harbor-redis-0
   resourcePolicy: "keep"
 

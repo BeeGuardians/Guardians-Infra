@@ -6,12 +6,11 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://helm.goharbor.io
-    chart: harbor
-    targetRevision: 1.14.0
-    helm:
-      valueFiles:
-        - https://raw.githubusercontent.com/BeeGuardians/Guardians-Infra/feat/harbor-hc/onpremise-cluster/harbor/values.yaml
+    repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
+    targetRevision: feat/harbor-hc
+    path: onpremise-cluster/harbor
+    plugin:
+      name: kustomize-with-ingressclass
   destination:
     server: https://kubernetes.default.svc
     namespace: harbor

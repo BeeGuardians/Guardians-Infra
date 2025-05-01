@@ -1,0 +1,7 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: harbor-hc-ingress
+  namespace: harbor
+spec:
+  ingressClassName: nginx-onpremise

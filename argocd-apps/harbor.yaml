@@ -22,3 +22,18 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+  ignoreDifferences:
+    - group: ""
+      kind: PersistentVolumeClaim
+      namespace: ns-devops
+      name: harbor-jobservice
+      jsonPointers:
+        - /spec/storageClassName
+        - /spec/resources/requests/storage
+    - group: ""
+      kind: PersistentVolumeClaim
+      namespace: ns-devops
+      name: harbor-registry
+      jsonPointers:
+        - /spec/storageClassName
+        - /spec/resources/requests/storage

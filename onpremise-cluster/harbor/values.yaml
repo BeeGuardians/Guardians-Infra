@@ -1,14 +1,18 @@
 expose:
-  type: nodePort
+  type: ingress
   tls:
     enabled: false
-  nodePort:
-    http:
-      port: 30401
-    https:
-      port: 30402
+  ingress:
+    hosts:
+      core: harbor.guardians.local
+      notary: notary.harbor.guardians.local
+    className: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
 
-externalURL: http://harbor.local:30401
+externalURL: http://harbor.guardians.local
 
 harborAdminPassword:
   existingSecret: harbor-admin-password
@@ -18,12 +22,16 @@ persistence:
   persistentVolumeClaim:
     registry:
       existingClaim: harbor-registry
+      enabled: true
     jobservice:
       existingClaim: harbor-jobservice
+      enabled: true
     database:
       existingClaim: database-data-harbor-database-0
+      enabled: true
     redis:
       existingClaim: data-harbor-redis-0
+      enabled: true
   resourcePolicy: "keep"
 
 database:

@@ -3,14 +3,14 @@ expose:
   tls:
     enabled: false
   ingress:
+    ingressClassName: nginx
     hosts:
-      core: harbor.guardians.com
-    controller: default
+      core: core.harbor.domain
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
       nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 
-externalURL: http://harbor.guardians.com
+externalURL: http://core.harbor.domain
 
 harborAdminPassword:
   existingSecret: harbor-admin-password

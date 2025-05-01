@@ -41,3 +41,11 @@ trivy:
     enabled: true
     existingClaim: data-harbor-trivy-0
     resourcePolicy: "keep"
+
+registry:
+  strategy:
+    type: Recreate
+
+jobservice:
+  strategy:
+    type: Recreate

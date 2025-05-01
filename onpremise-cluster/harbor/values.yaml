@@ -20,10 +20,10 @@ persistence:
   persistentVolumeClaim:
     registry:
       existingClaim: harbor-registry
-      enabled: false
+      enabled: true
     jobservice:
       existingClaim: harbor-jobservice
-      enabled: false
+      enabled: true
     database:
       existingClaim: database-data-harbor-database-0
       enabled: false

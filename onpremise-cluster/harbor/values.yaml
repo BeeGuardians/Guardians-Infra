@@ -1,14 +1,16 @@
 expose:
-  type: nodePort
+  type: ingress
   tls:
     enabled: false
-  nodePort:
-    http:
-      port: 30401
-    https:
-      port: 30402
+  ingress:
+    hosts:
+      core: harbor.guardians.com
+    controller: default
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 
-externalURL: http://192.168.0.140:30401
+externalURL: http://harbor.guardians.com
 
 harborAdminPassword:
   existingSecret: harbor-admin-password

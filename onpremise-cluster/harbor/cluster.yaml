@@ -1,0 +1,37 @@
+apiVersion: goharbor.io/v1alpha1
+kind: HarborCluster
+metadata:
+  name: my-harbor
+  namespace: ns-devops
+spec:
+  harborAdminPasswordRef:
+    name: harbor-admin-password
+    key: password
+
+  storageClass: rook-ceph-block
+
+  publicURL: http://harbor.guardians.com
+
+  expose:
+    ingress:
+      host: harbor.guardians.com
+      ingressClassName: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/ssl-redirect: "false"
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+
+  components:
+    core:
+      replicas: 2
+    portal:
+      replicas: 2
+    jobService:
+      replicas: 2
+    registry:
+      replicas: 2
+    trivy:
+      replicas: 2
+    redis:
+      replicas: 2
+    database:
+      replicas: 2

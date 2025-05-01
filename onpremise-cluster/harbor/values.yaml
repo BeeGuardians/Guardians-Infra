@@ -1,45 +1,38 @@
 expose:
   type: ingress
-  tls:
-    enabled: false
   ingress:
     hosts:
-      core: harbor.guardians.local
-      notary: notary.harbor.guardians.local
+      core: harbor.local
+      notary: notary.harbor.local
     className: nginx
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    tls:
+      enabled: false
 
-externalURL: http://harbor.guardians.local
-
-harborAdminPassword:
-  existingSecret: harbor-admin-password
+externalURL: http://harbor.local
 
 persistence:
   enabled: true
   persistentVolumeClaim:
     registry:
-      enabled: true
       existingClaim: harbor-registry
     jobservice:
-      enabled: true
       existingClaim: harbor-jobservice
     database:
-      enabled: true
-      existingClaim: database-data-harbor-database-0
+      existingClaim: harbor-database
     redis:
-      enabled: true
-      existingClaim: data-harbor-redis-0
-  resourcePolicy: "keep"
+      existingClaim: harbor-redis
+    trivy:
+      existingClaim: harbor-trivy
+  imageChartStorage:
+    disableredirect: true
 
 database:
-  type: internal
+  internal:
+    password: "Harbor12345"
+
+harborAdminPassword: "Harbor12345"
 
 trivy:
   enabled: true
-  persistence:
-    enabled: true
-    existingClaim: data-harbor-trivy-0
-    resourcePolicy: "keep"

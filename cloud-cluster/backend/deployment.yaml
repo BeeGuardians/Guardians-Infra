@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: ns-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "backend-role"
+        vault.hashicorp.com/agent-inject-secret-config.yaml: "secret/data/backend/config"
+        vault.hashicorp.com/agent-inject-template-config.yaml: |
+          {{- with secret "secret/data/backend/config" -}}
+          spring:
+            datasource:
+              url: {{ .Data.data.db_url }}
+              username: {{ .Data.data.db_username }}
+              password: {{ .Data.data.db_password }}
+          {{- end }}
+    spec:
+      serviceAccountName: vault-sa
+      containers:
+        - name: app
+          image: harbor.example.com/ctf/backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: config
+              mountPath: /vault/secrets
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: config
+          emptyDir: {}

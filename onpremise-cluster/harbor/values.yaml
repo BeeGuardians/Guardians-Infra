@@ -20,6 +20,7 @@ persistence:
     jobservice:
       existingClaim: harbor-jobservice
     database:
+<<<<<<< HEAD
       existingClaim: harbor-database
     redis:
       existingClaim: harbor-redis
@@ -27,6 +28,12 @@ persistence:
       existingClaim: harbor-trivy
   imageChartStorage:
     disableredirect: true
+=======
+      existingClaim: database-data-harbor-database-0
+    redis:
+      existingClaim: data-harbor-redis-0
+  resourcePolicy: "keep"
+>>>>>>> parent of 3cea370 (fix : explicitly enable existing PVCs to avoid patch error)
 
 database:
   internal:

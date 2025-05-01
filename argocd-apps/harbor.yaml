@@ -6,11 +6,13 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
-    targetRevision: feat/harbor
+    chart: harbor
+    repoURL: https://helm.goharbor.io
+    targetRevision: 1.14.1
+    helm:
+      valueFiles:
+        - values.yaml
     path: onpremise-cluster/harbor
-    directory:
-      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-devops

@@ -1,5 +1,0 @@
-resources:
-  - rendered.yaml
-
-patchesStrategicMerge:
-  - patch-ingressclass.yaml

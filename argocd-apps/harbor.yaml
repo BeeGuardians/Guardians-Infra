@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: harbor-hc
+  name: harbor
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
-    targetRevision: feat/harbor-hc
-    path: onpremise-cluster/harbor-chart
+    targetRevision: dev
+    path: onpremise-cluster/harbor
     helm:
       valueFiles:
         - values.yaml

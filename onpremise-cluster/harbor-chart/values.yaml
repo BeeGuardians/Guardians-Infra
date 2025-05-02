@@ -1,5 +1,5 @@
 expose:
-  type: ingress
+  type: nodePort
   tls:
     enabled: false
     certSource: auto
@@ -34,10 +34,10 @@ expose:
     ports:
       http:
         port: 80
-        nodePort: 30002
+        nodePort: 30601
       https:
         port: 443
-        nodePort: 30003
+        nodePort: 30602
   loadBalancer:
     name: harbor
     IP: ''

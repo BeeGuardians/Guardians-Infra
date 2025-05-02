@@ -4,27 +4,27 @@ expose:
     enabled: false
     certSource: auto
     auto:
-      commonName: ''
+      commonName: ""
     secret:
-      secretName: ''
+      secretName: ""
   ingress:
     hosts:
       core: harbor.example.com
     controller: default
-    kubeVersionOverride: ''
+    kubeVersionOverride: ""
     className: nginx-onpremise
     annotations:
-      ingress.kubernetes.io/ssl-redirect: 'true'
-      ingress.kubernetes.io/proxy-body-size: '0'
-      nginx.ingress.kubernetes.io/ssl-redirect: 'true'
-      nginx.ingress.kubernetes.io/proxy-body-size: '0'
+      ingress.kubernetes.io/ssl-redirect: "true"
+      ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
       kubernetes.io/ingress.class: nginx-onpremise
     harbor:
       annotations: {}
       labels: {}
   clusterIP:
     name: harbor
-    staticClusterIP: ''
+    staticClusterIP: ""
     annotations: {}
     ports:
       httpPort: 80
@@ -34,13 +34,13 @@ expose:
     ports:
       http:
         port: 80
-        nodePort: 30601
+        nodePort: 30401
       https:
         port: 443
-        nodePort: 30602
+        nodePort: 30402
   loadBalancer:
     name: harbor
-    IP: ''
+    IP: ""
     ports:
       httpPort: 80
       httpsPort: 443
@@ -51,27 +51,27 @@ internalTLS:
   enabled: false
   strong_ssl_ciphers: false
   certSource: auto
-  trustCa: ''
+  trustCa: ""
   core:
-    secretName: ''
-    crt: ''
-    key: ''
+    secretName: ""
+    crt: ""
+    key: ""
   jobservice:
-    secretName: ''
-    crt: ''
-    key: ''
+    secretName: ""
+    crt: ""
+    key: ""
   registry:
-    secretName: ''
-    crt: ''
-    key: ''
+    secretName: ""
+    crt: ""
+    key: ""
   portal:
-    secretName: ''
-    crt: ''
-    key: ''
+    secretName: ""
+    crt: ""
+    key: ""
   trivy:
-    secretName: ''
-    crt: ''
-    key: ''
+    secretName: ""
+    crt: ""
+    key: ""
 ipFamily:
   ipv6:
     enabled: true
@@ -82,39 +82,39 @@ persistence:
   resourcePolicy: keep
   persistentVolumeClaim:
     registry:
-      existingClaim: ''
+      existingClaim: ""
       storageClass: rook-ceph-fs
-      subPath: ''
+      subPath: ""
       accessMode: ReadWriteOnce
       size: 5Gi
       annotations: {}
     jobservice:
       jobLog:
-        existingClaim: ''
-        storageClass: 'rook-ceph-fs'
-        subPath: ''
+        existingClaim: ""
+        storageClass: "rook-ceph-fs"
+        subPath: ""
         accessMode: ReadWriteOnce
         size: 1Gi
         annotations: {}
       storageClass: rook-ceph-fs
     database:
-      existingClaim: ''
+      existingClaim: ""
       storageClass: rook-ceph-fs
-      subPath: ''
+      subPath: ""
       accessMode: ReadWriteOnce
       size: 1Gi
       annotations: {}
     redis:
-      existingClaim: ''
+      existingClaim: ""
       storageClass: rook-ceph-fs
-      subPath: ''
+      subPath: ""
       accessMode: ReadWriteOnce
       size: 1Gi
       annotations: {}
     trivy:
-      existingClaim: ''
+      existingClaim: ""
       storageClass: rook-ceph-fs
-      subPath: ''
+      subPath: ""
       accessMode: ReadWriteOnce
       size: 5Gi
       annotations: {}
@@ -127,11 +127,11 @@ persistence:
       accountname: accountname
       accountkey: base64encodedaccountkey
       container: containername
-      existingSecret: ''
+      existingSecret: ""
     gcs:
       bucket: bucketname
       encodedkey: base64-encoded-json-key-file
-      existingSecret: ''
+      existingSecret: ""
       useWorkloadIdentity: false
     s3:
       region: us-west-1
@@ -141,13 +141,13 @@ persistence:
       username: username
       password: password
       container: containername
-      existingSecret: ''
+      existingSecret: ""
     oss:
       accesskeyid: accesskeyid
       accesskeysecret: accesskeysecret
       region: regionname
       bucket: bucketname
-      existingSecret: ''
+      existingSecret: ""
 imagePullPolicy: IfNotPresent
 imagePullSecrets: null
 updateStrategy:
@@ -155,23 +155,23 @@ updateStrategy:
 logLevel: info
 existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
 harborAdminPassword: admin12345
-caSecretName: ''
+caSecretName: ""
 secretKey: not-a-secure-key
-existingSecretSecretKey: ''
+existingSecretSecretKey: ""
 proxy:
   httpProxy: null
   httpsProxy: null
   noProxy: 127.0.0.1,localhost,.local,.internal
   components:
-  - core
-  - jobservice
-  - trivy
+    - core
+    - jobservice
+    - trivy
 enableMigrateHelmHook: false
 nginx:
   image:
     repository: goharbor/nginx-photon
     tag: v2.10.0
-  serviceAccountName: ''
+  serviceAccountName: ""
   automountServiceAccountToken: false
   replicas: 1
   revisionHistoryLimit: 10
@@ -187,7 +187,7 @@ portal:
   image:
     repository: goharbor/harbor-portal
     tag: v2.10.0
-  serviceAccountName: ''
+  serviceAccountName: ""
   automountServiceAccountToken: false
   replicas: 1
   revisionHistoryLimit: 10
@@ -204,7 +204,7 @@ core:
   image:
     repository: goharbor/harbor-core
     tag: v2.10.0
-  serviceAccountName: ''
+  serviceAccountName: ""
   automountServiceAccountToken: false
   replicas: 1
   revisionHistoryLimit: 10
@@ -221,13 +221,13 @@ core:
   serviceAnnotations: {}
   configureUserSettings: null
   quotaUpdateProvider: db
-  secret: ''
-  existingSecret: ''
-  secretName: ''
-  tokenKey: ''
-  tokenCert: ''
-  xsrfKey: ''
-  existingXsrfSecret: ''
+  secret: ""
+  existingSecret: ""
+  secretName: ""
+  tokenKey: ""
+  tokenCert: ""
+  xsrfKey: ""
+  existingXsrfSecret: ""
   existingXsrfSecretKey: CSRF_KEY
   priorityClassName: null
   artifactPullAsyncFlushDuration: null
@@ -239,11 +239,11 @@ jobservice:
     tag: v2.10.0
   replicas: 1
   revisionHistoryLimit: 10
-  serviceAccountName: ''
+  serviceAccountName: ""
   automountServiceAccountToken: false
   maxJobWorkers: 10
   jobLoggers:
-  - file
+    - file
   loggerSweeperDuration: 14
   notification:
     webhook_job_max_retry: 3
@@ -258,12 +258,12 @@ jobservice:
   topologySpreadConstraints: null
   podAnnotations: {}
   podLabels: {}
-  secret: ''
-  existingSecret: ''
+  secret: ""
+  existingSecret: ""
   existingSecretKey: JOBSERVICE_SECRET
   priorityClassName: null
 registry:
-  serviceAccountName: ''
+  serviceAccountName: ""
   automountServiceAccountToken: false
   registry:
     image:
@@ -284,15 +284,15 @@ registry:
   podAnnotations: {}
   podLabels: {}
   priorityClassName: null
-  secret: ''
-  existingSecret: ''
+  secret: ""
+  existingSecret: ""
   existingSecretKey: REGISTRY_HTTP_SECRET
   relativeurls: false
   credentials:
     username: harbor_registry_user
     password: harbor_registry_password
-    existingSecret: ''
-    htpasswdString: ''
+    existingSecret: ""
+    htpasswdString: ""
   middleware:
     enabled: false
     type: cloudFront
@@ -312,7 +312,7 @@ trivy:
   image:
     repository: goharbor/trivy-adapter-photon
     tag: v2.10.0
-  serviceAccountName: ''
+  serviceAccountName: ""
   automountServiceAccountToken: false
   replicas: 1
   debugMode: false
@@ -320,7 +320,7 @@ trivy:
   severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
   ignoreUnfixed: false
   insecure: false
-  gitHubToken: ''
+  gitHubToken: ""
   skipUpdate: false
   offlineScan: false
   securityCheck: vuln
@@ -343,7 +343,7 @@ trivy:
 database:
   type: internal
   internal:
-    serviceAccountName: ''
+    serviceAccountName: ""
     automountServiceAccountToken: false
     image:
       repository: goharbor/harbor-db
@@ -364,11 +364,11 @@ database:
       permissions: {}
   external:
     host: 192.168.0.1
-    port: '5432'
+    port: "5432"
     username: user
     password: password
     coreDatabase: registry
-    existingSecret: ''
+    existingSecret: ""
     sslmode: disable
   maxIdleConns: 100
   maxOpenConns: 900
@@ -377,7 +377,7 @@ database:
 redis:
   type: internal
   internal:
-    serviceAccountName: ''
+    serviceAccountName: ""
     automountServiceAccountToken: false
     image:
       repository: goharbor/redis-photon
@@ -387,19 +387,19 @@ redis:
     tolerations: []
     affinity: {}
     priorityClassName: null
-    jobserviceDatabaseIndex: '1'
-    registryDatabaseIndex: '2'
-    trivyAdapterIndex: '5'
+    jobserviceDatabaseIndex: "1"
+    registryDatabaseIndex: "2"
+    trivyAdapterIndex: "5"
   external:
     addr: 192.168.0.2:6379
-    sentinelMasterSet: ''
-    coreDatabaseIndex: '0'
-    jobserviceDatabaseIndex: '1'
-    registryDatabaseIndex: '2'
-    trivyAdapterIndex: '5'
-    username: ''
-    password: ''
-    existingSecret: ''
+    sentinelMasterSet: ""
+    coreDatabaseIndex: "0"
+    jobserviceDatabaseIndex: "1"
+    registryDatabaseIndex: "2"
+    trivyAdapterIndex: "5"
+    username: ""
+    password: ""
+    existingSecret: ""
   podAnnotations: {}
   podLabels: {}
 exporter:
@@ -408,7 +408,7 @@ exporter:
   extraEnvVars: []
   podAnnotations: {}
   podLabels: {}
-  serviceAccountName: ''
+  serviceAccountName: ""
   automountServiceAccountToken: false
   image:
     repository: goharbor/harbor-exporter
@@ -437,7 +437,7 @@ metrics:
   serviceMonitor:
     enabled: false
     additionalLabels: {}
-    interval: ''
+    interval: ""
     metricRelabelings: []
     relabelings: []
 trace:

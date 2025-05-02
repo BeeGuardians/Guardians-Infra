@@ -11,7 +11,7 @@ spec:
     path: onpremise-cluster/harbor-chart
     helm:
       valueFiles:
-        - ../harbor/values.yam
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: harbor

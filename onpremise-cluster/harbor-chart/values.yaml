@@ -29,3 +29,6 @@ persistence:
       storageClass: rook-ceph-fs
     redis:
       storageClass: rook-ceph-fs
+
+trivy:
+  enabled: true

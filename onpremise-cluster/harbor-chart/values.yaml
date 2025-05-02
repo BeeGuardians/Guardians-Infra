@@ -32,3 +32,11 @@ persistence:
 
 trivy:
   enabled: true
+  skipUpdate: false
+  insecure: false
+  gitHubToken: ""
+  vulnType: "os,library"
+  severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
+  ignoreUnfixed: true
+  skipDirs: ""
+  skipFiles: ""

@@ -8,12 +8,16 @@ spec:
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
     targetRevision: feat/harbor-hc
-    path: onpremise-cluster/harbor
-    plugin:
-      name: kustomize-with-ingressclass
+    path: onpremise-cluster/harbor-chart
+    helm:
+      valueFiles:
+        - ../harbor/values.yam
   destination:
     server: https://kubernetes.default.svc
     namespace: harbor
   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true

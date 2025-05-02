@@ -91,7 +91,7 @@ persistence:
     jobservice:
       jobLog:
         existingClaim: ''
-        storageClass: ''
+        storageClass: 'rook-ceph-fs'
         subPath: ''
         accessMode: ReadWriteOnce
         size: 1Gi

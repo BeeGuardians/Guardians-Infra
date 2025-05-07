@@ -1,7 +1,7 @@
 expose:
   type: nodePort
   tls:
-    enabled: ture
+    enabled: true
     certSource: auto
     auto:
       commonName: ""

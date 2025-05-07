@@ -10,6 +10,7 @@ resources:
   - grafana-dashboard/jenkins-dashboard.yaml
   - grafana-dashboard/argocd-dashboard.yaml
   - grafana-dashboard/node-dashboard.yaml
+  - grafana-dashboard/postgres-dashboard.yaml
 
   # ServiceMonitors
   - servicemonitor/vault.yaml

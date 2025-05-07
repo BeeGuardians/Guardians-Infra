@@ -16,7 +16,7 @@ spec:
           adminPassword: guardians
           service:
             type: NodePort
-            nodePort: 30701
+            nodePort: 30601
           sidecar:
             dashboards:
               enabled: true

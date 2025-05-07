@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-dashboard
+  namespace: ns-monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  redis-dashboard.json: |
+    {
+      "title": "Redis Monitoring",
+      "uid": "redis-dashboard",
+      "schemaVersion": 26,
+      "version": 1,
+      "timezone": "browser",
+      "panels": [
+        {
+          "type": "stat",
+          "title": "Connected Clients",
+          "targets": [
+            {
+              "expr": "redis_connected_clients",
+              "refId": "A"
+            }
+          ],
+          "id": 1
+        },
+        {
+          "type": "graph",
+          "title": "Commands Processed/sec",
+          "targets": [
+            {
+              "expr": "rate(redis_commands_processed_total[1m])",
+              "refId": "A"
+            }
+          ],
+          "id": 2
+        }
+      ]
+    }

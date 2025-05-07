@@ -11,6 +11,7 @@ resources:
   - grafana-dashboard/argocd-dashboard.yaml
   - grafana-dashboard/node-dashboard.yaml
   - grafana-dashboard/postgres-dashboard.yaml
+  - grafana-dashboard/redis-dashboard.yaml
 
   # ServiceMonitors
   - servicemonitor/vault.yaml

@@ -8,10 +8,10 @@ spec:
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
     targetRevision: feat/monitoring
-    path: onpremise-cluster/monitoring
+    path: onpremise-cluster/monitoring/application
   destination:
     server: https://kubernetes.default.svc
-    namespace: ns-monitoring
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true

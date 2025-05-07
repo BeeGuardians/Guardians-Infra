@@ -3,5 +3,16 @@ kind: Kustomization
 namespace: ns-monitoring
 
 resources:
-  - grafana-dashboard
-  - servicemonitor
+  # Grafana Dashboards
+  - grafana-dashboard/vault-dashboard.yaml
+  - grafana-dashboard/ceph-dashboard.yaml
+  - grafana-dashboard/harbor-dashboard.yaml
+  - grafana-dashboard/jenkins-dashboard.yaml
+  - grafana-dashboard/argocd-dashboard.yaml
+
+  # ServiceMonitors
+  - servicemonitor/vault.yaml
+  - servicemonitor/ceph.yaml
+  - servicemonitor/harbor.yaml
+  - servicemonitor/jenkins.yaml
+  - servicemonitor/argocd.yaml

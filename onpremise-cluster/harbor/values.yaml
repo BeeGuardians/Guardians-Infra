@@ -220,8 +220,7 @@ core:
   podAnnotations: {}
   podLabels: {}
   serviceAnnotations: {}
-  configureUserSettings:
-    create_project_on_push: true
+  configureUserSettings: '{"create_project_on_push": true}'
   quotaUpdateProvider: db
   secret: ""
   existingSecret: ""

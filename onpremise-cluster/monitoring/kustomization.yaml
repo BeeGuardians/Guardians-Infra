@@ -3,6 +3,8 @@ kind: Kustomization
 namespace: ns-monitoring
 
 resources:
+  - application.yaml  
+  
   # Grafana Dashboards
   - grafana-dashboard/vault-dashboard.yaml
   - grafana-dashboard/ceph-dashboard.yaml

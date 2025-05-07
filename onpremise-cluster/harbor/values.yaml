@@ -2,11 +2,9 @@ expose:
   type: ingress
   tls:
     enabled: true
-    certSource: auto
-    auto:
-      commonName: harbor.example.com
+    certSource: secret
     secret:
-      secretName: ""
+      secretName: harbor-tls
   ingress:
     hosts:
       core: harbor.example.com

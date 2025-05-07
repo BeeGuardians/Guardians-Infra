@@ -220,9 +220,7 @@ core:
   podAnnotations: {}
   podLabels: {}
   serviceAnnotations: {}
-  configureUserSettings:
-    - name: enable_auto_creation
-      value: "true"
+  configureUserSettings: null
   quotaUpdateProvider: db
   secret: ""
   existingSecret: ""

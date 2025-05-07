@@ -5,22 +5,70 @@ metadata:
   namespace: ns-monitoring
   labels:
     grafana_dashboard: "1"
+    app: grafana
 data:
   jenkins-dashboard.json: |
     {
       "title": "Jenkins Dashboard",
+      "uid": "jenkins-dashboard",
+      "schemaVersion": 26,
+      "version": 1,
+      "timezone": "browser",
       "panels": [
         {
-          "type": "graph",
-          "title": "Job Count",
+          "type": "stat",
+          "title": "Build Success Rate",
           "targets": [
             {
-              "expr": "jenkins_job_last_build_result",
+              "expr": "sum(jenkins_job_last_build_result == 0) / count(jenkins_job_last_build_result)",
               "refId": "A"
             }
-          ]
+          ],
+          "id": 1
+        },
+        {
+          "type": "graph",
+          "title": "Job Duration (avg)",
+          "targets": [
+            {
+              "expr": "rate(jenkins_job_duration_seconds_sum[5m]) / rate(jenkins_job_duration_seconds_count[5m])",
+              "refId": "A"
+            }
+          ],
+          "id": 2
+        },
+        {
+          "type": "graph",
+          "title": "Queue Duration (avg)",
+          "targets": [
+            {
+              "expr": "rate(jenkins_queue_duration_seconds_sum[5m]) / rate(jenkins_queue_duration_seconds_count[5m])",
+              "refId": "A"
+            }
+          ],
+          "id": 3
+        },
+        {
+          "type": "graph",
+          "title": "Job Count by Result",
+          "targets": [
+            {
+              "expr": "sum by (result) (jenkins_job_last_build_result)",
+              "refId": "A"
+            }
+          ],
+          "id" 4
+        },
+        {
+          "type": "graph",
+          "title": "Building Jobs Duration",
+          "targets": [
+            {
+              "expr": "jenkins_job_building_duration_seconds",
+              "refId": "A"
+            }
+          ],
+          "id": 5
         }
-      ],
-      "schemaVersion": 16,
-      "version": 1
+      ]
     }

@@ -9,9 +9,11 @@ data:
   ceph-dashboard.json: |
     {
       "title": "Ceph Dashboard",
+      "schemaVersion": 16,
+      "version": 1,
       "panels": [
         {
-          "type": "graph",
+          "type": "stat",
           "title": "Cluster Health",
           "targets": [
             {
@@ -19,8 +21,86 @@ data:
               "refId": "A"
             }
           ]
+        },
+        {
+          "type": "stat",
+          "title": "Number of OSDs",
+          "targets": [
+            {
+              "expr": "ceph_osd_metadata",
+              "refId": "B"
+            }
+          ]
+        },
+        {
+          "type": "stat",
+          "title": "Active MON Count",
+          "targets": [
+            {
+              "expr": "count(ceph_mon_metadata)",
+              "refId": "C"
+            }
+          ]
+        },
+        {
+          "type": "graph",
+          "title": "Read IOPS",
+          "targets": [
+            {
+              "expr": "rate(ceph_pool_rd[1m])",
+              "refId": "D"
+            }
+          ]
+        },
+        {
+          "type": "graph",
+          "title": "Write IOPS",
+          "targets": [
+            {
+              "expr": "rate(ceph_pool_wr[1m])",
+              "refId": "E"
+            }
+          ]
+        },
+        {
+          "type": "graph",
+          "title": "Total Used Bytes",
+          "targets": [
+            {
+              "expr": "ceph_cluster_total_used_bytes",
+              "refId": "F"
+            }
+          ]
+        },
+        {
+          "type": "graph",
+          "title": "Total Available Bytes",
+          "targets": [
+            {
+              "expr": "ceph_cluster_total_bytes - ceph_cluster_total_used_bytes",
+              "refId": "G"
+            }
+          ]
+        },
+        {
+          "type": "graph",
+          "title": "Client Read Bandwidth",
+          "targets": [
+            {
+              "expr": "rate(ceph_client_io_read_bytes_total[1m])",
+              "refId": "H"
+            }
+          ]
+        },
+        {
+          "type": "graph",
+          "title": "Client Write Bandwidth",
+          "targets": [
+            {
+              "expr": "rate(ceph_client_io_write_bytes_total[1m])",
+              "refId": "I"
+            }
+          ]
         }
-      ],
-      "schemaVersion": 16,
-      "version": 1
+      ]
     }

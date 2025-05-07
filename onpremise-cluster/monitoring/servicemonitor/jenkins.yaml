@@ -11,7 +11,9 @@ spec:
       app: jenkins
   namespaceSelector:
     matchNames:
-      - ns-app
+      - ns-devops
   endpoints:
-    - port: metrics
+    - port: http
+      path: /prometheus
       interval: 30s
+      scheme: http

@@ -9,18 +9,58 @@ data:
   argocd-dashboard.json: |
     {
       "title": "ArgoCD Dashboard",
+      "schemaVersion": 16,
+      "version": 1,
       "panels": [
         {
           "type": "graph",
-          "title": "Sync Failures",
+          "title": "Sync Failures (5m rate)",
           "targets": [
             {
               "expr": "rate(argocd_app_sync_total{phase='Failed'}[5m])",
               "refId": "A"
             }
           ]
+        },
+        {
+          "type": "graph",
+          "title": "Sync Successes (5m rate)",
+          "targets": [
+            {
+              "expr": "rate(argocd_app_sync_total{phase='Succeeded'}[5m])",
+              "refId": "B"
+            }
+          ]
+        },
+        {
+          "type": "stat",
+          "title": "Currently Out-of-Sync Apps",
+          "targets": [
+            {
+              "expr": "argocd_app_info{sync_status='OutOfSync'}",
+              "refId": "C"
+            }
+          ]
+        },
+        {
+          "type": "stat",
+          "title": "Currently Healthy Apps",
+          "targets": [
+            {
+              "expr": "count(argocd_app_info{health_status='Healthy'})",
+              "refId": "D"
+            }
+          ]
+        },
+        {
+          "type": "stat",
+          "title": "Currently Degraded Apps",
+          "targets": [
+            {
+              "expr": "count(argocd_app_info{health_status='Degraded'})",
+              "refId": "E"
+            }
+          ]
         }
-      ],
-      "schemaVersion": 16,
-      "version": 1
+      ]
     }

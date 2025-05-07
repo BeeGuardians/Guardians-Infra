@@ -8,11 +8,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: vault
+      app: vault
   namespaceSelector:
     matchNames:
-      - ns-app
+      - ns-vault
   endpoints:
-    - port: http
+    - targetPort: 8200
       path: /v1/sys/metrics
       interval: 30s

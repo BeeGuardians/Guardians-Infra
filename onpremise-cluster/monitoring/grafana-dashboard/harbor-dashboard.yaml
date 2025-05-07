@@ -5,22 +5,77 @@ metadata:
   namespace: ns-monitoring
   labels:
     grafana_dashboard: "1"
+    app: grafana
 data:
   harbor-dashboard.json: |
     {
-      "title": "Harbor Dashboard",
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "type": "dashboard"
+          }
+        ]
+      },
+      "title": "Harbor Monitoring",
+      "uid": "harbor-dashboard",
+      "timezone": "browser",
       "panels": [
         {
           "type": "graph",
-          "title": "Pull Requests",
+          "title": "Registry HTTP Requests",
           "targets": [
             {
-              "expr": "harbor_project_pull_total",
+              "expr": "rate(harbor_registry_http_requests_total[1m])",
+              "legendFormat": "{{handler}} - {{method}}",
+              "interval": "",
               "refId": "A"
             }
-          ]
+          ],
+          "datasource": "Prometheus",
+          "id": 1
+        },
+        {
+          "type": "graph",
+          "title": "Core Request Duration",
+          "targets": [
+            {
+              "expr": "rate(harbor_core_http_duration_seconds_sum[1m]) / rate(harbor_core_http_duration_seconds_count[1m])",
+              "legendFormat": "avg duration",
+              "refId": "A"
+            }
+          ],
+          "datasource": "Prometheus",
+          "id": 2
+        },
+        {
+          "type": "graph",
+          "title": "Job Service Queue Depth",
+          "targets": [
+            {
+              "expr": "harbor_jobservice_task_queue_total",
+              "legendFormat": "Queue Depth",
+              "refId": "A"
+            }
+          ],
+          "datasource": "Prometheus",
+          "id": 3
+        },
+        {
+          "type": "graph",
+          "title": "Trivy Scan Duration",
+          "targets": [
+            {
+              "expr": "rate(harbor_trivy_scan_duration_seconds_sum[1m]) / rate(harbor_trivy_scan_duration_seconds_count[1m])",
+              "legendFormat": "avg scan duration",
+              "refId": "A"
+            }
+          ],
+          "datasource": "Prometheus",
+          "id": 4
         }
       ],
-      "schemaVersion": 16,
+      "schemaVersion": 26,
       "version": 1
     }
+    

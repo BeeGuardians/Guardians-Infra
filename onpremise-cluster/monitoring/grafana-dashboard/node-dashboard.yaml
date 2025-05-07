@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-dashboard
+  namespace: ns-monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  node-dashboard.json: |
+    {
+      "title": "Node Monitoring",
+      "uid": "node-monitoring",
+      "schemaVersion": 27,
+      "version": 1,
+      "timezone": "browser",
+      "panels": [
+        {
+          "type": "graph",
+          "title": "Node CPU Usage (%)",
+          "targets": [
+            {
+              "expr": "100 - (avg by(instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+              "refId": "A"
+            }
+          ],
+          "id": 1
+        },
+        {
+          "type": "graph",
+          "title": "Node Memory Usage (bytes)",
+          "targets": [
+            {
+              "expr": "node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes",
+              "refId": "A"
+            }
+          ],
+          "id": 2
+        },
+        {
+          "type": "graph",
+          "title": "Node Disk Usage (root mount)",
+          "targets": [
+            {
+              "expr": "node_filesystem_size_bytes{mountpoint=\"/\"} - node_filesystem_free_bytes{mountpoint=\"/\"}",
+              "refId": "A"
+            }
+          ],
+          "id": 3
+        },
+        {
+          "type": "graph",
+          "title": "Node Network In/Out",
+          "targets": [
+            {
+              "expr": "rate(node_network_receive_bytes_total[5m])",
+              "refId": "A"
+            },
+            {
+              "expr": "rate(node_network_transmit_bytes_total[5m])",
+              "refId": "B"
+            }
+          ],
+          "id": 4
+        }
+      ]
+    }

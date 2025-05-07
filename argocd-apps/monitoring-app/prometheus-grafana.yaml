@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring
+  name: prometheus-grafana
   namespace: argocd
 spec:
   project: default
@@ -13,7 +13,7 @@ spec:
       values: |
         grafana:
           enabled: true
-          adminPassword: prom1234
+          adminPassword: guardians
           service:
             type: NodePort
             nodePort: 30701

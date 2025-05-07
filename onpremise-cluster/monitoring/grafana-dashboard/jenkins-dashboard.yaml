@@ -57,7 +57,7 @@ data:
               "refId": "A"
             }
           ],
-          "id" 4
+          "id": 4
         },
         {
           "type": "graph",

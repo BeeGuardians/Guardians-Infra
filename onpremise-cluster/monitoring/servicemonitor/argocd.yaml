@@ -13,9 +13,7 @@ spec:
     matchNames:
       - argocd
   endpoints:
-    - port: https
-      scheme: https
+    - port: metrics
+      scheme: http
       interval: 30s
       path: /metrics
-      tlsConfig:
-        insecureSkipVerify: true

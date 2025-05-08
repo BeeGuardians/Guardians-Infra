@@ -46,7 +46,8 @@ expose:
       httpsPort: 443
     annotations: {}
     sourceRanges: []
-externalURL: https://harbor.example.com
+# externalURL: https://harbor.example.com
+externalURL: https://harbor.example.com:30443
 # externalURL: http://192.168.0.11:30401
 internalTLS:
   enabled: false

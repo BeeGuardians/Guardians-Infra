@@ -19,3 +19,7 @@ resources:
   - servicemonitor/harbor.yaml
   - servicemonitor/jenkins.yaml
   - servicemonitor/argocd.yaml
+  - servicemonitor/argocd-metrics.yaml
+
+  # workload
+  - workload/argocd-metrics.yaml

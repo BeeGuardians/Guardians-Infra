@@ -4,10 +4,15 @@ metadata:
   name: vault
   namespace: ns-vault
 spec:
-  ports:
-    - port: 8200
-      targetPort: 8200
-      nodePort: 30301
+  type: NodePort
   selector:
     app: vault
-  type: NodePort
+  ports:
+    - name: http
+      port: 8200
+      targetPort: 8200
+      nodePort: 30301
+    - name: telemetry
+      port: 9102
+      targetPort: 9102
+ 

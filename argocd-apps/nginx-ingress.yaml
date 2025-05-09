@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
-    targetRevision: feat/onpremise-nginx
+    targetRevision: dev
     path: cloud-cluster/nginx-ingress
   destination:
     server: https://43.202.32.34:6443

@@ -46,6 +46,8 @@ spec:
               value: "registry"
             - name: HARBOR_REDIS_URL
               value: redis://harbor-redis.harbor.svc:6379
+            - name: HARBOR_EXPORTER_METRICS_PATH
+              value: /metrics
 ---
 apiVersion: v1
 kind: Service

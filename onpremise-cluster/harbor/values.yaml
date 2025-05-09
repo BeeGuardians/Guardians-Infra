@@ -437,9 +437,10 @@ metrics:
     path: /metrics
     port: 8001
   serviceMonitor:
-    enabled: false
-    additionalLabels: {}
-    interval: ""
+    enabled: true
+    interval: 30s
+    additionalLabels:
+      release: prometheus
     metricRelabelings: []
     relabelings: []
 trace:

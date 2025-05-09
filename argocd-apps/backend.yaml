@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
-    targetRevision: dev
+    targetRevision: feat/new-backend
     path: cloud-cluster/backend
   destination:
     server: https://kubernetes.default.svc

@@ -32,6 +32,18 @@ spec:
               value: "admin"
             - name: HARBOR_PASSWORD
               value: "admin12345"
+            - name: HARBOR_DATABASE_TYPE
+              value: "PostgreSQL"
+            - name: HARBOR_DATABASE_HOST
+              value: "harbor-database.harbor.svc"
+            - name: HARBOR_DATABASE_PORT
+              value: "5432"
+            - name: HARBOR_DATABASE_USERNAME
+              value: "postgres"
+            - name: HARBOR_DATABASE_PASSWORD
+              value: "changeit"
+            - name: HARBOR_DATABASE_DBNAME
+              value: "registry"
 ---
 apiVersion: v1
 kind: Service

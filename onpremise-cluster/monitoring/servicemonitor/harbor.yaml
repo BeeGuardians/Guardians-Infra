@@ -1,3 +1,4 @@
+# harbor-core
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -14,10 +15,11 @@ spec:
       app: harbor
       component: core
   endpoints:
-    - port: http-web
+    - port: http-metrics
       path: /metrics
       interval: 30s
 ---
+# harbor-jobservice
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -34,10 +36,11 @@ spec:
       app: harbor
       component: jobservice
   endpoints:
-    - port: http-jobservice
+    - port: http-metrics
       path: /metrics
       interval: 30s
 ---
+# harbor-registry
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -54,10 +57,11 @@ spec:
       app: harbor
       component: registry
   endpoints:
-    - port: http-registry
+    - port: http-metrics
       path: /metrics
       interval: 30s
 ---
+# harbor-trivy
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -72,9 +76,9 @@ spec:
   selector:
     matchLabels:
       app: harbor
-      component: http-trivy
+      component: trivy
   endpoints:
-    - port: http
+    - port: http-trivy
       path: /metrics
       interval: 30s
 # ---

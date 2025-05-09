@@ -44,7 +44,7 @@ spec:
               value: "changeit"
             - name: HARBOR_DATABASE_DBNAME
               value: "registry"
-            - name: REDIS_URL
+            - name: HARBOR_REDIS_URL
               value: redis://harbor-redis.harbor.svc:6379
 ---
 apiVersion: v1

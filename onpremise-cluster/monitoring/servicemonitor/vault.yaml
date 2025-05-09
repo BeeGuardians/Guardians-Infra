@@ -13,6 +13,6 @@ spec:
     matchNames:
       - ns-vault
   endpoints:
-    - targetPort: 8200
-      path: /v1/sys/metrics
+    - port: telemetry
+      path: /metrics
       interval: 30s

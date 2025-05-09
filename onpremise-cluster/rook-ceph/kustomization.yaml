@@ -1,0 +1,63 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - 00-crds/crds.yaml
+  - 01-common/common.yaml
+  - 02-operator/operator.yaml
+  - 03-cluster/cluster.yaml
+  - 03-cluster/filesystem.yaml
+  - 04-storageclass/rbd-storageclass.yaml
+  - 04-storageclass/cephfs-storageclass.yaml
+  - 05-toolbox/toolbox.yaml
+
+patches:
+  - target:
+      kind: CustomResourceDefinition
+    patch: |-
+      - op: add
+        path: /metadata/annotations
+        value:
+          argocd.argoproj.io/sync-wave: "0"
+
+  - target:
+      kind: Namespace
+    patch: |-
+      - op: add
+        path: /metadata/annotations
+        value:
+          argocd.argoproj.io/sync-wave: "0"
+
+  - target:
+      kind: Deployment
+      name: rook-ceph-operator
+    patch: |-
+      - op: add
+        path: /metadata/annotations
+        value:
+          argocd.argoproj.io/sync-wave: "1"
+
+  - target:
+      kind: CephCluster
+    patch: |-
+      - op: add
+        path: /metadata/annotations
+        value:
+          argocd.argoproj.io/sync-wave: "2"
+
+  - target:
+      kind: StorageClass
+    patch: |-
+      - op: add
+        path: /metadata/annotations
+        value:
+          argocd.argoproj.io/sync-wave: "3"
+
+  - target:
+      kind: Deployment
+      name: rook-ceph-tools
+    patch: |-
+      - op: add
+        path: /metadata/annotations
+        value:
+          argocd.argoproj.io/sync-wave: "4"

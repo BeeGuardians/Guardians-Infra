@@ -423,7 +423,7 @@ exporter:
   cacheCleanInterval: 14400
   priorityClassName: null
 metrics:
-  enabled: false
+  enabled: true
   core:
     path: /metrics
     port: 8001

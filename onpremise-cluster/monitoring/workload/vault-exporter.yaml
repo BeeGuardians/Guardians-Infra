@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-exporter
+  namespace: ns-vault
+  labels:
+    app: vault-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vault-exporter
+  template:
+    metadata:
+      labels:
+        app: vault-exporter
+    spec:
+      containers:
+        - name: exporter
+          image: quay.io/prometheuscommunity/vault-exporter:latest
+          args:
+            - --vault.server=http://vault.ns-vault.svc:8200
+            - --vault.tls.insecure
+            - --web.listen-address=:9410
+          ports:
+            - name: http
+              containerPort: 9410
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vault-exporter
+  namespace: ns-vault
+  labels:
+    app: vault-exporter
+spec:
+  selector:
+    app: vault-exporter
+  ports:
+    - name: http
+      port: 9410
+      targetPort: 9410
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: vault-exporter
+  namespace: ns-monitoring
+  labels:
+    release: prometheus-grafana
+spec:
+  selector:
+    matchLabels:
+      app: vault-exporter
+  namespaceSelector:
+    matchNames:
+      - ns-vault
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s

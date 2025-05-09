@@ -1,18 +1,18 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: vault
+  name: vault-exporter
   namespace: ns-monitoring
   labels:
     release: prometheus-grafana
 spec:
   selector:
     matchLabels:
-      app: vault
+      app: vault-exporter
   namespaceSelector:
     matchNames:
-      - ns-vault
+      - ns-monitoring
   endpoints:
-    - port: telemetry
+    - port: http
       path: /metrics
       interval: 30s

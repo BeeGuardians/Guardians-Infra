@@ -24,6 +24,9 @@ spec:
               labelValue: "1"
         prometheus:
           enabled: true
+          service:
+            type: NodePort
+            portName: http
           prometheusSpec:
             serviceMonitorSelectorNilUsesHelmValues: false
   destination:

@@ -4,7 +4,7 @@ metadata:
   name: argocd
   namespace: ns-monitoring
   labels:
-    release: prometheus
+    release: prometheus-grafana
 spec:
   selector:
     matchLabels:

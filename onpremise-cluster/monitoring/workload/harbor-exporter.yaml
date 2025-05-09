@@ -48,6 +48,8 @@ spec:
               value: redis://harbor-redis.harbor.svc:6379
             - name: HARBOR_EXPORTER_METRICS_PATH
               value: /metrics
+            - name: HARBOR_EXPORTER_PORT
+              value: "8001"
 ---
 apiVersion: v1
 kind: Service

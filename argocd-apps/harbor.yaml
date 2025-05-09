@@ -21,3 +21,20 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: harbor-jobservice
+      namespace: harbor
+      jsonPointers:
+        - /spec/template/metadata/annotations/checksum~1configmap
+        - /spec/template/metadata/annotations/checksum~1configmap-env
+        - /spec/template/metadata/annotations/checksum~1secret
+        - /spec/template/metadata/annotations/checksum~1secret-core
+    - group: apps
+      kind: Deployment
+      name: harbor-registry
+      namespace: harbor
+      jsonPointers:
+        - /spec/template/metadata/annotations/checksum~1configmap
+        - /spec/template/metadata/annotations/checksum~1secret

@@ -32,18 +32,6 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
-          command: ["/bin/sh"]
-          args:
-            - "-c"
-            - |
-              source /vault/secrets/DB_USERNAME
-              source /vault/secrets/DB_PASSWORD
-              source /vault/secrets/MAIL_USERNAME
-              source /vault/secrets/MAIL_PASSWORD
-              source /vault/secrets/AWS_ACCESS_KEY
-              source /vault/secrets/AWS_SECRET_KEY
-              source /vault/secrets/REDIS_PASSWORD
-              exec java -jar app.jar
           env:
             - name: DB_HOST
               value: "postgres.ns-db.svc.cluster.local"
@@ -59,3 +47,19 @@ spec:
               value: "smtp.gmail.com"
             - name: MAIL_PORT
               value: "587"
+
+            # Vault-injected file paths as *_FILE
+            - name: DB_USERNAME_FILE
+              value: "/vault/secrets/DB_USERNAME"
+            - name: DB_PASSWORD_FILE
+              value: "/vault/secrets/DB_PASSWORD"
+            - name: MAIL_USERNAME_FILE
+              value: "/vault/secrets/MAIL_USERNAME"
+            - name: MAIL_PASSWORD_FILE
+              value: "/vault/secrets/MAIL_PASSWORD"
+            - name: AWS_ACCESS_KEY_FILE
+              value: "/vault/secrets/AWS_ACCESS_KEY"
+            - name: AWS_SECRET_KEY_FILE
+              value: "/vault/secrets/AWS_SECRET_KEY"
+            - name: REDIS_PASSWORD_FILE
+              value: "/vault/secrets/REDIS_PASSWORD"

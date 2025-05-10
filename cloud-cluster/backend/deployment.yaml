@@ -9,40 +9,12 @@ metadata:
     vault.hashicorp.com/agent-inject: "true"
     vault.hashicorp.com/role: "backend"
     vault.hashicorp.com/agent-inject-secret-DB_USERNAME: "secret/data/guardians#DB_USERNAME"
-    vault.hashicorp.com/agent-inject-template-DB_USERNAME: |
-      {{- with secret "secret/data/guardians" -}}
-      export DB_USERNAME="{{ .Data.data.DB_USERNAME }}"
-      {{- end }}
     vault.hashicorp.com/agent-inject-secret-DB_PASSWORD: "secret/data/guardians#DB_PASSWORD"
-    vault.hashicorp.com/agent-inject-template-DB_PASSWORD: |
-      {{- with secret "secret/data/guardians" -}}
-      export DB_PASSWORD="{{ .Data.data.DB_PASSWORD }}"
-      {{- end }}
     vault.hashicorp.com/agent-inject-secret-MAIL_USERNAME: "secret/data/guardians#MAIL_USERNAME"
-    vault.hashicorp.com/agent-inject-template-MAIL_USERNAME: |
-      {{- with secret "secret/data/guardians" -}}
-      export MAIL_USERNAME="{{ .Data.data.MAIL_USERNAME }}"
-      {{- end }}
     vault.hashicorp.com/agent-inject-secret-MAIL_PASSWORD: "secret/data/guardians#MAIL_PASSWORD"
-    vault.hashicorp.com/agent-inject-template-MAIL_PASSWORD: |
-      {{- with secret "secret/data/guardians" -}}
-      export MAIL_PASSWORD="{{ .Data.data.MAIL_PASSWORD }}"
-      {{- end }}
     vault.hashicorp.com/agent-inject-secret-AWS_ACCESS_KEY: "secret/data/guardians#AWS_ACCESS_KEY"
-    vault.hashicorp.com/agent-inject-template-AWS_ACCESS_KEY: |
-      {{- with secret "secret/data/guardians" -}}
-      export AWS_ACCESS_KEY="{{ .Data.data.AWS_ACCESS_KEY }}"
-      {{- end }}
     vault.hashicorp.com/agent-inject-secret-AWS_SECRET_KEY: "secret/data/guardians#AWS_SECRET_KEY"
-    vault.hashicorp.com/agent-inject-template-AWS_SECRET_KEY: |
-      {{- with secret "secret/data/guardians" -}}
-      export AWS_SECRET_KEY="{{ .Data.data.AWS_SECRET_KEY }}"
-      {{- end }}
     vault.hashicorp.com/agent-inject-secret-REDIS_PASSWORD: "secret/data/guardians#REDIS_PASSWORD"
-    vault.hashicorp.com/agent-inject-template-REDIS_PASSWORD: |
-      {{- with secret "secret/data/guardians" -}}
-      export REDIS_PASSWORD="{{ .Data.data.REDIS_PASSWORD }}"
-      {{- end }}
 spec:
   replicas: 1
   selector:
@@ -60,6 +32,18 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - |
+              source /vault/secrets/DB_USERNAME
+              source /vault/secrets/DB_PASSWORD
+              source /vault/secrets/MAIL_USERNAME
+              source /vault/secrets/MAIL_PASSWORD
+              source /vault/secrets/AWS_ACCESS_KEY
+              source /vault/secrets/AWS_SECRET_KEY
+              source /vault/secrets/REDIS_PASSWORD
+              exec java -jar app.jar
           env:
             - name: DB_HOST
               value: "postgres.ns-db.svc.cluster.local"
@@ -75,17 +59,3 @@ spec:
               value: "smtp.gmail.com"
             - name: MAIL_PORT
               value: "587"
-            - name: DB_USERNAME
-              value: "$(DB_USERNAME)"
-            - name: DB_PASSWORD
-              value: "$(DB_PASSWORD)"
-            - name: MAIL_USERNAME
-              value: "$(MAIL_USERNAME)"
-            - name: MAIL_PASSWORD
-              value: "$(MAIL_PASSWORD)"
-            - name: AWS_ACCESS_KEY
-              value: "$(AWS_ACCESS_KEY)"
-            - name: AWS_SECRET_KEY
-              value: "$(AWS_SECRET_KEY)"
-            - name: REDIS_PASSWORD
-              value: "$(REDIS_PASSWORD)"

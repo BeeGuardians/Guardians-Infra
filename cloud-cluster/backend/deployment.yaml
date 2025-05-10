@@ -8,13 +8,13 @@ metadata:
   annotations:
     vault.hashicorp.com/agent-inject: "true"
     vault.hashicorp.com/role: "backend"
-    vault.hashicorp.com/agent-inject-secret-DB_USERNAME: "secret/data/guardians#DB_USERNAME"
-    vault.hashicorp.com/agent-inject-secret-DB_PASSWORD: "secret/data/guardians#DB_PASSWORD"
-    vault.hashicorp.com/agent-inject-secret-MAIL_USERNAME: "secret/data/guardians#MAIL_USERNAME"
-    vault.hashicorp.com/agent-inject-secret-MAIL_PASSWORD: "secret/data/guardians#MAIL_PASSWORD"
-    vault.hashicorp.com/agent-inject-secret-AWS_ACCESS_KEY: "secret/data/guardians#AWS_ACCESS_KEY"
-    vault.hashicorp.com/agent-inject-secret-AWS_SECRET_KEY: "secret/data/guardians#AWS_SECRET_KEY"
-    vault.hashicorp.com/agent-inject-secret-REDIS_PASSWORD: "secret/data/guardians#REDIS_PASSWORD"
+    vault.hashicorp.com/agent-inject-secret-DB_USERNAME: "secret/guardians#DB_USERNAME"
+    vault.hashicorp.com/agent-inject-secret-DB_PASSWORD: "secret/guardians#DB_PASSWORD"
+    vault.hashicorp.com/agent-inject-secret-MAIL_USERNAME: "secret/guardians#MAIL_USERNAME"
+    vault.hashicorp.com/agent-inject-secret-MAIL_PASSWORD: "secret/guardians#MAIL_PASSWORD"
+    vault.hashicorp.com/agent-inject-secret-AWS_ACCESS_KEY: "secret/guardians#AWS_ACCESS_KEY"
+    vault.hashicorp.com/agent-inject-secret-AWS_SECRET_KEY: "secret/guardians#AWS_SECRET_KEY"
+    vault.hashicorp.com/agent-inject-secret-REDIS_PASSWORD: "secret/guardians#REDIS_PASSWORD"
 spec:
   replicas: 1
   selector:

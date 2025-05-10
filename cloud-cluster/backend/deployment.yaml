@@ -17,6 +17,7 @@ spec:
       annotations:
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/role: "backend"
+        vault.hashicorp.com/vault-addr: "http://vault.ns-vault.svc:8200"
         vault.hashicorp.com/agent-inject-secret-DB_USERNAME: "secret/guardians#DB_USERNAME"
         vault.hashicorp.com/agent-inject-secret-DB_PASSWORD: "secret/guardians#DB_PASSWORD"
         vault.hashicorp.com/agent-inject-secret-MAIL_USERNAME: "secret/guardians#MAIL_USERNAME"

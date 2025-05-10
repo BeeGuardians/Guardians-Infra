@@ -28,7 +28,7 @@ spec:
       serviceAccountName: vault-sa
       containers:
         - name: backend
-          image: harbor.example.com:30443/guardians/backend:v5
+          image: harbor.example.com:30443/guardians/backend:v6
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

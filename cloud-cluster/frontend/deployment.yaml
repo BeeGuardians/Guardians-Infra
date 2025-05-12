@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: frontend
   namespace: ns-app
+  labels:
+    app: frontend
 spec:
   replicas: 1
   selector:
@@ -13,11 +15,10 @@ spec:
       labels:
         app: frontend
     spec:
+      serviceAccountName: default
       containers:
-        - name: app
-          image: harbor.example.com/ctf/frontend:latest
+        - name: frontend
+          image: harbor.example.com:30443/guardians/frontend:v5
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
-      imagePullSecrets:
-        - name: harbor-secret

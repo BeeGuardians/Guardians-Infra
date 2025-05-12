@@ -14,22 +14,11 @@ spec:
     metadata:
       labels:
         app: backend
-      annotations:
-        vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/role: "backend"
-        vault.hashicorp.com/vault-addr: "http://vault.ns-vault.svc:8200"
-        vault.hashicorp.com/agent-inject-secret-DB_USERNAME: "secret/guardians#DB_USERNAME"
-        vault.hashicorp.com/agent-inject-secret-DB_PASSWORD: "secret/guardians#DB_PASSWORD"
-        vault.hashicorp.com/agent-inject-secret-MAIL_USERNAME: "secret/guardians#MAIL_USERNAME"
-        vault.hashicorp.com/agent-inject-secret-MAIL_PASSWORD: "secret/guardians#MAIL_PASSWORD"
-        vault.hashicorp.com/agent-inject-secret-AWS_ACCESS_KEY: "secret/guardians#AWS_ACCESS_KEY"
-        vault.hashicorp.com/agent-inject-secret-AWS_SECRET_KEY: "secret/guardians#AWS_SECRET_KEY"
-        vault.hashicorp.com/agent-inject-secret-REDIS_PASSWORD: "secret/guardians#REDIS_PASSWORD"
     spec:
-      serviceAccountName: vault-sa
+      serviceAccountName: default
       containers:
         - name: backend
-          image: harbor.example.com:30443/guardians/backend:v6
+          image: harbor.example.com:30443/guardians/backend:v7
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -48,17 +37,13 @@ spec:
               value: "smtp.gmail.com"
             - name: MAIL_PORT
               value: "587"
-            - name: DB_USERNAME_FILE
-              value: "/vault/secrets/DB_USERNAME"
-            - name: DB_PASSWORD_FILE
-              value: "/vault/secrets/DB_PASSWORD"
-            - name: MAIL_USERNAME_FILE
-              value: "/vault/secrets/MAIL_USERNAME"
-            - name: MAIL_PASSWORD_FILE
-              value: "/vault/secrets/MAIL_PASSWORD"
-            - name: AWS_ACCESS_KEY_FILE
-              value: "/vault/secrets/AWS_ACCESS_KEY"
-            - name: AWS_SECRET_KEY_FILE
-              value: "/vault/secrets/AWS_SECRET_KEY"
-            - name: REDIS_PASSWORD_FILE
-              value: "/vault/secrets/REDIS_PASSWORD"
+            - name: VAULT_ROLE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: vault-approle
+                  key: role_id
+            - name: VAULT_SECRET_ID
+              valueFrom:
+                secretKeyRef:
+                  name: vault-approle
+                  key: secret_id

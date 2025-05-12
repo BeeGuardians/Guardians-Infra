@@ -28,7 +28,7 @@ spec:
             - name: DB_PORT
               value: "5432"
             - name: DB_NAME
-              value: "guardians"
+              value: "guardian"
             - name: REDIS_HOST
               value: "redis-service.ns-db.svc.cluster.local"
             - name: REDIS_PORT

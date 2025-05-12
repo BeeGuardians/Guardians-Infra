@@ -4,22 +4,26 @@ namespace: ns-monitoring
 
 resources:
   # Grafana Dashboards
-  # - grafana-dashboard/vault-dashboard.yaml
-  # - grafana-dashboard/ceph-dashboard.yaml
-  # - grafana-dashboard/harbor-dashboard.yaml
-  # - grafana-dashboard/jenkins-dashboard.yaml
-  # - grafana-dashboard/argocd-dashboard.yaml
-  # - grafana-dashboard/node-dashboard.yaml
-  # - grafana-dashboard/postgres-dashboard.yaml
-  # - grafana-dashboard/redis-dashboard.yaml
+  - grafana-dashboard/argocd-dashboard.yaml
+  - grafana-dashboard/ceph-dashboard.yaml
+  - grafana-dashboard/harbor-dashboard.yaml
+  - grafana-dashboard/jenkins-dashboard.yaml
+  - grafana-dashboard/multi-node-dashboard.yaml
+  - grafana-dashboard/postgres-dashboard.yaml
+  - grafana-dashboard/redis-dashboard.yaml
+  - grafana-dashboard/vault-dashboard.yaml
 
   # ServiceMonitors
-  - servicemonitor/vault.yaml
-  - servicemonitor/ceph.yaml
-  - servicemonitor/harbor.yaml
-  - servicemonitor/jenkins.yaml
-  - servicemonitor/argocd.yaml
-  #- servicemonitor/argocd-metrics.yaml
+  # - servicemonitor/vault.yaml
+  # - servicemonitor/ceph.yaml
+  # - servicemonitor/harbor.yaml
+  # - servicemonitor/jenkins.yaml
+  # - servicemonitor/argocd.yaml
+  # - servicemonitor/argocd-metrics.yaml
 
   # workload
-  #- workload/argocd-metrics.yaml
+  # - workload/argocd-server-metrics.yaml
+  # - workload/harbor-exporter.yaml
+  # - workload/postgres-exporter.yaml
+  # - workload/redis-exporter.yaml
+  # - workload/vault-exporter.yaml

@@ -22,7 +22,7 @@ resources:
   - servicemonitor/postgres.yaml
 
   # workload
-  - workload/argocd-server-metrics.yaml
+  #- workload/argocd-server-metrics.yaml
   - workload/harbor-exporter.yaml
   - workload/postgres-exporter.yaml
   - workload/redis-exporter.yaml

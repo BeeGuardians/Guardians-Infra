@@ -3,12 +3,14 @@ kind: Service
 metadata:
   name: backend
   namespace: ns-app
+  labels:
+    app: backend
 spec:
+  type: NodePort
   selector:
     app: backend
-  type: NodePort
   ports:
-    - protocol: TCP
+    - name: http
       port: 80
       targetPort: 8080
-      nodePort: 30080
+      nodePort: 30090

@@ -4,14 +4,14 @@ metadata:
   name: postgres-exporter
   namespace: ns-monitoring
   labels:
-    release: prometheus
+    release: prometheus-grafana
 spec:
   selector:
     matchLabels:
       app: postgres-exporter
   namespaceSelector:
     matchNames:
-      - ns-db
+      - ns-monitoring
   endpoints:
     - port: metrics
       interval: 30s

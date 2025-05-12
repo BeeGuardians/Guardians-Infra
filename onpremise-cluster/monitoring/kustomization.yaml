@@ -26,4 +26,4 @@ resources:
   - workload/harbor-exporter.yaml
   - workload/postgres-exporter.yaml
   - workload/redis-exporter.yaml
-  - workload/vault-exporter.yaml
+  #- workload/vault-exporter.yaml

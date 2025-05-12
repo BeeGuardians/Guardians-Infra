@@ -18,7 +18,7 @@ spec:
           image: quay.io/prometheuscommunity/postgres-exporter
           env:
             - name: DATA_SOURCE_NAME
-              value: "postgresql://guardian:guardian@postgres:5432/guardian?sslmode=disable"
+              value: "postgresql://guardian:guardian@postgres.ns-db.svc:5432/guardian?sslmode=disable"
           ports:
             - containerPort: 9187
           readinessProbe:

@@ -14,16 +14,17 @@ resources:
   - grafana-dashboard/vault-dashboard.yaml
 
   # ServiceMonitors
-  # - servicemonitor/vault.yaml
-  # - servicemonitor/ceph.yaml
-  # - servicemonitor/harbor.yaml
-  # - servicemonitor/jenkins.yaml
-  # - servicemonitor/argocd.yaml
-  # - servicemonitor/argocd-metrics.yaml
+  - servicemonitor/vault.yaml
+  - servicemonitor/ceph.yaml
+  - servicemonitor/harbor.yaml
+  - servicemonitor/jenkins.yaml
+  - servicemonitor/argocd.yaml
+  - servicemonitor/argocd-metrics.yaml
+  - servicemonitor/postgres.yaml
 
   # workload
-  # - workload/argocd-server-metrics.yaml
-  # - workload/harbor-exporter.yaml
-  # - workload/postgres-exporter.yaml
-  # - workload/redis-exporter.yaml
-  # - workload/vault-exporter.yaml
+  - workload/argocd-server-metrics.yaml
+  - workload/harbor-exporter.yaml
+  - workload/postgres-exporter.yaml
+  - workload/redis-exporter.yaml
+  - workload/vault-exporter.yaml

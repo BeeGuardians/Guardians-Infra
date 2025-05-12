@@ -37,6 +37,8 @@ spec:
               value: "smtp.gmail.com"
             - name: MAIL_PORT
               value: "587"
+            - name: VAULT_URI
+              value: "http://vault.ns-vault.svc:8200"
             - name: VAULT_ROLE_ID
               valueFrom:
                 secretKeyRef:

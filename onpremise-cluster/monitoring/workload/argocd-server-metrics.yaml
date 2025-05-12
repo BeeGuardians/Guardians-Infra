@@ -45,6 +45,7 @@ metadata:
   namespace: argocd
   labels:
     app: argocd-application-controller
+    app.kubernetes.io/name: argocd-application-controller
 spec:
   selector:
     app.kubernetes.io/name: argocd-application-controller

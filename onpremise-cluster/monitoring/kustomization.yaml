@@ -19,7 +19,6 @@ resources:
   - servicemonitor/harbor.yaml
   - servicemonitor/jenkins.yaml
   - servicemonitor/argocd.yaml
-  - servicemonitor/argocd-metrics.yaml
   - servicemonitor/postgres.yaml
 
   # workload

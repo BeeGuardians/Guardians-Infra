@@ -31,6 +31,7 @@ spec:
         - /spec/template/metadata/annotations/checksum~1configmap-env
         - /spec/template/metadata/annotations/checksum~1secret
         - /spec/template/metadata/annotations/checksum~1secret-core
+        - /spec/template/metadata/annotations/checksum~1secret-jobservice
     - group: apps
       kind: Deployment
       name: harbor-registry
@@ -38,3 +39,13 @@ spec:
       jsonPointers:
         - /spec/template/metadata/annotations/checksum~1configmap
         - /spec/template/metadata/annotations/checksum~1secret
+        - /spec/template/metadata/annotations/checksum~1secret-core
+        - /spec/template/metadata/annotations/checksum~1secret-jobservice
+    - group: apps
+      kind: Deployment
+      name: harbor-core
+      namespace: harbor
+      jsonPointers:
+        - /spec/template/metadata/annotations/checksum~1secret
+        - /spec/template/metadata/annotations/checksum~1secret-core
+        - /spec/template/metadata/annotations/checksum~1secret-jobservice

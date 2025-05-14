@@ -19,6 +19,9 @@ spec:
       containers:
         - name: rook-ceph-tools
           image: rook/ceph:v1.13.2
+          imagePullPolicy: IfNotPresent
+          tty: true
+          stdin: true
           command:
             - /bin/bash
             - -c
@@ -29,17 +32,18 @@ spec:
 
               write_endpoints() {
                 endpoints=$(cat ${MON_CONFIG})
-                mon_endpoints=$(echo "${endpoints}"| sed 's/[a-z0-9_-]\+=//g')
+                mon_endpoints=$(echo "${endpoints}" | sed 's/[a-z0-9_-]\+=//g')
 
                 echo "$(date) writing mon endpoints to ${CEPH_CONFIG}: ${endpoints}"
                 cat <<EOF > ${CEPH_CONFIG}
-                [global]
-                mon_host = ${mon_endpoints}
+[global]
+mon_host = ${mon_endpoints}
 
-                [client.admin]
-                keyring = ${KEYRING_FILE}
-                EOF
-                              }
+[client.admin]
+keyring = ${KEYRING_FILE}
+EOF
+              }
+
               watch_endpoints() {
                 real_path=$(realpath ${MON_CONFIG})
                 initial_time=$(stat -c %Z "${real_path}")
@@ -66,9 +70,6 @@ EOF
 
               write_endpoints
               watch_endpoints
-          imagePullPolicy: IfNotPresent
-          tty: true
-          stdin: true
           securityContext:
             runAsNonRoot: true
             runAsUser: 2016

@@ -17,9 +17,8 @@ spec:
     spec:
       containers:
         - name: metrics
-          image: quay.io/argoproj/argocd:v2.10.7
-          command: ["/usr/local/bin/argocd"]
-          args: ["metrics"]
+          image: quay.io/argoproj/argocd:v2.12.10
+          command: ["/usr/local/bin/argocd-metrics"]
           ports:
             - containerPort: 8082
 ---

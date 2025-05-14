@@ -33,14 +33,13 @@ spec:
 
                 echo "$(date) writing mon endpoints to ${CEPH_CONFIG}: ${endpoints}"
                 cat <<EOF > ${CEPH_CONFIG}
-[global]
-mon_host = ${mon_endpoints}
+                [global]
+                mon_host = ${mon_endpoints}
 
-[client.admin]
-keyring = ${KEYRING_FILE}
-EOF
-              }
-
+                [client.admin]
+                keyring = ${KEYRING_FILE}
+                EOF
+                              }
               watch_endpoints() {
                 real_path=$(realpath ${MON_CONFIG})
                 initial_time=$(stat -c %Z "${real_path}")

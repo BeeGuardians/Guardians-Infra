@@ -35,13 +35,13 @@ spec:
                 mon_endpoints=$(echo "${endpoints}" | sed 's/[a-z0-9_-]\+=//g')
 
                 echo "$(date) writing mon endpoints to ${CEPH_CONFIG}: ${endpoints}"
-                cat <<EOF > ${CEPH_CONFIG}
-[global]
-mon_host = ${mon_endpoints}
+                  cat <<EOF > ${CEPH_CONFIG}
+              [global]
+              mon_host = ${mon_endpoints}
 
-[client.admin]
-keyring = ${KEYRING_FILE}
-EOF
+              [client.admin]
+              keyring = ${KEYRING_FILE}
+              EOF
               }
 
               watch_endpoints() {
@@ -64,9 +64,9 @@ EOF
               fi
 
               cat <<EOF > ${KEYRING_FILE}
-[${ROOK_CEPH_USERNAME}]
-key = ${ceph_secret}
-EOF
+              [${ROOK_CEPH_USERNAME}]
+              key = ${ceph_secret}
+              EOF
 
               write_endpoints
               watch_endpoints

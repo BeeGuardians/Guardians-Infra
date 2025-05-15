@@ -33,6 +33,9 @@ spec:
             portName: http
           prometheusSpec:
             serviceMonitorSelectorNilUsesHelmValues: false
+            evaluationInterval: 30s
+            scrapeInterval: 30s
+            retention: 10d
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-monitoring

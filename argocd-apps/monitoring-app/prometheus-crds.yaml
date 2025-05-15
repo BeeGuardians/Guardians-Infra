@@ -1,21 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring-config
+  name: prometheus-crds
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
     targetRevision: feat/monitoring
-    path: onpremise-cluster/monitoring
+    path: onpremise-cluster/monitoring/crds
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-monitoring
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
     syncOptions:
-      - CreateNamespace=true
       - ServerSideApply=true
+    automated:
+      selfHeal: true
+      prune: true

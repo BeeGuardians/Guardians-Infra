@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - prometheus-grafana.yaml
   - monitoring-config.yaml
+  - prometheus-crds.yaml

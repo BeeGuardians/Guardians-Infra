@@ -27,3 +27,6 @@ resources:
   - workload/postgres-exporter.yaml
   - workload/redis-exporter.yaml
   #- workload/vault-exporter.yaml
+
+  # crds
+  - crds/

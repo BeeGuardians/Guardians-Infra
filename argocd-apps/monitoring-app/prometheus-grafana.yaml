@@ -26,6 +26,10 @@ spec:
               enabled: true
               label: grafana_dashboard
               labelValue: "1"
+        alertmanager:
+          enabled: true
+          alertmanagerSpec:
+            replicas: 1
         prometheus:
           enabled: true
           service:

@@ -38,7 +38,7 @@ spec:
             - name: MAIL_PORT
               value: "587"
             - name: VAULT_URI
-              value: "http://vault.ns-vault.svc:8200"
+              value: "http://vault.guardians.onprem:30301"
             - name: VAULT_ROLE_ID
               valueFrom:
                 secretKeyRef:

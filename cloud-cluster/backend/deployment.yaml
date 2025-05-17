@@ -26,13 +26,13 @@ spec:
             - name: DB_HOST
               value: "postgres.ns-db.svc.cluster.local"
             - name: DB_PORT
-              value: "5432"
+              value: "30432"
             - name: DB_NAME
               value: "guardian"
             - name: REDIS_HOST
               value: "redis-service.ns-db.svc.cluster.local"
             - name: REDIS_PORT
-              value: "6379"
+              value: "30379"
             - name: MAIL_HOST
               value: "smtp.gmail.com"
             - name: MAIL_PORT

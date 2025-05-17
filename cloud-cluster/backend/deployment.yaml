@@ -53,4 +53,5 @@ spec:
               value: "ap-northeast-2"
             - name: AWS_S3_BUCKET
               value: "s3-guardians-dev"
-            - name: "https://s3-guardians-dev.s3.ap-northeast-2.amazonaws.com/defaults/basic-profile.png"
+            - name: DEFAULT_PROFILE_URL
+              value: "https://s3-guardians-dev.s3.ap-northeast-2.amazonaws.com/defaults/basic-profile.png"

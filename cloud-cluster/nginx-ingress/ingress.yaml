@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: bee-guardians-ingress
-  namespace: nginx-ingress
+  namespace: ns-app
   annotations:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
@@ -16,7 +16,6 @@ spec:
             backend:
               service:
                 name: backend
-                namespace: ns-app
                 port:
                   number: 80
           - path: /
@@ -24,6 +23,5 @@ spec:
             backend:
               service:
                 name: frontend
-                namespace: ns-app
                 port:
                   number: 80

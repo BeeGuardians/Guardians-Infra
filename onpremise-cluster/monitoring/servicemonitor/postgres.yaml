@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: postgres-exporter
+  namespace: ns-monitoring
+  labels:
+    release: prometheus-grafana
+spec:
+  selector:
+    matchLabels:
+      app: postgres-exporter
+  namespaceSelector:
+    matchNames:
+      - ns-monitoring
+  endpoints:
+    - port: metrics
+      interval: 30s

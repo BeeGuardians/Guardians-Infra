@@ -1,5 +1,4 @@
 resources:
-  - kube-prometheus-stack/
   - exporters/
   - dashboards/
   - servicemonitor/

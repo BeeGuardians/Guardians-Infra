@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: vault-exporter
+  name: vault-servicemonitor
   namespace: ns-monitoring
   labels:
     release: prometheus-stack

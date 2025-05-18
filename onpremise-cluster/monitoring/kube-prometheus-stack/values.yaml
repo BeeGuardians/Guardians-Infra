@@ -1218,6 +1218,9 @@ alertmanager:
 grafana:
   enabled: true
   namespaceOverride: ""
+  service:
+    type: NodePort
+    nodePort: 30601
 
   ## ForceDeployDatasources Create datasource configmap even if grafana deployment has been disabled
   ##
@@ -3553,7 +3556,7 @@ prometheus:
     ## Port to expose on each node
     ## Only used if service.type is 'NodePort'
     ##
-    nodePort: 30090
+    nodePort: 30602
 
     ## Loadbalancer IP
     ## Only use if service.type is "LoadBalancer"
@@ -3566,7 +3569,7 @@ prometheus:
 
     ## Service type
     ##
-    type: ClusterIP
+    type: NodePort
 
     ## Additional ports to open for Prometheus service
     ##

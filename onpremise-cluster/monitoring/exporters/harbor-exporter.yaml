@@ -74,7 +74,7 @@ metadata:
   name: harbor-exporter
   namespace: ns-monitoring
   labels:
-    release: prometheus-grafana
+    release: kube-prometheus-stack
 spec:
   selector:
     matchLabels:

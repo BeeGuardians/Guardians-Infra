@@ -1,4 +1,5 @@
 resources:
+  - argocd-exporter.yaml
   - harbor-exporter.yaml
   - postgres-exporter.yaml
   - redis-exporter.yaml

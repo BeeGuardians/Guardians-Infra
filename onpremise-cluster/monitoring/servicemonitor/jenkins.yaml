@@ -14,6 +14,6 @@ spec:
       - ns-devops
   endpoints:
     - port: http
-      path: /prometheus
+      path: /metrics
       interval: 30s
       scheme: http

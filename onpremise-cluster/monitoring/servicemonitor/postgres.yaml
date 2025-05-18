@@ -11,7 +11,8 @@ spec:
       app: postgres-exporter
   namespaceSelector:
     matchNames:
-      - ns-monitoring
+      - ns-db
   endpoints:
     - port: metrics
       interval: 30s
+      scheme: http

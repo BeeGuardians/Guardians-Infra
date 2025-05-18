@@ -13,7 +13,7 @@ spec:
     matchNames:
       - argocd
   endpoints:
-    - port: http
+    - port: metrics
       path: /metrics
       interval: 30s
       scheme: http

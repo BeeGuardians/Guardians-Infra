@@ -1,5 +1,4 @@
 resources:
-  - argocd-server-metrics.yaml
   - harbor-exporter.yaml
   - postgres-exporter.yaml
   - redis-exporter.yaml

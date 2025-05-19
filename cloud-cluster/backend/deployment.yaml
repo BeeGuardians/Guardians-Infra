@@ -58,5 +58,3 @@ spec:
               value: "https://s3-guardians-dev.s3.ap-northeast-2.amazonaws.com/profile/basic_profile.png"
             - name: COOKIE_SESSION
               value: "true"
-            - name: SPRING_PROFILES_ACTIVE
-              value: "dev"

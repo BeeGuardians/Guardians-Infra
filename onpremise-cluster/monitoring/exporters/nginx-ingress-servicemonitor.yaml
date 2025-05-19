@@ -11,7 +11,7 @@ spec:
       app: nginx-ingress
   namespaceSelector:
     matchNames:
-      - nginx-ingress
+      - ingress-nginx
   endpoints:
     - port: metrics
       path: /metrics

@@ -1,17 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cloud-kube-prometheus-stack
+  name: cloud-node-exporter
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
     targetRevision: feat/monitoring
-    path: cloud-cluster/monitoring/kube-prometheus-stack
-    helm:
-      valueFiles:
-        - values.yaml
+    path: cloud-cluster/monitoring/exporters
   destination:
     server: https://10.100.0.21:6443
     namespace: ns-monitoring

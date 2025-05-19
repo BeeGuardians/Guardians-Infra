@@ -4,4 +4,3 @@ resources:
   - postgres-exporter.yaml
   - redis-exporter.yaml
   - vault-exporter.yaml
-  - springboot-metrics.yaml

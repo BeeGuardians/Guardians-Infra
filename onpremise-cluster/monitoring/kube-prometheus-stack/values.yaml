@@ -3893,6 +3893,14 @@ prometheus:
   ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#prometheusspec
   ##
   prometheusSpec:
+    additionalScrapeConfigs:
+      - job_name: 'cloud-node-exporter'
+        static_configs:
+          - targets:
+              - 10.100.0.21:9100
+              - 10.100.0.22:9100
+              - 10.100.0.23:9100
+    additionalScrapeConfigsSecret: cloud-scrape-configs
     ## Statefulset's persistent volume claim retention policy
     ## whenDeleted and whenScaled determine whether
     ## statefulset's PVCs are deleted (true) or retained (false)

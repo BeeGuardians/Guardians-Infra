@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: nginx-ingress-controller
+  namespace: ns-monitoring
+  labels:
+    release: prometheus-grafana
+spec:
+  selector:
+    matchLabels:
+      app: nginx-ingress
+  namespaceSelector:
+    matchNames:
+      - nginx-ingress
+  endpoints:
+    - port: metrics
+      interval: 30s
+      path: /metrics
+      scheme: http
+      targetPort: 10254

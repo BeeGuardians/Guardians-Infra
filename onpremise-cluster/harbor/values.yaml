@@ -87,16 +87,16 @@ persistence:
       existingClaim: ""
       storageClass: rook-ceph-fs
       subPath: ""
-      accessMode: ReadWriteOnce
-      size: 5Gi
+      accessMode: ReadWriteMany
+      size: 10Gi
       annotations: {}
     jobservice:
       jobLog:
         existingClaim: ""
         storageClass: "rook-ceph-fs"
         subPath: ""
-        accessMode: ReadWriteOnce
-        size: 1Gi
+        accessMode: ReadWriteMany
+        size: 5Gi
         annotations: {}
       storageClass: rook-ceph-fs
     database:

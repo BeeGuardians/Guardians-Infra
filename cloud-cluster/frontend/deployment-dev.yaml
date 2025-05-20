@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-dev
+  namespace: ns-app
+  labels:
+    app: frontend-dev
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-dev
+  template:
+    metadata:
+      labels:
+        app: frontend-dev
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: frontend-dev
+          image: harbor.example.com:30443/guardians/frontend:9aa5a10
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80

@@ -4,7 +4,7 @@ metadata:
   name: backend-dev
   namespace: ns-app
   labels:
-    app: backend
+    app: backend-dev
 spec:
   revisionHistoryLimit: 3
   replicas: 1

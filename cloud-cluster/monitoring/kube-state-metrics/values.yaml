@@ -58,12 +58,12 @@ automountServiceAccountToken: true
 service:
   port: 8080
   # Default to clusterIP for backward compatibility
-  type: ClusterIP
+  type: NodePort
   ipDualStack:
     enabled: false
     ipFamilies: ["IPv6", "IPv4"]
     ipFamilyPolicy: "PreferDualStack"
-  nodePort: 0
+  nodePort: 31080
   loadBalancerIP: ""
   # Only allow access to the loadBalancerIP from these IPs
   loadBalancerSourceRanges: []
@@ -197,6 +197,11 @@ prometheus:
     ##
     labelValueLengthLimit: 0
     selectorOverride: {}
+  serviceMonitor:
+    enabled: true
+    namespace: ns-monitoring
+    labels:
+      release: kube
 
     ## kube-state-metrics endpoint
     http:

@@ -16,3 +16,14 @@
         - 10.100.0.21:32001
         - 10.100.0.22:32001
         - 10.100.0.23:32001
+
+- job_name: cloud-kube-state-metrics
+  static_configs:
+    - targets:
+        - 10.100.0.21:31080
+        - 10.100.0.22:31080
+        - 10.100.0.23:31080
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: cluster
+      replacement: cloud

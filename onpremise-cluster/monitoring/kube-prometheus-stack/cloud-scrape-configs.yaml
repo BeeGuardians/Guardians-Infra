@@ -4,6 +4,10 @@
         - 10.100.0.21:9100
         - 10.100.0.22:9100
         - 10.100.0.23:9100
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: cluster
+      replacement: cloud
 
 - job_name: 'springboot-backend'
   metrics_path: /actuator/prometheus

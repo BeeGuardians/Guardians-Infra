@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cloud-node-exporter
+  name: cloud-kube-state-metrics
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
     targetRevision: feat/monitoring
-    path: cloud-cluster/monitoring/exporters
+    path: cloud-cluster/monitoring/kube-state-metrics
   destination:
     server: https://10.100.0.21:6443
-    namespace: ns-monitoring
+    namespace: kube-system
   syncPolicy:
     automated:
       prune: true

@@ -3526,6 +3526,8 @@ prometheus:
   ##
   service:
     enabled: true
+    type: NodePort
+    nodePort: 30603
     annotations: {}
     labels: {}
     clusterIP: ""
@@ -3958,7 +3960,7 @@ prometheus:
     ## This is disabled by default.
     ## ref: https://prometheus.io/docs/prometheus/latest/querying/api/#tsdb-admin-apis
     ##
-    enableAdminAPI: false
+    enableAdminAPI: true
 
     ## Sets version of Prometheus overriding the Prometheus version as derived
     ## from the image tag. Useful in cases where the tag does not follow semver v2.
@@ -4029,7 +4031,9 @@ prometheus:
 
     ## External labels to add to any time series or alerts when communicating with external systems
     ##
-    externalLabels: {}
+    externalLabels: 
+      cluster: cloud-cluster
+    retention: 24h
 
     ## enable --web.enable-remote-write-receiver flag on prometheus-server
     ##

@@ -84,18 +84,18 @@ persistence:
   resourcePolicy: keep
   persistentVolumeClaim:
     registry:
-      existingClaim: ""
+      existingClaim: "harbor-registry"
       storageClass: rook-ceph-fs
       subPath: ""
-      accessMode: ReadWriteMany
-      size: 10Gi
+      accessMode: ReadWriteOnce
+      size: 20i
       annotations: {}
     jobservice:
       jobLog:
-        existingClaim: ""
+        existingClaim: "harbor-jobservice-log"
         storageClass: "rook-ceph-fs"
         subPath: ""
-        accessMode: ReadWriteMany
+        accessMode: ReadWriteOnce
         size: 5Gi
         annotations: {}
       storageClass: rook-ceph-fs

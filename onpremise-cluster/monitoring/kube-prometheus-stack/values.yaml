@@ -3893,9 +3893,6 @@ prometheus:
   ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#prometheusspec
   ##
   prometheusSpec:
-    additionalScrapeConfigs:
-      #name: cloud-scrape-configs
-      #key: additional-scrape-configs.yaml
     ## Statefulset's persistent volume claim retention policy
     ## whenDeleted and whenScaled determine whether
     ## statefulset's PVCs are deleted (true) or retained (false)
@@ -4351,7 +4348,7 @@ prometheus:
     ## The scrape configuration example below will find master nodes, provided they have the name .*mst.*, relabel the
     ## port to 2379 and allow etcd scraping provided it is running on all Kubernetes master nodes
     ##
-    additionalScrapeConfigs:
+    scrapeConfigs:
       - job_name: 'cloud-node-exporter'
         static_configs:
           - targets:

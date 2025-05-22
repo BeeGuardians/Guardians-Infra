@@ -84,7 +84,7 @@ persistence:
   resourcePolicy: keep
   persistentVolumeClaim:
     registry:
-      existingClaim: "harbor-registry"
+      existingClaim: ""
       storageClass: rook-ceph-fs
       subPath: ""
       accessMode: ReadWriteOnce
@@ -92,7 +92,7 @@ persistence:
       annotations: {}
     jobservice:
       jobLog:
-        existingClaim: "harbor-jobservice-log"
+        existingClaim: ""
         storageClass: "rook-ceph-fs"
         subPath: ""
         accessMode: ReadWriteOnce

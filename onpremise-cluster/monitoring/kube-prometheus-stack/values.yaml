@@ -4358,6 +4358,9 @@ prometheus:
               - 10.100.0.21:9100
               - 10.100.0.22:9100
               - 10.100.0.23:9100
+        relabel_configs:
+          - target_label: cluster
+            replacement: onpremise-cluster
 
       - job_name: 'springboot-backend'
         metrics_path: /actuator/prometheus
@@ -4366,6 +4369,9 @@ prometheus:
               - 10.100.0.21:32001
               - 10.100.0.22:32001
               - 10.100.0.23:32001
+        relabel_configs:
+          - target_label: cluster
+            replacement: onpremise-cluster
 
       - job_name: 'nginx-ingress'
         metrics_path: /metrics
@@ -4374,6 +4380,9 @@ prometheus:
               - 10.100.0.21:10254
               - 10.100.0.22:10254
               - 10.100.0.23:10254
+        relabel_configs:
+          - target_label: cluster
+            replacement: onpremise-cluster
 
       - job_name: 'cloud-federation'
         scrape_interval: 30s
@@ -4389,6 +4398,7 @@ prometheus:
             regex: .*
             target_label: cluster
             replacement: cloud-cluster
+
     # - job_name: kube-etcd
     #   kubernetes_sd_configs:
     #     - role: node

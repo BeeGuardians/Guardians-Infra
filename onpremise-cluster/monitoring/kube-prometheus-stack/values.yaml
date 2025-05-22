@@ -2488,7 +2488,9 @@ kube-state-metrics:
       ## RelabelConfigs to apply to samples before scraping
       ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
       ##
-      relabelings: []
+      relabelings:
+        - targetLabel: cluster
+          replacement: onpremise-cluster
       # - sourceLabels: [__meta_kubernetes_pod_node_name]
       #   separator: ;
       #   regex: ^(.*)$

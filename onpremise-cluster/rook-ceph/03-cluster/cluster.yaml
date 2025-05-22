@@ -31,6 +31,9 @@ spec:
       - name: "guardians6"
         devices:
           - name: "sdb"
+      - name: "guardians7"
+        devices:
+          - name: "sdb"
     config:
       osdsPerDevice: "1"
       databaseSizeMB: "1024" # 블루스토어용 DB 사이즈 (선택)

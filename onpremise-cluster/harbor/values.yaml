@@ -214,7 +214,24 @@ core:
   startupProbe:
     enabled: true
     initialDelaySeconds: 10
-  extraEnvVars: []
+    timeoutSeconds: 10
+    periodSeconds: 10
+    failureThreshold: 30
+
+  readinessProbe:
+    timeoutSeconds: 10
+    periodSeconds: 10
+    failureThreshold: 10
+
+  livenessProbe:
+    timeoutSeconds: 10
+    periodSeconds: 10
+    failureThreshold: 10
+
+  extraEnvVars:
+    - name: HTTP_HOST
+      value: "0.0.0.0"
+
   nodeSelector: {}
   tolerations: []
   affinity: {}

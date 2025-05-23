@@ -1,3 +1,4 @@
+disableChecksums: true
 expose:
   type: ingress
   tls:
@@ -81,7 +82,7 @@ ipFamily:
     enabled: true
 persistence:
   enabled: true
-  resourcePolicy: keep
+  resourcePolicy: delete
   persistentVolumeClaim:
     registry:
       existingClaim: ""

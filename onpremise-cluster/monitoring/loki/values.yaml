@@ -29,6 +29,19 @@ kubectlImage:
   digest: null
   # -- Docker image pull policy
   pullPolicy: IfNotPresent
+
+querier:
+  replicas: 1
+
+distributor:
+  replicas: 1
+
+ingester:
+  replicas: 1
+
+queryFrontend:
+  replicas: 1
+
 loki:
   # Configures the readiness probe for all of the Loki pods
   readinessProbe:
@@ -357,8 +370,7 @@ loki:
   # --  Optional analytics configuration
   analytics: {}
   # --  Optional querier configuration
-  querier:
-    replicas: 1
+  querier: {}
   
   queryFrontend:
     replicas: 1
@@ -374,8 +386,7 @@ loki:
   frontend_worker:
     scheduler_address: '{{ include "loki.querySchedulerAddress" . }}'
   # -- Optional distributor configuration
-  distributor:
-    replicas: 1
+  distributor: {}
   # -- Enable tracing
   tracing:
     enabled: false

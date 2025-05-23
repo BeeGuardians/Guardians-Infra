@@ -229,7 +229,7 @@ core:
     failureThreshold: 10
 
   extraEnvVars:
-    - name: HTTP_HOST
+    - name: CORE_HOST
       value: "0.0.0.0"
 
   nodeSelector: {}

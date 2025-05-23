@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring-config
+  name: onpremise-promtail
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
     targetRevision: feat/monitoring
-    path: onpremise-cluster/monitoring
+    path: onpremise-cluster/monitoring/promtail
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-monitoring

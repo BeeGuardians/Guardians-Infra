@@ -42,10 +42,9 @@ ingester:
 queryFrontend:
   replicas: 1
 
-deploymentMode: SingleBinary
-
 loki:
   # Configures the readiness probe for all of the Loki pods
+  deploymentMode: SingleBinary
   readinessProbe:
     httpGet:
       path: /ready

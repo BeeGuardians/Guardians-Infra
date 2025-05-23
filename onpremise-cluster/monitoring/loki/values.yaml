@@ -1145,7 +1145,7 @@ backend:
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
     # If empty or set to null, no storageClassName spec is
     # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-    storageClass: rook-ceph-block
+    storageClass: null
     # -- Selector for persistent disk
     selector: null
 # Configuration for the single binary node(s)
@@ -1234,7 +1234,7 @@ singleBinary:
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
     # If empty or set to null, no storageClassName spec is
     # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-    storageClass: null
+    storageClass: rook-ceph-block
     # -- Selector for persistent disk
     selector: null
 # Use either this ingress or the gateway, but not both at once.

@@ -1139,7 +1139,7 @@ backend:
     # -- Enable StatefulSetAutoDeletePVC feature
     enableStatefulSetAutoDeletePVC: true
     # -- Size of persistent disk
-    size: 10Gi
+    size: "10Gi"
     # -- Storage class to be used.
     # If defined, storageClassName: <storageClass>.
     # If set to "-", storageClassName: "", which disables dynamic provisioning.

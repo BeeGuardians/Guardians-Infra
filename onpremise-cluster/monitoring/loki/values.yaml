@@ -1190,7 +1190,7 @@ singleBinary:
   targetModule: "all"
   # -- Labels for single binary service
   extraArgs:
-    -config.expand-env=true
+    - "-config.expand-env=true"
   # -- Environment variables to add to the single binary pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the single binary pods

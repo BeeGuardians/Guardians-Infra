@@ -244,7 +244,7 @@ loki:
     tracing:
       enabled: {{ .Values.loki.tracing.enabled }}
   # Should authentication be enabled
-  auth_enabled: true
+  auth_enabled: false
   # -- memberlist configuration (overrides embedded default)
   memberlistConfig: {}
   # -- Extra memberlist configuration
@@ -1130,6 +1130,7 @@ backend:
   # -- The default is to deploy all pods in parallel.
   podManagementPolicy: "Parallel"
   persistence:
+    enabled: true
     # -- Enable volume claims in pod spec
     volumeClaimsEnabled: true
     # -- Parameters used for the `data` volume when volumeClaimEnabled if false
@@ -1144,13 +1145,14 @@ backend:
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
     # If empty or set to null, no storageClassName spec is
     # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-    storageClass: null
+    storageClass: rook-ceph-block
     # -- Selector for persistent disk
     selector: null
 # Configuration for the single binary node(s)
 singleBinary:
   # -- Number of replicas for the single binary
-  replicas: 0
+  replicas: 1
+  
   autoscaling:
     # -- Enable autoscaling
     enabled: false
@@ -1187,7 +1189,8 @@ singleBinary:
   # -- Comma-separated list of Loki modules to load for the single binary
   targetModule: "all"
   # -- Labels for single binary service
-  extraArgs: []
+  extraArgs:
+    -config.expand-env=true
   # -- Environment variables to add to the single binary pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the single binary pods

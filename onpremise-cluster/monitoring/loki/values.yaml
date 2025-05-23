@@ -768,8 +768,9 @@ monitoring:
         maxUnavailable: 1
 # Configuration for the write pod(s)
 write:
+  enabled: false
   # -- Number of replicas for the write
-  replicas: 1
+  # replicas: 1
   autoscaling:
     # -- Enable autoscaling for the write.
     enabled: false
@@ -955,21 +956,22 @@ tableManager:
   retention_period: 0
 # Configuration for the read pod(s)
 read:
-  # -- Number of replicas for the read
-  replicas: 1
-  autoscaling:
-    # -- Enable autoscaling for the read, this is only used if `queryIndex.enabled: true`
-    enabled: false
-    # -- Minimum autoscaling replicas for the read
-    minReplicas: 2
-    # -- Maximum autoscaling replicas for the read
-    maxReplicas: 6
-    # -- Target CPU utilisation percentage for the read
-    targetCPUUtilizationPercentage: 60
-    # -- Target memory utilisation percentage for the read
-    targetMemoryUtilizationPercentage:
-    # -- Behavior policies while scaling.
-    behavior: {}
+  enabled: false
+  # # -- Number of replicas for the read
+  # replicas: 1
+  # autoscaling:
+  #   # -- Enable autoscaling for the read, this is only used if `queryIndex.enabled: true`
+  #   enabled: false
+  #   # -- Minimum autoscaling replicas for the read
+  #   minReplicas: 2
+  #   # -- Maximum autoscaling replicas for the read
+  #   maxReplicas: 6
+  #   # -- Target CPU utilisation percentage for the read
+  #   targetCPUUtilizationPercentage: 60
+  #   # -- Target memory utilisation percentage for the read
+  #   targetMemoryUtilizationPercentage:
+  #   # -- Behavior policies while scaling.
+  #   behavior: {}
     #  scaleUp:
     #   stabilizationWindowSeconds: 300
     #   policies:
@@ -1060,21 +1062,21 @@ read:
     selector: null
 # Configuration for the backend pod(s)
 backend:
+  enabled: false
   # -- Number of replicas for the backend
-  replicas: 1
-  autoscaling:
-    # -- Enable autoscaling for the backend.
-    enabled: false
-    # -- Minimum autoscaling replicas for the backend.
-    minReplicas: 2
-    # -- Maximum autoscaling replicas for the backend.
-    maxReplicas: 6
-    # -- Target CPU utilization percentage for the backend.
-    targetCPUUtilizationPercentage: 60
-    # -- Target memory utilization percentage for the backend.
-    targetMemoryUtilizationPercentage:
-    # -- Behavior policies while scaling.
-    behavior: {}
+  # autoscaling:
+  #   # -- Enable autoscaling for the backend.
+  #   enabled: false
+  #   # -- Minimum autoscaling replicas for the backend.
+  #   minReplicas: 2
+  #   # -- Maximum autoscaling replicas for the backend.
+  #   maxReplicas: 6
+  #   # -- Target CPU utilization percentage for the backend.
+  #   targetCPUUtilizationPercentage: 60
+  #   # -- Target memory utilization percentage for the backend.
+  #   targetMemoryUtilizationPercentage:
+  #   # -- Behavior policies while scaling.
+  #   behavior: {}
     #    scaleUp:
     #     stabilizationWindowSeconds: 300
     #     policies:

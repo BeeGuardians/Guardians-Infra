@@ -1611,6 +1611,7 @@ kubelet:
     ## If true, defines whether Prometheus tracks staleness of the metrics that have an explicit timestamp present in scraped data. Has no effect if `honorTimestamps` is false.
     ## We recommend enabling this if you want the best possible accuracy for container_ metrics scraped from cadvisor.
     ## For more details see: https://github.com/prometheus-community/helm-charts/pull/5063#issuecomment-2545374849
+    trackTimestampsStaleness: false
 
     ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
     ##

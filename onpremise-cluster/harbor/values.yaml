@@ -213,24 +213,30 @@ core:
   revisionHistoryLimit: 10
   startupProbe:
     enabled: true
-    initialDelaySeconds: 10
+    initialDelaySeconds: 20
     timeoutSeconds: 10
     periodSeconds: 10
-    failureThreshold: 30
+    failureThreshold: 60
 
   readinessProbe:
-    timeoutSeconds: 10
+    httpGet:
+      path: /api/v2.0/ping
+      port: http-web
+    initialDelaySeconds: 10
+    timeoutSeconds: 5
     periodSeconds: 10
     failureThreshold: 10
 
   livenessProbe:
-    timeoutSeconds: 10
+    httpGet:
+      path: /api/v2.0/ping
+      port: http-web
+    initialDelaySeconds: 10
+    timeoutSeconds: 5
     periodSeconds: 10
     failureThreshold: 10
 
-  extraEnvVars:
-    - name: CORE_HOST
-      value: "0.0.0.0"
+  extraEnvVars: []
 
   nodeSelector: {}
   tolerations: []

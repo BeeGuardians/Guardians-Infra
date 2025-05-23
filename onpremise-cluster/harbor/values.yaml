@@ -344,34 +344,12 @@ trivy:
   podLabels: {}
   priorityClassName: null
 database:
-  type: internal
-  internal:
-    serviceAccountName: ""
-    automountServiceAccountToken: false
-    image:
-      repository: goharbor/harbor-db
-      tag: v2.10.0
-    password: changeit
-    shmSizeLimit: 512Mi
-    livenessProbe:
-      timeoutSeconds: 1
-    readinessProbe:
-      timeoutSeconds: 1
-    extraEnvVars: []
-    nodeSelector: {}
-    tolerations: []
-    affinity: {}
-    priorityClassName: null
-    initContainer:
-      migrator: {}
-      permissions: {}
-    customPgHba:
-      - host all all 0.0.0.0/0 trust
+  type: external
   external:
-    host: 192.168.0.1
+    host: postgres.ns-db.svc.cluster.local
     port: "5432"
-    username: user
-    password: password
+    username: harbor_user
+    password: harbor_user
     coreDatabase: registry
     existingSecret: ""
     sslmode: disable

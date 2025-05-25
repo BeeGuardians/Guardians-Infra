@@ -31,20 +31,21 @@ kubectlImage:
   pullPolicy: IfNotPresent
 
 querier:
-  replicas: 1
+  replicas: 2
 
 distributor:
-  replicas: 1
+  replicas: 2
 
 ingester:
-  replicas: 1
+  replicas: 2
 
 queryFrontend:
-  replicas: 1
+  replicas: 2
 
 loki:
   # Configures the readiness probe for all of the Loki pods
-  deploymentMode: SingleBinary
+  deploymentMode: Distributed
+  replication_factor: 2
   readinessProbe:
     httpGet:
       path: /ready
@@ -359,7 +360,8 @@ loki:
   # -- Structured loki configuration, takes precedence over `loki.config`, `loki.schemaConfig`, `loki.storageConfig`
   structuredConfig: {}
   # -- Additional query scheduler config
-  query_scheduler: {}
+  query_scheduler:
+    enabled: true
   # -- Additional storage config
   storage_config:
     hedging:
@@ -367,16 +369,18 @@ loki:
       max_per_second: 20
       up_to: 3
   # --  Optional compactor configuration
-  compactor: {}
+  compactor:
+    enabled: true
   # --  Optional analytics configuration
   analytics: {}
   # --  Optional querier configuration
-  querier: {}
-  
+  querier:
+    replicas: 2  
   queryFrontend:
-    replicas: 1
+    replicas: 2
   # --  Optional ingester configuration
   ingester:
+    replicas: 3
     wal:
       enabled: true
   # --  Optional index gateway configuration

@@ -42,6 +42,9 @@ ingester:
 queryFrontend:
   replicas: 2
 
+query_scheduler:
+  enabled: true
+
 loki:
   # Configures the readiness probe for all of the Loki pods
   deploymentMode: Distributed
@@ -281,14 +284,14 @@ loki:
     split_queries_by_interval: 15m
     ingestion_rate_mb: 10
     ingestion_burst_size_mb: 20
-    max_concurrent_streams: 128
+  #  max_concurrent_streams: 128
     max_entries_limit_per_query: 5000
   # -- Provides a reloadable runtime configuration file for some specific configuration
   runtimeConfig: {}
   # -- Check https://grafana.com/docs/loki/latest/configuration/#common_config for more info on how to provide a common configuration
   commonConfig:
     path_prefix: /var/loki
-    replication_factor: 1
+    replication_factor: 2
     compactor_address: '{{ include "loki.compactorAddress" . }}'
   # -- Storage config. Providing this will automatically populate all necessary storage configs in the templated config.
   storage:
@@ -367,8 +370,7 @@ loki:
   # -- Structured loki configuration, takes precedence over `loki.config`, `loki.schemaConfig`, `loki.storageConfig`
   structuredConfig: {}
   # -- Additional query scheduler config
-  query_scheduler:
-    enabled: true
+  query_scheduler: {}
   # -- Additional storage config
   storage_config:
     hedging:
@@ -376,13 +378,13 @@ loki:
       max_per_second: 20
       up_to: 3
   # --  Optional compactor configuration
-  compactor:
-    enabled: true
+  #compactor:
+  #  enabled: true
   # --  Optional analytics configuration
   analytics: {}
   # --  Optional querier configuration
-  querier:
-    replicas: 2  
+  #querier:
+  #  replicas: 2  
   queryFrontend:
     replicas: 2
   # --  Optional ingester configuration

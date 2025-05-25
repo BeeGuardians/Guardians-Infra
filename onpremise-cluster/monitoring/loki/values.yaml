@@ -389,7 +389,6 @@ loki:
     replicas: 2
   # --  Optional ingester configuration
   ingester:
-    replicas: 3
     wal:
       enabled: true
   # --  Optional index gateway configuration

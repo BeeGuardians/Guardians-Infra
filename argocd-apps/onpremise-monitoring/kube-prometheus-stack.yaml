@@ -27,3 +27,8 @@ spec:
       kind: ServiceMonitor
       jsonPointers:
         - /spec/endpoints/0/metricRelabelings
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      jsonPointers:
+        - /metadata/annotations/controller-gen.kubebuilder.io~1version
+        - /metadata/annotations/operator.prometheus.io~1version

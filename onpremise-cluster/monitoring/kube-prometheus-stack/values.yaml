@@ -1588,8 +1588,6 @@ kubelet:
 
   serviceMonitor:
     enabled: true
-    https:
-      trackTimestampsStaleness: false
     ## Enable scraping /metrics from kubelet's service
     kubelet: true
 

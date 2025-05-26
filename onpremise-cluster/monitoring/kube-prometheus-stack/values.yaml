@@ -1460,10 +1460,8 @@ grafana:
     nodePort: 30601
     port: 80
 
-  readinessProbe:
-    enabled: false
-  livenessProbe:
-    enabled: false
+  readinessProbe: null
+  livenessProbe: null
 
   serviceMonitor:
     # If true, a ServiceMonitor CRD is created for a prometheus operator

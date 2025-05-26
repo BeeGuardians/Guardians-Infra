@@ -32,6 +32,12 @@ spec:
         - /spec/endpoints/0/metricRelabelings
         - /spec/endpoints/0/trackTimestampsStaleness
         - /spec/endpoints/1/trackTimestampsStaleness
+    - group: monitoring.coreos.com
+      kind: ServiceMonitor
+      name: kube-prometheus-stack-kubelet
+      jsonPointers:
+        - /spec/endpoints/0/trackTimestampsStaleness
+        - /spec/endpoints/1/trackTimestampsStaleness
     - group: apiextensions.k8s.io
       kind: CustomResourceDefinition
       jsonPointers:

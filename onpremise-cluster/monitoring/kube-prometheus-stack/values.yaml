@@ -1471,6 +1471,11 @@ grafana:
           type: prometheus
           access: proxy
           url: http://prometheus-operated.ns-monitoring.svc.cluster.local:9090
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki.ns-monitoring.svc.cluster.local:3100
+          isDefault: false
 
   serviceMonitor:
     # If true, a ServiceMonitor CRD is created for a prometheus operator

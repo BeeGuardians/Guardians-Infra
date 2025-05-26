@@ -4390,10 +4390,8 @@ prometheus:
         static_configs:
           - targets:
               - 10.100.0.21:30603
-        metric_relabel_configs:
-          - source_labels: [__name__]
-            regex: .*
-            target_label: cluster
+        relabel_configs:
+          - target_label: cluster
             replacement: cloud-cluster
 
     # - job_name: kube-etcd

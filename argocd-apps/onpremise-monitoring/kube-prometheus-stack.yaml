@@ -12,6 +12,7 @@ spec:
     helm:
       valueFiles:
         - values.yaml
+      skipCrds: true
       parameters:
         - name: prometheusOperator.admissionWebhooks.enabled
           value: "false"

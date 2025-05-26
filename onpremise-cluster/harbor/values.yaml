@@ -324,7 +324,7 @@ jobservice:
   podLabels: {}
   secret: ""
   existingSecret: ""
-  existingSecretKey: JOBSERVICE_SECRET
+  existingSecretKey: ""
   priorityClassName: null
 registry:
   serviceAccountName: ""

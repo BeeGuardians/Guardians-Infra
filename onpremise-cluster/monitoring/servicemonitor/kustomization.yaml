@@ -6,4 +6,3 @@ resources:
   - postgres.yaml
   - redis.yaml
   - vault.yaml
-  - kube-prometheus-stack.yaml

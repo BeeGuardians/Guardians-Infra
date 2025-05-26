@@ -30,6 +30,8 @@ spec:
       kind: ServiceMonitor
       jsonPointers:
         - /spec/endpoints/0/metricRelabelings
+        - /spec/endpoints/0/trackTimestampsStaleness
+        - /spec/endpoints/1/trackTimestampsStaleness
     - group: apiextensions.k8s.io
       kind: CustomResourceDefinition
       jsonPointers:
@@ -38,3 +40,7 @@ spec:
     - group: apiextensions.k8s.io
       kind: CustomResourceDefinition
       name: thanosrulers.monitoring.coreos.com
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      name: prometheusagents.monitoring.coreos.com
+

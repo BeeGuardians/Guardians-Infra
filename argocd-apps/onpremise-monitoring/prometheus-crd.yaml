@@ -18,3 +18,5 @@ spec:
       prune: false
     syncOptions:
       - ServerSideApply=true
+      - ApplyOutOfSyncOnly=true
+  resourceTrackingMethod: annotation

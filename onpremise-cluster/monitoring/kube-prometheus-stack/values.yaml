@@ -499,7 +499,7 @@ alertmanager:
   podDisruptionBudget:
     enabled: false
     minAvailable: 1
-    # maxUnavailable: ""
+    maxUnavailable: ""
     unhealthyPodEvictionPolicy: AlwaysAllow
 
   ## Alertmanager configuration directives
@@ -1172,15 +1172,15 @@ alertmanager:
     clusterAdvertiseAddress: false
 
     ## clusterGossipInterval determines interval between gossip attempts.
-    ## Needs to be specified as GoDuration, a time duration that can be parsed by Go's time.ParseDuration() (e.g. 45ms, 30s, 1m, 1h20m15s)
+    ## Needs to be specified as GoDuration, a time duration that can be parsed by Go’s time.ParseDuration() (e.g. 45ms, 30s, 1m, 1h20m15s)
     clusterGossipInterval: ""
 
     ## clusterPeerTimeout determines timeout for cluster peering.
-    ## Needs to be specified as GoDuration, a time duration that can be parsed by Go's time.ParseDuration() (e.g. 45ms, 30s, 1m, 1h20m15s)
+    ## Needs to be specified as GoDuration, a time duration that can be parsed by Go’s time.ParseDuration() (e.g. 45ms, 30s, 1m, 1h20m15s)
     clusterPeerTimeout: ""
 
     ## clusterPushpullInterval determines interval between pushpull attempts.
-    ## Needs to be specified as GoDuration, a time duration that can be parsed by Go's time.ParseDuration() (e.g. 45ms, 30s, 1m, 1h20m15s)
+    ## Needs to be specified as GoDuration, a time duration that can be parsed by Go’s time.ParseDuration() (e.g. 45ms, 30s, 1m, 1h20m15s)
     clusterPushpullInterval: ""
 
     ## clusterLabel defines the identifier that uniquely identifies the Alertmanager cluster.
@@ -1218,6 +1218,9 @@ alertmanager:
 grafana:
   enabled: true
   namespaceOverride: ""
+  service:
+    type: NodePort
+    nodePort: 30601
 
   ## ForceDeployDatasources Create datasource configmap even if grafana deployment has been disabled
   ##
@@ -1608,8 +1611,6 @@ kubelet:
     ## If true, defines whether Prometheus tracks staleness of the metrics that have an explicit timestamp present in scraped data. Has no effect if `honorTimestamps` is false.
     ## We recommend enabling this if you want the best possible accuracy for container_ metrics scraped from cadvisor.
     ## For more details see: https://github.com/prometheus-community/helm-charts/pull/5063#issuecomment-2545374849
-    trackTimestampsStaleness: true
-
     ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
     ##
     sampleLimit: 0
@@ -2485,7 +2486,9 @@ kube-state-metrics:
       ## RelabelConfigs to apply to samples before scraping
       ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api-reference/api.md#relabelconfig
       ##
-      relabelings: []
+      relabelings:
+        - targetLabel: cluster
+          replacement: onpremise-cluster
       # - sourceLabels: [__meta_kubernetes_pod_node_name]
       #   separator: ;
       #   regex: ^(.*)$
@@ -2692,7 +2695,7 @@ prometheusOperator:
       podDisruptionBudget:
         enabled: false
         minAvailable: 1
-        # maxUnavailable: ""
+        maxUnavailable: ""
         unhealthyPodEvictionPolicy: AlwaysAllow
 
       ## Number of old replicasets to retain ##
@@ -3094,7 +3097,7 @@ prometheusOperator:
   podDisruptionBudget:
     enabled: false
     minAvailable: 1
-    # maxUnavailable: ""
+    maxUnavailable: ""
     unhealthyPodEvictionPolicy: AlwaysAllow
 
   ## Assign a PriorityClassName to pods if set
@@ -3553,7 +3556,7 @@ prometheus:
     ## Port to expose on each node
     ## Only used if service.type is 'NodePort'
     ##
-    nodePort: 30090
+    nodePort: 30602
 
     ## Loadbalancer IP
     ## Only use if service.type is "LoadBalancer"
@@ -3566,7 +3569,7 @@ prometheus:
 
     ## Service type
     ##
-    type: ClusterIP
+    type: NodePort
 
     ## Additional ports to open for Prometheus service
     ##
@@ -3638,7 +3641,7 @@ prometheus:
   podDisruptionBudget:
     enabled: false
     minAvailable: 1
-    # maxUnavailable: ""
+    maxUnavailable: ""
     unhealthyPodEvictionPolicy: AlwaysAllow
 
   # Ingress exposes thanos sidecar outside the cluster
@@ -3905,9 +3908,9 @@ prometheus:
     disableCompaction: false
 
     ## AutomountServiceAccountToken indicates whether a service account token should be automatically mounted in the pod,
-    ## If the field isn't set, the operator mounts the service account token by default.
+    ## If the field isn’t set, the operator mounts the service account token by default.
     ## Warning: be aware that by default, Prometheus requires the service account token for Kubernetes service discovery,
-    ## It is possible to use strategic merge patch to project the service account token into the 'prometheus' container.
+    ## It is possible to use strategic merge patch to project the service account token into the ‘prometheus’ container.
     automountServiceAccountToken: true
 
     ## APIServerConfig
@@ -4029,7 +4032,8 @@ prometheus:
 
     ## External labels to add to any time series or alerts when communicating with external systems
     ##
-    externalLabels: {}
+    externalLabels:
+      cluster: onpremise-cluster
 
     ## enable --web.enable-remote-write-receiver flag on prometheus-server
     ##
@@ -4344,7 +4348,52 @@ prometheus:
     ## The scrape configuration example below will find master nodes, provided they have the name .*mst.*, relabel the
     ## port to 2379 and allow etcd scraping provided it is running on all Kubernetes master nodes
     ##
-    additionalScrapeConfigs: []
+    scrapeConfigs:
+      - job_name: 'cloud-node-exporter'
+        static_configs:
+          - targets:
+              - 10.100.0.21:9100
+              - 10.100.0.22:9100
+              - 10.100.0.23:9100
+        relabel_configs:
+          - target_label: cluster
+            replacement: onpremise-cluster
+
+      - job_name: 'springboot-backend'
+        metrics_path: /actuator/prometheus
+        static_configs:
+          - targets:
+              - 10.100.0.21:32001
+              - 10.100.0.22:32001
+              - 10.100.0.23:32001
+        relabel_configs:
+          - target_label: cluster
+            replacement: onpremise-cluster
+
+      - job_name: 'nginx-ingress'
+        metrics_path: /metrics
+        static_configs:
+          - targets:
+              - 10.100.0.21:10254
+              - 10.100.0.22:10254
+              - 10.100.0.23:10254
+        relabel_configs:
+          - target_label: cluster
+            replacement: onpremise-cluster
+
+      - job_name: 'cloud-federation'
+        scrape_interval: 30s
+        metrics_path: /federate
+        params:
+          'match[]':
+            - '{__name__=~".+"}'
+        static_configs:
+          - targets:
+              - 10.100.0.21:30603
+        relabel_configs:
+          - target_label: cluster
+            replacement: cloud-cluster
+
     # - job_name: kube-etcd
     #   kubernetes_sd_configs:
     #     - role: node
@@ -4613,7 +4662,7 @@ prometheus:
     hostNetwork: false
 
     # HostAlias holds the mapping between IP and hostnames that will be injected
-    # as an entry in the pod's hosts file.
+    # as an entry in the pod’s hosts file.
     hostAliases: []
     #  - ip: 10.10.0.100
     #    hostnames:
@@ -4625,7 +4674,7 @@ prometheus:
     tracingConfig: {}
 
     ## Defines the service discovery role used to discover targets from ServiceMonitor objects and Alertmanager endpoints.
-    ## If set, the value should be either "Endpoints" or "EndpointSlice". If unset, the operator assumes the "Endpoints" role.
+    ## If set, the value should be either “Endpoints” or “EndpointSlice”. If unset, the operator assumes the “Endpoints” role.
     serviceDiscoveryRole: ""
 
     ## Additional configuration which is not covered by the properties above. (passed through tpl)
@@ -4861,7 +4910,7 @@ thanosRuler:
   podDisruptionBudget:
     enabled: false
     minAvailable: 1
-    # maxUnavailable: ""
+    maxUnavailable: ""
     unhealthyPodEvictionPolicy: AlwaysAllow
 
   ingress:

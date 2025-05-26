@@ -78,7 +78,6 @@ loki:
   serviceAnnotations: {}
   # -- Common labels for all services
   serviceLabels: {}
-  structuredConfig: {}
   # -- The number of old ReplicaSets to retain to allow rollback
   revisionHistoryLimit: 10
   # -- The SecurityContext for Loki pods

@@ -215,11 +215,6 @@ loki:
       {{- end }}
     {{- end }}
 
-    {{- with .Values.loki.storage_config }}
-    storage_config:
-      {{- tpl (. | toYaml) $ | nindent 4 }}
-    {{- end }}
-
     {{- with .Values.loki.query_scheduler }}
     query_scheduler:
       {{- tpl (. | toYaml) $ | nindent 4 }}
@@ -330,12 +325,6 @@ loki:
   rulerConfig: {}
   query_scheduler: {}
   # -- Additional storage config
-  # storage_config:
-  #   hedging:
-  #     at: "250ms"
-  #     max_per_second: 20
-  #     up_to: 3
-  # --  Optional compactor configuration
   #compactor:
   #  enabled: true
   # --  Optional analytics configuration

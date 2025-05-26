@@ -1470,7 +1470,7 @@ grafana:
         - name: Prometheus
           type: prometheus
           access: proxy
-          url: http://prometheus-server.ns-monitoring.svc.cluster.local
+          url: http://prometheus-operated.ns-monitoring.svc.cluster.local:9090
 
   serviceMonitor:
     # If true, a ServiceMonitor CRD is created for a prometheus operator

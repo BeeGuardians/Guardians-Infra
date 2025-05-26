@@ -2609,6 +2609,8 @@ prometheus-node-exporter:
 ##
 prometheusOperator:
   enabled: true
+  crd:
+    create: false
 
   ## Use '{{ template "kube-prometheus-stack.fullname" . }}-operator' by default
   fullnameOverride: ""

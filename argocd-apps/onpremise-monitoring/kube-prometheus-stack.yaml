@@ -12,6 +12,9 @@ spec:
     helm:
       valueFiles:
         - values.yaml
+      parameters:
+        - name: prometheusOperator.admissionWebhooks.enabled
+          value: "false"
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-monitoring
@@ -32,3 +35,6 @@ spec:
       jsonPointers:
         - /metadata/annotations/controller-gen.kubebuilder.io~1version
         - /metadata/annotations/operator.prometheus.io~1version
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      name: thanosrulers.monitoring.coreos.com

@@ -1463,6 +1463,15 @@ grafana:
   readinessProbe: null
   livenessProbe: null
 
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: http://prometheus-server.ns-monitoring.svc.cluster.local
+
   serviceMonitor:
     # If true, a ServiceMonitor CRD is created for a prometheus operator
     # https://github.com/prometheus-operator/prometheus-operator

@@ -1588,6 +1588,8 @@ kubelet:
 
   serviceMonitor:
     enabled: true
+    https:
+      trackTimestampsStaleness: false
     ## Enable scraping /metrics from kubelet's service
     kubelet: true
 
@@ -3389,6 +3391,16 @@ prometheus:
   ##
   annotations: {}
 
+  service:
+  type: NodePort
+  port: 9090
+  targetPort: 9090
+  nodePort: 30602
+  annotations:
+    cluster: onpremise-cluster
+  labels:
+    cluster: onpremise-cluster
+
   ## Configure network policy for the prometheus
   networkPolicy:
     enabled: false
@@ -3474,6 +3486,10 @@ prometheus:
     ## Additional labels
     ##
     additionalLabels: {}
+    annotations:
+      cluster: onpremise-cluster
+    labels:
+      cluster: onpremise-cluster
 
     ## scheme: HTTP scheme to use for scraping. Can be used with `tlsConfig` for example if using istio mTLS.
     scheme: ""

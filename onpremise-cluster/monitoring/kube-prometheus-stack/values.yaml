@@ -1258,7 +1258,7 @@ grafana:
   operator:
     ## Enable references to ConfigMaps containing dashboards in GrafanaDashboard CRs
     ## Set to true to allow dashboards to be loaded from ConfigMap references
-    dashboardsConfigMapRefEnabled: false
+    ## dashboardsConfigMapRefEnabled: false
 
     ## Annotations for GrafanaDashboard Cr
     ##
@@ -5350,10 +5350,3 @@ extraManifests: null
   #   data:
   #     plaintext: Zm9vYmFy
   #     templated: '{{ print "foobar" | upper | b64enc }}'
-
-grafana:
-  readinessProbe:
-    enabled: false
-  livenessProbe:
-    enabled: false
-

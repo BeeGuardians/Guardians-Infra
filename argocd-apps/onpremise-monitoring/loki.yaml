@@ -9,6 +9,8 @@ spec:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
     targetRevision: feat/monitoring
     path: onpremise-cluster/monitoring/loki
+    helm:
+      skipCrds: true
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-monitoring

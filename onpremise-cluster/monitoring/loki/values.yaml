@@ -54,6 +54,7 @@ loki:
     extraVolumeMounts:
       - name: rules
         mountPath: /etc/loki/rules
+        readOnly: false
     extraVolumes:
       - name: rules
         configMap:

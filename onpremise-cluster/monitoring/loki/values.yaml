@@ -362,10 +362,8 @@ loki:
   query_scheduler: {}
   # -- Additional storage config
   storage_config:
-    hedging:
-      at: "250ms"
-      max_per_second: 20
-      up_to: 3
+    boltdb_shipper:
+      shared_store: filesystem
   # --  Optional compactor configuration
   compactor:
     shared_store: filesystem

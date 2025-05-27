@@ -140,12 +140,14 @@ loki:
       {{- tpl (. | toYaml) $ | nindent 4 }}
     {{- end }}
 
-    {{- if .Values.loki.commonConfig}}
+    {{- if .Values.loki.commonConfig }}
     common:
-    {{- toYaml .Values.loki.commonConfig | nindent 2}}
+    {{- toYaml .Values.loki.commonConfig | nindent 2 }}
+    {{- if .Values.loki.storage }}
       storage:
-      {{- include "loki.commonStorageConfig" . | nindent 4}}
-    {{- end}}
+      {{- include "loki.commonStorageConfig" . | nindent 4 }}
+    {{- end }}
+    {{- end }}
 
     {{- with .Values.loki.limits_config }}
     limits_config:

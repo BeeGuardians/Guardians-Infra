@@ -349,7 +349,13 @@ loki:
         prefix: loki_index_
         period: 24h
   # -- Check https://grafana.com/docs/loki/latest/configuration/#ruler for more info on configuring ruler
-  rulerConfig: {}
+  rulerConfig:
+    alertmanager_url: http://kube-prometheus-stack-alertmanager.ns-monitoring.svc:9093
+    storage:
+      type: local
+      local:
+        directory: /var/loki/rules
+    rule_path: /var/loki/rules
   # -- Structured loki configuration, takes precedence over `loki.config`, `loki.schemaConfig`, `loki.storageConfig`
   structuredConfig: {}
   # -- Additional query scheduler config
@@ -363,11 +369,6 @@ loki:
   # --  Optional compactor configuration
   compactor:
     shared_store: filesystem
-  ruler:
-    storage:
-      type: local
-    rule_path: /etc/loki/rules
-    alertmanager_url: http://kube-prometheus-stack-alertmanager.ns-monitoring.svc:9093
   # --  Optional analytics configuration
   analytics: {}
   # --  Optional querier configuration

@@ -46,9 +46,8 @@ query_scheduler:
   enabled: true
 
 loki:
-  # Configures the readiness probe for all of the Loki pods
-  deploymentMode: Distributed
-  replication_factor: 2
+  isSingleBinary: true
+  replication_factor: 1
   readinessProbe:
     httpGet:
       path: /ready
@@ -290,8 +289,8 @@ loki:
     replication_factor: 1
     compactor_address: '{{ include "loki.compactorAddress" . }}'
   # -- Storage config. Providing this will automatically populate all necessary storage configs in the templated config.
-  storage:
-    type: filesystem
+  # storage:
+  #   type: filesystem
 
     # filesystem:
     #   chunks_directory: /var/loki/chunks
@@ -312,15 +311,15 @@ loki:
       timeout: "500ms"
       default_validity: "12h"
   # -- Check https://grafana.com/docs/loki/latest/configuration/#schema_config for more info on how to configure schemas
-  schemaConfig:
-    configs:
-      - from: "2020-10-24"
-        store: tsdb
-        object_store: filesystem
-        schema: v11
-        index:
-          prefix: index_
-          period: 24h
+  # schemaConfig:
+  #   configs:
+  #     - from: "2020-10-24"
+  #       store: tsdb
+  #       object_store: filesystem
+  #       schema: v11
+  #       index:
+  #         prefix: index_
+  #         period: 24h
   # -- Check https://grafana.com/docs/loki/latest/configuration/#ruler for more info on configuring ruler
   rulerConfig: {}
   query_scheduler: {}

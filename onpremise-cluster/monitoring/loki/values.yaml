@@ -325,9 +325,6 @@ loki:
     #   max_retries: null
     #   connect_timeout: null
     #   request_timeout: null
-    filesystem:
-      chunks_directory: /var/loki/chunks
-      rules_directory: /var/loki/rules
   # -- Configure memcached as an external cache for chunk and results cache. Disabled by default
   # must enable and specify a host for each cache you would like to use.
   memcached:
@@ -351,7 +348,7 @@ loki:
       object_store: filesystem
       schema: v11
       index:
-        prefix: index_
+        prefix: loki_index_
         period: 24h
   # -- Check https://grafana.com/docs/loki/latest/configuration/#ruler for more info on configuring ruler
   rulerConfig: {}
@@ -363,6 +360,8 @@ loki:
   storage_config:
     boltdb_shipper:
       shared_store: filesystem
+    filesystem:
+      directory: /var/loki/chunks
   # --  Optional compactor configuration
   compactor:
     shared_store: filesystem

@@ -289,8 +289,8 @@ loki:
     replication_factor: 1
     compactor_address: '{{ include "loki.compactorAddress" . }}'
   # -- Storage config. Providing this will automatically populate all necessary storage configs in the templated config.
-  # storage:
-  #   type: filesystem
+  storage:
+    type: filesystem
 
     # filesystem:
     #   chunks_directory: /var/loki/chunks

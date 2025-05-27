@@ -274,8 +274,8 @@ loki:
       kvstore:
         store: memberlist
   # -- Storage config. Providing this will automatically populate all necessary storage configs in the templated config.
-  # storage:
-  #   type: filesystem
+  storage:
+    type: ""
   
   ruler:
     storage:

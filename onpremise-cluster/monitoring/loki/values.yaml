@@ -29,22 +29,6 @@ kubectlImage:
   digest: null
   # -- Docker image pull policy
   pullPolicy: IfNotPresent
-
-querier:
-  replicas: 2
-
-distributor:
-  replicas: 2
-
-ingester:
-  replicas: 3
-
-queryFrontend:
-  replicas: 2
-
-query_scheduler:
-  enabled: true
-
 loki:
   storage: {}
   isSingleBinary: true
@@ -60,6 +44,7 @@ loki:
         configMap:
           name: loki-rules
   replication_factor: 1
+  # Configures the readiness probe for all of the Loki pods
   readinessProbe:
     httpGet:
       path: /ready
@@ -74,7 +59,7 @@ loki:
     # -- Overrides the image tag whose default is the chart's appVersion
     # TODO: needed for 3rd target backend functionality
     # revert to null or latest once this behavior is relased
-    tag: 2.9.4
+    tag: null
     # -- Overrides the image tag with an image digest
     digest: null
     # -- Docker image pull policy
@@ -89,7 +74,6 @@ loki:
   serviceAnnotations: {}
   # -- Common labels for all services
   serviceLabels: {}
-  structuredConfig: {}
   # -- The number of old ReplicaSets to retain to allow rollback
   revisionHistoryLimit: 10
   # -- The SecurityContext for Loki pods
@@ -150,14 +134,12 @@ loki:
       {{- tpl (. | toYaml) $ | nindent 4 }}
     {{- end }}
 
-    {{- if .Values.loki.commonConfig }}
+    {{- if .Values.loki.commonConfig}}
     common:
-    {{- toYaml .Values.loki.commonConfig | nindent 2 }}
-    {{- if .Values.loki.storage }}
+    {{- toYaml .Values.loki.commonConfig | nindent 2}}
       storage:
-      {{- include "loki.commonStorageConfig" . | nindent 4 }}
-    {{- end }}
-    {{- end }}
+      {{- include "loki.commonStorageConfig" . | nindent 4}}
+    {{- end}}
 
     {{- with .Values.loki.limits_config }}
     limits_config:
@@ -193,7 +175,7 @@ loki:
       configs:
         - from: 2022-01-11
           store: boltdb-shipper
-          object_store: filesystem
+          object_store: {{ .Values.loki.storage.type }}
           schema: v12
           index:
             prefix: loki_index_
@@ -226,6 +208,11 @@ loki:
             service: {{ .service }}
             timeout: {{ .timeout }}
       {{- end }}
+    {{- end }}
+
+    {{- with .Values.loki.storage_config }}
+    storage_config:
+      {{- tpl (. | toYaml) $ | nindent 4 }}
     {{- end }}
 
     {{- with .Values.loki.query_scheduler }}
@@ -271,7 +258,7 @@ loki:
     tracing:
       enabled: {{ .Values.loki.tracing.enabled }}
   # Should authentication be enabled
-  auth_enabled: false
+  auth_enabled: true
   # -- memberlist configuration (overrides embedded default)
   memberlistConfig: {}
   # -- Extra memberlist configuration
@@ -282,26 +269,20 @@ loki:
   server:
     http_listen_port: 3100
     grpc_listen_port: 9095
-    grpc_server_max_recv_msg_size: 104857600  # 100MiB
-    grpc_server_max_send_msg_size: 104857600  # 100MiB
-    http_server_read_timeout: 5m
-    http_server_write_timeout: 5m
+  # -- Limits config
   limits_config:
     reject_old_samples: true
     reject_old_samples_max_age: 168h
     max_cache_freshness_per_query: 10m
     split_queries_by_interval: 15m
-    ingestion_rate_mb: 10
-    ingestion_burst_size_mb: 20
-  #  max_concurrent_streams: 128
-    max_entries_limit_per_query: 5000
   # -- Provides a reloadable runtime configuration file for some specific configuration
   runtimeConfig: {}
   # -- Check https://grafana.com/docs/loki/latest/configuration/#common_config for more info on how to provide a common configuration
   commonConfig:
     path_prefix: /var/loki
-    replication_factor: 1
+    replication_factor: 3
     compactor_address: '{{ include "loki.compactorAddress" . }}'
+<<<<<<< HEAD
 
   schema_config:
     configs:
@@ -313,6 +294,65 @@ loki:
           prefix: loki_index_
           period: 24h
 
+=======
+  # -- Storage config. Providing this will automatically populate all necessary storage configs in the templated config.
+  storage:
+    bucketNames:
+      chunks: chunks
+      ruler: ruler
+      admin: admin
+    type: s3
+    s3:
+      s3: null
+      endpoint: null
+      region: null
+      secretAccessKey: null
+      accessKeyId: null
+      signatureVersion: null
+      s3ForcePathStyle: false
+      insecure: false
+      http_config: {}
+      # -- Check https://grafana.com/docs/loki/latest/configure/#s3_storage_config for more info on how to provide a backoff_config
+      backoff_config: {}
+    gcs:
+      chunkBufferSize: 0
+      requestTimeout: "0s"
+      enableHttp2: true
+    azure:
+      accountName: null
+      accountKey: null
+      connectionString: null
+      useManagedIdentity: false
+      useFederatedToken: false
+      userAssignedId: null
+      requestTimeout: null
+      endpointSuffix: null
+    swift:
+      auth_version: null
+      auth_url: null
+      internal: null
+      username: null
+      user_domain_name: null
+      user_domain_id: null
+      user_id: null
+      password: null
+      domain_id: null
+      domain_name: null
+      project_id: null
+      project_name: null
+      project_domain_id: null
+      project_domain_name: null
+      region_name: null
+      container_name: null
+      max_retries: null
+      connect_timeout: null
+      request_timeout: null
+    filesystem:
+      chunks_directory: /var/loki/chunks
+      rules_directory: /var/loki/rules
+  # -- Configure memcached as an external cache for chunk and results cache. Disabled by default
+  # must enable and specify a host for each cache you would like to use.
+>>>>>>> 83d9c92 (feat : add Loki helm chart)
   memcached:
     chunk_cache:
       enabled: false
@@ -326,26 +366,36 @@ loki:
       service: "memcached-client"
       timeout: "500ms"
       default_validity: "12h"
+<<<<<<< HEAD
   rulerConfig:
     storage:
       type: local
       local:
         directory: /etc/loki/rules
+=======
+  # -- Check https://grafana.com/docs/loki/latest/configuration/#schema_config for more info on how to configure schemas
+  schemaConfig: {}
+  # -- Check https://grafana.com/docs/loki/latest/configuration/#ruler for more info on configuring ruler
+  rulerConfig: {}
+  # -- Structured loki configuration, takes precedence over `loki.config`, `loki.schemaConfig`, `loki.storageConfig`
+  structuredConfig: {}
+  # -- Additional query scheduler config
+>>>>>>> 83d9c92 (feat : add Loki helm chart)
   query_scheduler: {}
   # -- Additional storage config
-  #compactor:
-  #  enabled: true
+  storage_config:
+    hedging:
+      at: "250ms"
+      max_per_second: 20
+      up_to: 3
+  # --  Optional compactor configuration
+  compactor: {}
   # --  Optional analytics configuration
   analytics: {}
   # --  Optional querier configuration
-  #querier:
-  #  replicas: 2  
-  queryFrontend:
-    replicas: 2
+  querier: {}
   # --  Optional ingester configuration
-  ingester:
-    wal:
-      enabled: true
+  ingester: {}
   # --  Optional index gateway configuration
   index_gateway:
     mode: ring
@@ -677,6 +727,9 @@ monitoring:
       # -- PodLogs relabel configs to apply to samples before scraping
       # https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
       relabelings: []
+      # -- Additional pipeline stages to process logs after scraping
+      # https://grafana.com/docs/agent/latest/operator/api/#pipelinestagespec-a-namemonitoringgrafanacomv1alpha1pipelinestagespeca
+      additionalPipelineStages: []
     # LogsInstance configuration
     logsInstance:
       # -- LogsInstance annotations
@@ -735,9 +788,8 @@ monitoring:
         maxUnavailable: 1
 # Configuration for the write pod(s)
 write:
-  enabled: false
   # -- Number of replicas for the write
-  # replicas: 1
+  replicas: 3
   autoscaling:
     # -- Enable autoscaling for the write.
     enabled: false
@@ -923,22 +975,21 @@ tableManager:
   retention_period: 0
 # Configuration for the read pod(s)
 read:
-  enabled: false
-  # # -- Number of replicas for the read
-  # replicas: 1
-  # autoscaling:
-  #   # -- Enable autoscaling for the read, this is only used if `queryIndex.enabled: true`
-  #   enabled: false
-  #   # -- Minimum autoscaling replicas for the read
-  #   minReplicas: 2
-  #   # -- Maximum autoscaling replicas for the read
-  #   maxReplicas: 6
-  #   # -- Target CPU utilisation percentage for the read
-  #   targetCPUUtilizationPercentage: 60
-  #   # -- Target memory utilisation percentage for the read
-  #   targetMemoryUtilizationPercentage:
-  #   # -- Behavior policies while scaling.
-  #   behavior: {}
+  # -- Number of replicas for the read
+  replicas: 3
+  autoscaling:
+    # -- Enable autoscaling for the read, this is only used if `queryIndex.enabled: true`
+    enabled: false
+    # -- Minimum autoscaling replicas for the read
+    minReplicas: 2
+    # -- Maximum autoscaling replicas for the read
+    maxReplicas: 6
+    # -- Target CPU utilisation percentage for the read
+    targetCPUUtilizationPercentage: 60
+    # -- Target memory utilisation percentage for the read
+    targetMemoryUtilizationPercentage:
+    # -- Behavior policies while scaling.
+    behavior: {}
     #  scaleUp:
     #   stabilizationWindowSeconds: 300
     #   policies:
@@ -981,6 +1032,8 @@ read:
   legacyReadTarget: false
   # -- Additional CLI args for the read
   extraArgs: []
+  # -- Containers to add to the read pods
+  extraContainers: []
   # -- Environment variables to add to the read pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the read pods
@@ -1029,21 +1082,21 @@ read:
     selector: null
 # Configuration for the backend pod(s)
 backend:
-  enabled: false
   # -- Number of replicas for the backend
-  # autoscaling:
-  #   # -- Enable autoscaling for the backend.
-  #   enabled: false
-  #   # -- Minimum autoscaling replicas for the backend.
-  #   minReplicas: 2
-  #   # -- Maximum autoscaling replicas for the backend.
-  #   maxReplicas: 6
-  #   # -- Target CPU utilization percentage for the backend.
-  #   targetCPUUtilizationPercentage: 60
-  #   # -- Target memory utilization percentage for the backend.
-  #   targetMemoryUtilizationPercentage:
-  #   # -- Behavior policies while scaling.
-  #   behavior: {}
+  replicas: 3
+  autoscaling:
+    # -- Enable autoscaling for the backend.
+    enabled: false
+    # -- Minimum autoscaling replicas for the backend.
+    minReplicas: 3
+    # -- Maximum autoscaling replicas for the backend.
+    maxReplicas: 6
+    # -- Target CPU utilization percentage for the backend.
+    targetCPUUtilizationPercentage: 60
+    # -- Target memory utilization percentage for the backend.
+    targetMemoryUtilizationPercentage:
+    # -- Behavior policies while scaling.
+    behavior: {}
     #    scaleUp:
     #     stabilizationWindowSeconds: 300
     #     policies:
@@ -1118,7 +1171,6 @@ backend:
   # -- The default is to deploy all pods in parallel.
   podManagementPolicy: "Parallel"
   persistence:
-    enabled: true
     # -- Enable volume claims in pod spec
     volumeClaimsEnabled: true
     # -- Parameters used for the `data` volume when volumeClaimEnabled if false
@@ -1127,7 +1179,7 @@ backend:
     # -- Enable StatefulSetAutoDeletePVC feature
     enableStatefulSetAutoDeletePVC: true
     # -- Size of persistent disk
-    size: "10Gi"
+    size: 10Gi
     # -- Storage class to be used.
     # If defined, storageClassName: <storageClass>.
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
@@ -1139,8 +1191,7 @@ backend:
 # Configuration for the single binary node(s)
 singleBinary:
   # -- Number of replicas for the single binary
-  replicas: 1
-  
+  replicas: 0
   autoscaling:
     # -- Enable autoscaling
     enabled: false
@@ -1177,8 +1228,7 @@ singleBinary:
   # -- Comma-separated list of Loki modules to load for the single binary
   targetModule: "all"
   # -- Labels for single binary service
-  extraArgs:
-    - "-config.expand-env=true"
+  extraArgs: []
   # -- Environment variables to add to the single binary pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the single binary pods
@@ -1222,7 +1272,7 @@ singleBinary:
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
     # If empty or set to null, no storageClassName spec is
     # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-    storageClass: rook-ceph-block
+    storageClass: null
     # -- Selector for persistent disk
     selector: null
 # Use either this ingress or the gateway, but not both at once.
@@ -1273,12 +1323,11 @@ ingress:
 # Configuration for the memberlist service
 memberlist:
   service:
-    publishNotReadyAddresses: true
+    publishNotReadyAddresses: false
 # Configuration for the gateway
 gateway:
   # -- Specifies whether the gateway should be enabled
   enabled: true
-  lokiAddress: http://loki:3100
   # -- Number of replicas for the gateway
   replicas: 1
   # -- Enable logging of 2xx and 3xx HTTP requests
@@ -1514,6 +1563,12 @@ networkPolicy:
     podSelector: {}
     # -- Specifies the namespace the discovery Pods are running in
     namespaceSelector: {}
+  egressWorld:
+    # -- Enable additional cilium egress rules to external world for write, read and backend.
+    enabled: false
+  egressKubeApiserver:
+    # -- Enable additional cilium egress rules to kube-apiserver for backend.
+    enabled: false
 # -------------------------------------
 # Configuration for `minio` child chart
 # -------------------------------------

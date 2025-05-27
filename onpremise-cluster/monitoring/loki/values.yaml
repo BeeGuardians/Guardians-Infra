@@ -46,8 +46,7 @@ query_scheduler:
   enabled: true
 
 loki:
-  storage:
-    type: filesystem
+  storage: {}
   isSingleBinary: true
   replication_factor: 1
   readinessProbe:

@@ -30,20 +30,6 @@ kubectlImage:
   # -- Docker image pull policy
   pullPolicy: IfNotPresent
 loki:
-  storage: {}
-  isSingleBinary: true
-  ruler:
-    enabled: true
-    configStorageType: ConfigMap
-    extraVolumeMounts:
-      - name: rules
-        mountPath: /etc/loki/rules
-        readOnly: false
-    extraVolumes:
-      - name: rules
-        configMap:
-          name: loki-rules
-  replication_factor: 1
   # Configures the readiness probe for all of the Loki pods
   readinessProbe:
     httpGet:
@@ -84,7 +70,7 @@ loki:
     runAsUser: 10001
   # -- The SecurityContext for Loki containers
   containerSecurityContext:
-    readOnlyRootFilesystem: false
+    readOnlyRootFilesystem: true
     capabilities:
       drop:
         - ALL
@@ -282,19 +268,6 @@ loki:
     path_prefix: /var/loki
     replication_factor: 3
     compactor_address: '{{ include "loki.compactorAddress" . }}'
-<<<<<<< HEAD
-
-  schema_config:
-    configs:
-      - from: 2022-01-11
-        store: boltdb-shipper
-        object_store: filesystem
-        schema: v12
-        index:
-          prefix: loki_index_
-          period: 24h
-
-=======
   # -- Storage config. Providing this will automatically populate all necessary storage configs in the templated config.
   storage:
     bucketNames:
@@ -352,7 +325,6 @@ loki:
       rules_directory: /var/loki/rules
   # -- Configure memcached as an external cache for chunk and results cache. Disabled by default
   # must enable and specify a host for each cache you would like to use.
->>>>>>> 83d9c92 (feat : add Loki helm chart)
   memcached:
     chunk_cache:
       enabled: false
@@ -366,13 +338,6 @@ loki:
       service: "memcached-client"
       timeout: "500ms"
       default_validity: "12h"
-<<<<<<< HEAD
-  rulerConfig:
-    storage:
-      type: local
-      local:
-        directory: /etc/loki/rules
-=======
   # -- Check https://grafana.com/docs/loki/latest/configuration/#schema_config for more info on how to configure schemas
   schemaConfig: {}
   # -- Check https://grafana.com/docs/loki/latest/configuration/#ruler for more info on configuring ruler
@@ -380,7 +345,6 @@ loki:
   # -- Structured loki configuration, takes precedence over `loki.config`, `loki.schemaConfig`, `loki.storageConfig`
   structuredConfig: {}
   # -- Additional query scheduler config
->>>>>>> 83d9c92 (feat : add Loki helm chart)
   query_scheduler: {}
   # -- Additional storage config
   storage_config:
@@ -1491,9 +1455,9 @@ gateway:
   # Configures the readiness probe for the gateway
   readinessProbe:
     httpGet:
-      path: /ready
-      port: 3100
-    initialDelaySeconds: 30
+      path: /
+      port: http
+    initialDelaySeconds: 15
     timeoutSeconds: 1
   nginxConfig:
     # -- Enable listener for IPv6, disable on IPv4-only systems

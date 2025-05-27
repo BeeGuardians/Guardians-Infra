@@ -280,6 +280,11 @@ loki:
       ruler: ruler
       admin: admin
     type: filesystem
+  
+  ruler:
+    storage:
+      type: local
+    rule_path: /tmp/loki/rules
     # s3:
     #   s3: null
     #   endpoint: null

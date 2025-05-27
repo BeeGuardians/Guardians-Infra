@@ -100,7 +100,7 @@ loki:
     runAsUser: 10001
   # -- The SecurityContext for Loki containers
   containerSecurityContext:
-    readOnlyRootFilesystem: true
+    readOnlyRootFilesystem: false
     capabilities:
       drop:
         - ALL

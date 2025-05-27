@@ -270,6 +270,9 @@ loki:
     path_prefix: /var/loki
     replication_factor: 1
     compactor_address: '{{ include "loki.compactorAddress" . }}'
+    ring:
+      kvstore:
+        store: memberlist
   # -- Storage config. Providing this will automatically populate all necessary storage configs in the templated config.
   storage:
     bucketNames:

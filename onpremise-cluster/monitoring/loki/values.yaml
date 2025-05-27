@@ -247,7 +247,8 @@ loki:
   # Should authentication be enabled
   auth_enabled: false
   # -- memberlist configuration (overrides embedded default)
-  memberlistConfig: {}
+  memberlistConfig:
+    join_members: []
   # -- Extra memberlist configuration
   extraMemberlistConfig: {}
   # -- Tenants list to be created on nginx htpasswd file, with name and password keys
@@ -267,7 +268,7 @@ loki:
   # -- Check https://grafana.com/docs/loki/latest/configuration/#common_config for more info on how to provide a common configuration
   commonConfig:
     path_prefix: /var/loki
-    replication_factor: 3
+    replication_factor: 1
     compactor_address: '{{ include "loki.compactorAddress" . }}'
   # -- Storage config. Providing this will automatically populate all necessary storage configs in the templated config.
   storage:

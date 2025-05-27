@@ -126,8 +126,6 @@ loki:
     {{- if .Values.loki.commonConfig}}
     common:
     {{- toYaml .Values.loki.commonConfig | nindent 2}}
-      storage:
-      {{- include "loki.commonStorageConfig" . | nindent 4}}
     {{- end}}
 
     {{- with .Values.loki.limits_config }}
@@ -271,7 +269,7 @@ loki:
   commonConfig:
     path_prefix: /var/loki
     replication_factor: 1
-    compactor_address: '{{ include "loki.compactorAddress" . }}'
+    compactor_address: http://loki:3100
     ring:
       kvstore:
         store: memberlist

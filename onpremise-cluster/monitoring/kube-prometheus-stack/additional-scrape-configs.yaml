@@ -7,6 +7,8 @@
   relabel_configs:
     - target_label: cluster
       replacement: cloud-cluster
+    - target_label: job
+      replacement: node-exporter
 
 - job_name: 'springboot-backend'
   metrics_path: /actuator/prometheus
@@ -18,6 +20,8 @@
   relabel_configs:
     - target_label: cluster
       replacement: cloud-cluster
+    - target_label: job
+      replacement: backend
 
 - job_name: 'nginx-ingress'
   metrics_path: /metrics
@@ -29,6 +33,8 @@
   relabel_configs:
     - target_label: cluster
       replacement: cloud-cluster
+    - target_label: job
+      replacement: nginx
 
 - job_name: 'cloud-federation'
   scrape_interval: 30s
@@ -42,3 +48,5 @@
   relabel_configs:
     - target_label: cluster
       replacement: cloud-cluster
+    - target_label: job
+      replacement: cloud-federation

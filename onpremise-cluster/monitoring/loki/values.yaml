@@ -33,7 +33,15 @@ loki:
   mode: monolithic
   storage:
     type: filesystem
-  # Configures the readiness probe for all of the Loki pods
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - guardians5
   readinessProbe:
     httpGet:
       path: /ready

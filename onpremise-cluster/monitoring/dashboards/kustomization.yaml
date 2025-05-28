@@ -3,7 +3,7 @@ resources:
   - ceph-dashboard.yaml
   - harbor-dashboard.yaml
   - jenkins-dashboard.yaml
-  - multi-node-dashboard.yaml
+  - node-exporter-dashboard.yaml
   - postgres-dashboard.yaml
   - redis-dashboard.yaml
   - vault-dashboard.yaml

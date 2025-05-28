@@ -5,6 +5,7 @@ metadata:
   namespace: ns-monitoring
   labels:
     grafana_dashboard: "1"
+    grafana_folder: "Guardians"
 data:
   argocd-dashboard.json: |
     {
@@ -1500,7 +1501,7 @@ data:
     },
     "timepicker": {},
     "timezone": "utc",
-    "title": "ArgoCD / Application / Overview",
+    "title": "ArgoCD",
     "uid": "argo-cd-application-overview-kask",
     "version": 2,
     "weekStart": ""

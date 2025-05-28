@@ -5,6 +5,7 @@ metadata:
   namespace: ns-monitoring
   labels:
     grafana_dashboard: "1"
+    grafana_folder: "Guardians"
 data:
   ceph-dashboard.json: |
     {
@@ -24,7 +25,7 @@ data:
       ]
     },
     "description": "Overview of your Ceph cluster.",
-    "editable": false,
+    "editable": true,
     "fiscalYearStartMonth": 0,
     "gnetId": 2842,
     "graphTooltip": 0,

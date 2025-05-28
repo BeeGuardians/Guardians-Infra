@@ -5,6 +5,7 @@ metadata:
   namespace: ns-monitoring
   labels:
     grafana_dashboard: "1"
+    grafana_folder: "Guardians"
 data:
   postgres-dashboard.json: |
     {
@@ -3328,7 +3329,7 @@ data:
       ]
     },
     "timezone": "",
-    "title": "PostgreSQL Database",
+    "title": "PostgreSQL",
     "uid": "000000039",
     "version": 2,
     "weekStart": ""

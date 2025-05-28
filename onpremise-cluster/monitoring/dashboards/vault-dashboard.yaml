@@ -5,10 +5,11 @@ metadata:
   namespace: ns-monitoring
   labels:
     grafana_dashboard: "1"
+    grafana_folder: "Guardians"
 data:
   vault-dashboard.json: |
     {
-      "title": "Vault Comprehensive Dashboard",
+      "title": "Vault",
       "panels": [
         {
           "type": "stat",

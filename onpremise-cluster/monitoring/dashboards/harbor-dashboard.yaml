@@ -5,6 +5,7 @@ metadata:
   namespace: ns-monitoring
   labels:
     grafana_dashboard: "1"
+    grafana_folder: "Guardians"
     app: grafana
 data:
   harbor-dashboard.json: |
@@ -2831,7 +2832,7 @@ data:
       "hidden": false
     },
     "timezone": "",
-    "title": "Harbor Exporter",
+    "title": "Harbor",
     "uid": "iRBnfkZhQ",
     "version": 1,
     "weekStart": ""

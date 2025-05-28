@@ -31,6 +31,10 @@ kubectlImage:
   pullPolicy: IfNotPresent
 loki:
   mode: monolithic
+  service:
+    type: NodePort
+    port: 3100
+    nodePort: 30604
   storage:
     type: filesystem
   affinity:

@@ -145,13 +145,13 @@ readinessProbe:
   timeoutSeconds: 1
 
 # -- Resource requests and limits
-resources: {}
-#  limits:
-#    cpu: 200m
-#    memory: 128Mi
-#  requests:
-#    cpu: 100m
-#    memory: 128Mi
+resources:
+  limits:
+    cpu: 200m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
 
 # -- The security context for pods
 podSecurityContext:
@@ -401,7 +401,7 @@ config:
   # -- The log format of the Promtail server
   # Must be reference in `config.file` to configure `server.log_format`
   # Valid formats: `logfmt, json`
-  # See default config in `values.yaml`
+  # See default config in `values.yaml`snippets
   logFormat: logfmt
   # -- The port of the Promtail server
   # Must be reference in `config.file` to configure `server.http_listen_port`
@@ -411,7 +411,7 @@ config:
   # Must be reference in `config.file` to configure `clients`
   # @default -- See `values.yaml`
   clients:
-    - url: http://loki-gateway/loki/api/v1/push
+    - url: http://loki.ns-monitoring.svc.cluster.local:3100/loki/api/v1/push
   # -- Configures where Promtail will save it's positions file, to resume reading after restarts.
   # Must be referenced in `config.file` to configure `positions`
   positions:
@@ -465,6 +465,9 @@ config:
           - __meta_kubernetes_pod_annotation_kubernetes_io_config_hash
           - __meta_kubernetes_pod_container_name
         target_label: __path__
+      - action: replace
+        replacement: cloud-cluster
+        target_label: cluster
 
     # If set to true, adds an additional label for the scrape job.
     # This helps debug the Promtail config.

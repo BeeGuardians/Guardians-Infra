@@ -43,9 +43,9 @@ loki:
         nodeSelectorTerms:
           - matchExpressions:
               - key: kubernetes.io/hostname
-                operator: In
+                operator: NotIn
                 values:
-                  - guardians5
+                  - guardians7
   readinessProbe:
     httpGet:
       path: /ready

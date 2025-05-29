@@ -37,15 +37,6 @@ loki:
     nodePort: 30604
   storage:
     type: filesystem
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: NotIn
-                values:
-                  - guardians7
   readinessProbe:
     httpGet:
       path: /ready
@@ -1250,13 +1241,15 @@ singleBinary:
   terminationGracePeriodSeconds: 30
   # -- Affinity for single binary pods. Passed through `tpl` and, thus, to be configured as string
   # @default -- Hard node and soft zone anti-affinity
-  affinity: |
-    podAntiAffinity:
+  affinity:
+    nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchLabels:
-              {{- include "loki.singleBinarySelectorLabels" . | nindent 10 }}
-          topologyKey: kubernetes.io/hostname
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                  - guardians7
   # -- DNS config for single binary pods
   dnsConfig: {}
   # -- Node selector for single binary pods

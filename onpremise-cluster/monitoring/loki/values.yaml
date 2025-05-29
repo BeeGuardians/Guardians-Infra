@@ -37,6 +37,8 @@ loki:
     nodePort: 30604
   storage:
     type: filesystem
+  image:
+    tag: 2.9.4
 
 affinity:
   nodeAffinity:

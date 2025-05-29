@@ -39,6 +39,7 @@ loki:
     type: filesystem
   image:
     tag: 2.9.4
+  externalConfigSecretName: ""
 
 affinity:
   nodeAffinity:

@@ -20,10 +20,9 @@ spec:
         fsGroup: 1000
       affinity:
         nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              preference:
-                matchExpressions:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
                   - key: kubernetes.io/hostname
                     operator: In
                     values:
@@ -35,18 +34,28 @@ spec:
           ports:
             - containerPort: 8080
             - containerPort: 50000
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          env:
+            - name: JAVA_OPTS
+              value: "-Xmx1g -Xms512m"
           livenessProbe:
             httpGet:
               path: /login
               port: 8080
-            initialDelaySeconds: 60
+            initialDelaySeconds: 120
             periodSeconds: 30
           readinessProbe:
             httpGet:
               path: /login
               port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 15
+            initialDelaySeconds: 120
+            periodSeconds: 30
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home

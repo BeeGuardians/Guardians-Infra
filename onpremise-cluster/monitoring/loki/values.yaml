@@ -37,19 +37,15 @@ loki:
     nodePort: 30604
   storage:
     type: filesystem
-  image:
-    tag: 2.9.4
-  externalConfigSecretName: ""
-
-affinity:
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/hostname
-              operator: In
-              values:
-                - guardians5
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - guardians5
   readinessProbe:
     httpGet:
       path: /ready

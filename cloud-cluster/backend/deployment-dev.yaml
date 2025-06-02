@@ -19,7 +19,7 @@ spec:
       serviceAccountName: spring-app-sa
       containers:
         - name: backend-dev
-          image: harbor.example.com:30443/guardians/backend:41a6b5a
+          image: harbor.example.com:30443/guardians/backend:53fe645
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

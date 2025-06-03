@@ -12,4 +12,4 @@ rules:
     verbs: ["get", "list", "watch", "create", "delete"]
   - apiGroups: ["networking.k8s.io"]
     resources: ["networkpolicies"]
-    verbs: ["create", "delete"]
+    verbs: ["get", "list", "watch", "create", "delete"]

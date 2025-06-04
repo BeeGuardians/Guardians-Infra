@@ -7,3 +7,5 @@ resources:
   - postgres-dashboard.yaml
   - redis-dashboard.yaml
   - vault-dashboard.yaml
+  - multi-cluster-board.yaml
+  - resource-dashboard.yaml

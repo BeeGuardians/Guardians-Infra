@@ -2441,7 +2441,7 @@ data:
       },
       "timepicker": {},
       "timezone": "utc",
-      "title": "Kubernetes / Compute Resources / Namespace (Pods)",
+      "title": "Resource Monitoring",
       "uid": "85a562078cdf77779eaa1add43ccec1e",
       "version": 1
     }

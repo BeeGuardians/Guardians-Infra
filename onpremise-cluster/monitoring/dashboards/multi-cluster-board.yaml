@@ -6233,7 +6233,7 @@ data:
         ]
       },
       "timezone": "browser",
-      "title": "K8s Node Metrics / Multi Clusters (Node Exporter, Prometheus, Grafana11, 2025, EN) Copy",
+      "title": "Multi Cluster Monitoring",
       "uid": "31ed4768-9a6a-4551-a43d-1f858307002c",
       "version": 1
     }

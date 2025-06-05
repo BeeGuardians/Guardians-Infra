@@ -1,6 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+commonLabels:
+  argocd.argoproj.io/instance: rook-ceph
+
 resources:
   - 00-crds/crds.yaml
   - 01-common/common.yaml

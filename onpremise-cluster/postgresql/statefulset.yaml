@@ -36,7 +36,7 @@ spec:
                   name: postgres-secret
                   key: dbname
           volumeMounts:
-            - name: pgdata-new
+            - name: pgdata-v1
               mountPath: /var/lib/postgresql/data
             - name: initdb
               mountPath: /docker-entrypoint-initdb.d
@@ -46,7 +46,7 @@ spec:
             name: postgres-initdb
   volumeClaimTemplates:
     - metadata:
-        name: pgdata-new
+        name: pgdata-v1
       spec:
         accessModes: ["ReadWriteMany"]
         storageClassName: rook-ceph-fs

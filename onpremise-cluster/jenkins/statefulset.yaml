@@ -57,9 +57,9 @@ spec:
             initialDelaySeconds: 120
             periodSeconds: 30
           volumeMounts:
-            - name: jenkins-home
+            - name: jenkins-pvc-new
               mountPath: /var/jenkins_home
       volumes:
-        - name: jenkins-home
+        - name: jenkins-pvc-new
           persistentVolumeClaim:
             claimName: jenkins-pvc

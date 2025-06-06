@@ -62,9 +62,9 @@ spec:
             timeoutSeconds: 10
             failureThreshold: 3
           volumeMounts:
-            - name: jenkins-pvc-v2
+            - name: jenkins-refresh
               mountPath: /var/jenkins_home
       volumes:
-        - name: jenkins-pvc-v2
+        - name: jenkins-refresh
           persistentVolumeClaim:
-            claimName: jenkins-pvc-v2
+            claimName: jenkins-refresh

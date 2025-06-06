@@ -48,18 +48,23 @@ spec:
             httpGet:
               path: /login
               port: 8080
-            initialDelaySeconds: 120
+            initialDelaySeconds: 600
             periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 6
+
           readinessProbe:
             httpGet:
               path: /login
               port: 8080
-            initialDelaySeconds: 120
+            initialDelaySeconds: 600
             periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
           volumeMounts:
-            - name: jenkins-pvc-new
+            - name: jenkins-pvc-v2
               mountPath: /var/jenkins_home
       volumes:
-        - name: jenkins-pvc-new
+        - name: jenkins-pvc-v2
           persistentVolumeClaim:
-            claimName: jenkins-pvc-new
+            claimName: jenkins-pvc-v2

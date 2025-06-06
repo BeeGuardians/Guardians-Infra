@@ -62,4 +62,4 @@ spec:
       volumes:
         - name: jenkins-pvc-new
           persistentVolumeClaim:
-            claimName: jenkins-pvc
+            claimName: jenkins-pvc-new

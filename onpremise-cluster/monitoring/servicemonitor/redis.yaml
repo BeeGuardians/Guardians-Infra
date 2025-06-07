@@ -1,38 +1,18 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
 metadata:
-  name: redis-exporter
-  namespace: ns-db
+  name: redis-servicemonitor
+  namespace: ns-monitoring
+  labels:
+    release: kube-prometheus-stack
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: redis-exporter
-  template:
-    metadata:
-      labels:
-        app: redis-exporter
-    spec:
-      containers:
-        - name: exporter
-          image: oliver006/redis_exporter:v1.61.0
-          env:
-            - name: REDIS_ADDR
-              value: "redis://redis-service:6379"
-          ports:
-            - containerPort: 9121
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: redis-exporter
-  namespace: ns-db
-  labels:
-    app: redis-exporter
-spec:
-  selector:
-    app: redis-exporter
-  ports:
-    - name: metrics
-      port: 9121
-      targetPort: 9121
+  namespaceSelector:
+    matchNames:
+      - ns-db
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 30s

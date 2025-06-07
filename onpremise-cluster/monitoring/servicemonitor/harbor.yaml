@@ -5,19 +5,20 @@ metadata:
   name: harbor-core
   namespace: ns-monitoring
   labels:
-    release: prometheus
+    release: kube-prometheus-stack
 spec:
-  namespaceSelector:
-    matchNames:
-      - harbor
   selector:
     matchLabels:
       app: harbor
       component: core
+      release: harbor
+  namespaceSelector:
+    matchNames:
+      - harbor
   endpoints:
     - port: http-metrics
-      path: /metrics
       interval: 30s
+      scheme: http
 ---
 # harbor-jobservice
 apiVersion: monitoring.coreos.com/v1
@@ -26,19 +27,20 @@ metadata:
   name: harbor-jobservice
   namespace: ns-monitoring
   labels:
-    release: prometheus
+    release: kube-prometheus-stack
 spec:
-  namespaceSelector:
-    matchNames:
-      - harbor
   selector:
     matchLabels:
       app: harbor
       component: jobservice
+      release: harbor
+  namespaceSelector:
+    matchNames:
+      - harbor
   endpoints:
     - port: http-metrics
-      path: /metrics
       interval: 30s
+      scheme: http
 ---
 # harbor-registry
 apiVersion: monitoring.coreos.com/v1
@@ -47,19 +49,20 @@ metadata:
   name: harbor-registry
   namespace: ns-monitoring
   labels:
-    release: prometheus
+    release: kube-prometheus-stack
 spec:
-  namespaceSelector:
-    matchNames:
-      - harbor
   selector:
     matchLabels:
       app: harbor
       component: registry
+      release: harbor
+  namespaceSelector:
+    matchNames:
+      - harbor
   endpoints:
     - port: http-metrics
-      path: /metrics
       interval: 30s
+      scheme: http
 ---
 # harbor-trivy
 apiVersion: monitoring.coreos.com/v1
@@ -68,16 +71,17 @@ metadata:
   name: harbor-trivy
   namespace: ns-monitoring
   labels:
-    release: prometheus
+    release: kube-prometheus-stack
 spec:
-  namespaceSelector:
-    matchNames:
-      - harbor
   selector:
     matchLabels:
       app: harbor
       component: trivy
+      release: harbor
+  namespaceSelector:
+    matchNames:
+      - harbor
   endpoints:
     - port: http-trivy
-      path: /metrics
       interval: 30s
+      scheme: http

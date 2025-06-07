@@ -1,0 +1,11 @@
+resources:
+  - argocd-dashboard.yaml
+  - ceph-dashboard.yaml
+  - harbor-dashboard.yaml
+  - jenkins-dashboard.yaml
+  - node-exporter-dashboard.yaml
+  - postgres-dashboard.yaml
+  - redis-dashboard.yaml
+  - vault-dashboard.yaml
+  - multi-cluster-board.yaml
+  - resource-dashboard.yaml

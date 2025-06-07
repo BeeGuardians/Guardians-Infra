@@ -4,7 +4,7 @@ metadata:
   name: jenkins
   namespace: ns-monitoring
   labels:
-    release: prometheus-grafana
+    release: kube-prometheus-stack
 spec:
   selector:
     matchLabels:
@@ -14,6 +14,6 @@ spec:
       - ns-devops
   endpoints:
     - port: http
-      path: /prometheus
+      path: /prometheus/
       interval: 30s
       scheme: http

@@ -1,0 +1,11 @@
+resources:
+  - pv.yaml
+  - pvc.yaml
+
+helmCharts:
+  - name: loki
+    releaseName: loki
+    namespace: ns-monitoring
+    valuesFile: ../values.yaml
+    includeCRDs: true
+    path: ..

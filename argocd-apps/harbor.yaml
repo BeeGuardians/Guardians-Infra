@@ -7,8 +7,8 @@ spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
-    targetRevision: dev
-    path: onpremise-cluster/harbor
+    targetRevision: dev-v2
+    path: onpremise-cluster/harbor/base
     helm:
       valueFiles:
         - values.yaml

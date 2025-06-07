@@ -7,8 +7,8 @@ spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
-    targetRevision: feat/monitoring
-    path: onpremise-cluster/monitoring/loki
+    targetRevision: dev-v2
+    path: onpremise-cluster/monitoring/loki/base
     helm:
       skipCrds: true
   destination:

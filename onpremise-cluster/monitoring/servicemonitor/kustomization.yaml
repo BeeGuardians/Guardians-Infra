@@ -1,6 +1,5 @@
 resources:
   - argocd.yaml
-  - ceph.yaml
   - harbor.yaml
   - jenkins.yaml
   - postgres.yaml

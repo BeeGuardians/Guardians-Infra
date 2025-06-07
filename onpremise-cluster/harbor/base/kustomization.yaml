@@ -1,0 +1,11 @@
+resources:
+  - pv.yaml
+  - pvc.yaml
+
+helmCharts:
+  - name: harbor
+    releaseName: harbor
+    namespace: harbor
+    valuesFile: ../values.yaml
+    includeCRDs: true
+    path: ..

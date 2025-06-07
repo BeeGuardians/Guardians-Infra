@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
-    targetRevision: feat/monitoring
+    targetRevision: dev-v2
     path: cloud-cluster/monitoring/promtail
     helm:
       valueFiles:

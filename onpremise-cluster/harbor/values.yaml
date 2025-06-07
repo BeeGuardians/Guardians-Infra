@@ -50,7 +50,7 @@ expose:
     annotations: {}
     sourceRanges: []
 # externalURL: https://harbor.example.com
-externalURL: https://harbor.example.com:30443
+externalURL: https://harbor.example.com:31443
 # externalURL: http://192.168.0.11:30401
 internalTLS:
   enabled: false
@@ -158,15 +158,6 @@ nginx:
   extraEnvVars: []
   nodeSelector: {}
   tolerations: []
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: NotIn
-                values:
-                  - guardians7
   topologySpreadConstraints: []
   podAnnotations: {}
   podLabels: {}
@@ -182,15 +173,6 @@ portal:
   extraEnvVars: []
   nodeSelector: {}
   tolerations: []
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: NotIn
-                values:
-                  - guardians7
   topologySpreadConstraints: []
   podAnnotations: {}
   podLabels: {}
@@ -237,15 +219,6 @@ core:
 
   nodeSelector: {}
   tolerations: []
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: NotIn
-                values:
-                  - guardians7
   topologySpreadConstraints: []
   podAnnotations: {}
   podLabels: {}
@@ -285,15 +258,6 @@ jobservice:
   extraEnvVars: []
   nodeSelector: {}
   tolerations: []
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: NotIn
-                values:
-                  - guardians7
   topologySpreadConstraints: null
   podAnnotations: {}
   podLabels: {}
@@ -318,15 +282,6 @@ registry:
   revisionHistoryLimit: 1
   nodeSelector: {}
   tolerations: []
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: NotIn
-                values:
-                  - guardians7
   topologySpreadConstraints: []
   podAnnotations: {}
   podLabels: {}
@@ -382,15 +337,6 @@ trivy:
   extraEnvVars: []
   nodeSelector: {}
   tolerations: []
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: NotIn
-                values:
-                  - guardians7
   topologySpreadConstraints: []
   podAnnotations: {}
   podLabels: {}
@@ -420,15 +366,6 @@ redis:
     extraEnvVars: []
     nodeSelector: {}
     tolerations: []
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: NotIn
-                  values:
-                    - guardians7
     priorityClassName: null
     jobserviceDatabaseIndex: "1"
     registryDatabaseIndex: "2"
@@ -458,15 +395,6 @@ exporter:
     tag: v2.10.0
   nodeSelector: {}
   tolerations: []
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: NotIn
-                values:
-                  - guardians7
   topologySpreadConstraints: []
   cacheDuration: 23
   cacheCleanInterval: 14400

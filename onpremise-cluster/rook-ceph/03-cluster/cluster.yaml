@@ -16,9 +16,6 @@ spec:
     useAllNodes: false
     useAllDevices: false
     nodes:
-      - name: "guardians2"
-        devices:
-          - name: "sdb"
       - name: "guardians3"
         devices:
           - name: "sdb"

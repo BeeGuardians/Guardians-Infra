@@ -31,19 +31,19 @@ spec:
             - name: DB_HOST
               value: "postgres.ns-db.svc.cluster.local"
             - name: DB_PORT
-              value: "30432"
+              value: "5432"
             - name: DB_NAME
               value: "guardian"
             - name: REDIS_HOST
               value: "redis-service.ns-db.svc.cluster.local"
             - name: REDIS_PORT
-              value: "30379"
+              value: "6379"
             - name: MAIL_HOST
               value: "smtp.gmail.com"
             - name: MAIL_PORT
               value: "587"
             - name: VAULT_URI
-              value: "http://vault.guardians.onprem:30301"
+              value: "http://vault.ns-vault.svc.cluster.local:8200"
             - name: VAULT_ROLE_ID
               valueFrom:
                 secretKeyRef:

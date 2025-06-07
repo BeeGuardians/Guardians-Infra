@@ -18,15 +18,6 @@ spec:
       securityContext:
         runAsUser: 1000
         fsGroup: 1000
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values:
-                      - guardians7
       containers:
         - name: jenkins
           image: jenkins/jenkins:lts
@@ -36,11 +27,11 @@ spec:
             - containerPort: 50000
           resources:
             requests:
-              memory: "1Gi"
-              cpu: "500m"
+              memory: "4Gi"
+              cpu: "2000m"
             limits:
-              memory: "2Gi"
-              cpu: "1000m"
+              memory: "8Gi"
+              cpu: "4000m"
           env:
             - name: JAVA_OPTS
               value: "-Xmx1g -Xms512m"

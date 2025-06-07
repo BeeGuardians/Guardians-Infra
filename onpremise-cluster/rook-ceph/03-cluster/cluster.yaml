@@ -22,9 +22,6 @@ spec:
       - name: "guardians4"
         devices:
           - name: "sdb"
-      - name: "guardians5"
-        devices:
-          - name: "sdb"
       - name: "guardians6"
         devices:
           - name: "sdb"

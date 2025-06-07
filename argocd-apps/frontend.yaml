@@ -10,7 +10,7 @@ spec:
     targetRevision: dev
     path: cloud-cluster/frontend
   destination:
-    server: https://10.100.0.21:6443
+    server: https://kubernetes.default.svc
     namespace: ns-app
   syncPolicy:
     automated:

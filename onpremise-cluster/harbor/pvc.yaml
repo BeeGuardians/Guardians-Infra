@@ -1,0 +1,69 @@
+# harbor-registry
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: harbor-registry-pvc
+  namespace: harbor
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  volumeName: harbor-registry-pv
+---
+# harbor-jobservice
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: harbor-jobservice-pvc
+  namespace: harbor
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: harbor-jobservice-pv
+---
+# harbor-database
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: harbor-database-pvc
+  namespace: harbor
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: harbor-database-pv
+---
+# harbor-redis
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: harbor-redis-pvc
+  namespace: harbor
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: harbor-redis-pv
+---
+# harbor-trivy
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: harbor-trivy-pvc
+  namespace: harbor
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: harbor-trivy-pv

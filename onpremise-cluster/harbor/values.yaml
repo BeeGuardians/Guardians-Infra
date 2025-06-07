@@ -84,45 +84,20 @@ ipFamily:
     enabled: true
 persistence:
   enabled: true
-  resourcePolicy: delete
+  resourcePolicy: retain
   persistentVolumeClaim:
     registry:
-      existingClaim: ""
-      storageClass: rook-ceph-fs
-      subPath: ""
-      accessMode: ReadWriteOnce
-      size: 20Gi
-      annotations: {}
+      existingClaim: "harbor-registry-pvc"
     jobservice:
       jobLog:
-        existingClaim: ""
-        storageClass: "rook-ceph-fs"
-        subPath: ""
-        accessMode: ReadWriteOnce
-        size: 5Gi
-        annotations: {}
-      storageClass: rook-ceph-fs
+        existingClaim: "harbor-jobservice-pvc"
+      storageClass: ""
     database:
-      existingClaim: ""
-      storageClass: rook-ceph-fs
-      subPath: ""
-      accessMode: ReadWriteOnce
-      size: 1Gi
-      annotations: {}
+      existingClaim: "harbor-database-pvc"
     redis:
-      existingClaim: ""
-      storageClass: rook-ceph-fs
-      subPath: ""
-      accessMode: ReadWriteOnce
-      size: 1Gi
-      annotations: {}
+      existingClaim: "harbor-redis-pvc"
     trivy:
-      existingClaim: ""
-      storageClass: rook-ceph-fs
-      subPath: ""
-      accessMode: ReadWriteOnce
-      size: 5Gi
-      annotations: {}
+      existingClaim: "harbor-trivy-pvc"
   imageChartStorage:
     disableredirect: false
     type: filesystem

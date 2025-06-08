@@ -1200,15 +1200,7 @@ singleBinary:
   terminationGracePeriodSeconds: 30
   # -- Affinity for single binary pods. Passed through `tpl` and, thus, to be configured as string
   # @default -- Hard node and soft zone anti-affinity
-  affinity: |
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: NotIn
-                values:
-                  - guardians7
+  affinity: {}
   # -- DNS config for single binary pods
   dnsConfig: {}
   # -- Node selector for single binary pods
@@ -1357,15 +1349,7 @@ gateway:
   terminationGracePeriodSeconds: 30
   # -- Affinity for gateway pods. Passed through `tpl` and, thus, to be configured as string
   # @default -- Hard node and soft zone anti-affinity
-  affinity: |
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
-                  - guardians5
+  affinity: {}
   # -- DNS config for gateway pods
   dnsConfig: {}
   # -- Node selector for gateway pods

@@ -19,7 +19,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: frontend
-          image: harbor.example.com:31443/guardians/frontend:ab7196b
+          image: harbor.example.com:31443/guardians/frontend:2bc7afc
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80

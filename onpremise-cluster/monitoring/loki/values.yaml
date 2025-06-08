@@ -625,42 +625,6 @@ monitoring:
     #       expr: sum(rate(loki_request_duration_seconds_bucket[1m])) by (le, job, route)
     #     - record: node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate
     #       expr: sum(rate(container_cpu_usage_seconds_total[1m])) by (node, namespace, pod, container)
-  # ServiceMonitor configuration
-  serviceMonitor:
-    # -- If enabled, ServiceMonitor resources for Prometheus Operator are created
-    enabled: true
-    # -- Namespace selector for ServiceMonitor resources
-    namespaceSelector: {}
-    # -- ServiceMonitor annotations
-    annotations: {}
-    # -- Additional ServiceMonitor labels
-    labels: {}
-    # -- ServiceMonitor scrape interval
-    # Default is 15s because included recording rules use a 1m rate, and scrape interval needs to be at
-    # least 1/4 rate interval.
-    interval: 15s
-    # -- ServiceMonitor scrape timeout in Go duration format (e.g. 15s)
-    scrapeTimeout: null
-    # -- ServiceMonitor relabel configs to apply to samples before scraping
-    # https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
-    relabelings: []
-    # -- ServiceMonitor metric relabel configs to apply to samples before ingestion
-    # https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#endpoint
-    metricRelabelings: []
-    # -- ServiceMonitor will use http by default, but you can pick https as well
-    scheme: http
-    # -- ServiceMonitor will use these tlsConfig settings to make the health check requests
-    tlsConfig: null
-    # -- If defined, will create a MetricsInstance for the Grafana Agent Operator.
-    metricsInstance:
-      # -- If enabled, MetricsInstance resources for Grafana Agent Operator are created
-      enabled: true
-      # -- MetricsInstance annotations
-      annotations: {}
-      # -- Additional MetricsInstance labels
-      labels: {}
-      # -- If defined a MetricsInstance will be created to remote write metrics.
-      remoteWrite: null
   # Self monitoring determines whether Loki should scrape its own logs.
   # This feature currently relies on the Grafana Agent Operator being installed,
   # which is installed by default using the grafana-agent-operator sub-chart.
@@ -675,51 +639,6 @@ monitoring:
       # -- Namespace to create additional tenant token secret in. Useful if your Grafana instance
       # is in a separate namespace. Token will still be created in the canary namespace.
       secretNamespace: "{{ .Release.Namespace }}"
-    # Grafana Agent configuration
-    grafanaAgent:
-      # -- Controls whether to install the Grafana Agent Operator and its CRDs.
-      # Note that helm will not install CRDs if this flag is enabled during an upgrade.
-      # In that case install the CRDs manually from https://github.com/grafana/agent/tree/main/production/operator/crds
-      installOperator: true
-      # -- Grafana Agent annotations
-      annotations: {}
-      # -- Additional Grafana Agent labels
-      labels: {}
-      # -- Enable the config read api on port 8080 of the agent
-      enableConfigReadAPI: false
-      # -- The name of the PriorityClass for GrafanaAgent pods
-      priorityClassName: null
-      # -- Resource requests and limits for the grafanaAgent pods
-      resources: {}
-      #   limits:
-      #     memory: 200Mi
-      #   requests:
-      #     cpu: 50m
-      #     memory: 100Mi
-      # -- Tolerations for GrafanaAgent pods
-      tolerations: []
-    # PodLogs configuration
-    podLogs:
-      # -- PodLogs version
-      apiVersion: monitoring.grafana.com/v1alpha1
-      # -- PodLogs annotations
-      annotations: {}
-      # -- Additional PodLogs labels
-      labels: {}
-      # -- PodLogs relabel configs to apply to samples before scraping
-      # https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
-      relabelings: []
-      # -- Additional pipeline stages to process logs after scraping
-      # https://grafana.com/docs/agent/latest/operator/api/#pipelinestagespec-a-namemonitoringgrafanacomv1alpha1pipelinestagespeca
-      additionalPipelineStages: []
-    # LogsInstance configuration
-    logsInstance:
-      # -- LogsInstance annotations
-      annotations: {}
-      # -- Additional LogsInstance labels
-      labels: {}
-      # -- Additional clients for remote write
-      clients: null
   # The Loki canary pushes logs to and queries from this loki installation to test
   # that it's working correctly
   lokiCanary:

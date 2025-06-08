@@ -8,9 +8,11 @@ spec:
   source:
     repoURL: https://github.com/BeeGuardians/Guardians-Infra.git
     targetRevision: dev-v2
-    path: onpremise-cluster/monitoring/loki/base
-    directory:
-      recurse: true
+    path: onpremise-cluster/monitoring/loki
+    helm:
+      skipCrds: true
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: ns-monitoring

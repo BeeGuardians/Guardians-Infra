@@ -30,7 +30,20 @@ kubectlImage:
   # -- Docker image pull policy
   pullPolicy: IfNotPresent
 loki:
+  persistence:
+    enabled: true
+    existingClaim: loki-data
+    storageClassName: ""
   mode: monolithic
+  storage:
+    type: filesystem
+  extraVolumes:
+    - name: loki-storage
+      persistentVolumeClaim:
+        claimName: loki-data
+  extraVolumeMounts:
+    - name: loki-storage
+      mountPath: /var/loki
   service:
     type: NodePort
     port: 3100
@@ -276,10 +289,58 @@ loki:
     ring:
       kvstore:
         store: memberlist
+  
   ruler:
     storage:
       type: local
     rule_path: /tmp/loki/rules
+    # s3:
+    #   s3: null
+    #   endpoint: null
+    #   region: null
+    #   secretAccessKey: null
+    #   accessKeyId: null
+    #   signatureVersion: null
+    #   s3ForcePathStyle: false
+    #   insecure: false
+    #   http_config: {}
+    #   # -- Check https://grafana.com/docs/loki/latest/configure/#s3_storage_config for more info on how to provide a backoff_config
+    #   backoff_config: {}
+    # gcs:
+    #   chunkBufferSize: 0
+    #   requestTimeout: "0s"
+    #   enableHttp2: true
+    # azure:
+    #   accountName: null
+    #   accountKey: null
+    #   connectionString: null
+    #   useManagedIdentity: false
+    #   useFederatedToken: false
+    #   userAssignedId: null
+    #   requestTimeout: null
+    #   endpointSuffix: null
+    # swift:
+    #   auth_version: null
+    #   auth_url: null
+    #   internal: null
+    #   username: null
+    #   user_domain_name: null
+    #   user_domain_id: null
+    #   user_id: null
+    #   password: null
+    #   domain_id: null
+    #   domain_name: null
+    #   project_id: null
+    #   project_name: null
+    #   project_domain_id: null
+    #   project_domain_name: null
+    #   region_name: null
+    #   container_name: null
+    #   max_retries: null
+    #   connect_timeout: null
+    #   request_timeout: null
+  # -- Configure memcached as an external cache for chunk and results cache. Disabled by default
+  # must enable and specify a host for each cache you would like to use.
   memcached:
     chunk_cache:
       enabled: false
@@ -1133,14 +1194,9 @@ singleBinary:
   # -- Init containers to add to the single binary pods
   initContainers: []
   # -- Volume mounts to add to the single binary pods
-  extraVolumeMounts:
-    - name: loki-storage
-      mountPath: /var/loki
+  extraVolumeMounts: []
   # -- Volumes to add to the single binary pods
-  extraVolumes:
-    - name: loki-storage
-      persistentVolumeClaim:
-        claimName: loki-data
+  extraVolumes: []
   # -- Resource requests and limits for the single binary
   resources:
     limits:
@@ -1161,11 +1217,7 @@ singleBinary:
   # -- Tolerations for single binary pods
   tolerations: []
   persistence:
-    enabled: true
-    existingClaim: loki-data
-    storageClassName: ""
-  storage:
-    type: filesystem
+    enabled: false
 # Use either this ingress or the gateway, but not both at once.
 # If you enable this, make sure to disable the gateway.
 # You'll need to supply authn configuration for your ingress controller.

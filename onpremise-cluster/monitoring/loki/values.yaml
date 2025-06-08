@@ -30,20 +30,7 @@ kubectlImage:
   # -- Docker image pull policy
   pullPolicy: IfNotPresent
 loki:
-  persistence:
-    enabled: true
-    existingClaim: loki-data
-    storageClassName: ""
   mode: monolithic
-  storage:
-    type: filesystem
-  extraVolumes:
-    - name: loki-storage
-      persistentVolumeClaim:
-        claimName: loki-data
-  extraVolumeMounts:
-    - name: loki-storage
-      mountPath: /var/loki
   service:
     type: NodePort
     port: 3100
@@ -81,19 +68,6 @@ loki:
   serviceLabels: {}
   # -- The number of old ReplicaSets to retain to allow rollback
   revisionHistoryLimit: 10
-  # -- The SecurityContext for Loki pods
-  podSecurityContext:
-    fsGroup: 10001
-    runAsGroup: 10001
-    runAsNonRoot: true
-    runAsUser: 10001
-  # -- The SecurityContext for Loki containers
-  containerSecurityContext:
-    readOnlyRootFilesystem: false
-    capabilities:
-      drop:
-        - ALL
-    allowPrivilegeEscalation: false
   # -- Should enableServiceLinks be enabled. Default to enable
   enableServiceLinks: true
   # -- Specify an existing secret containing loki configuration. If non-empty, overrides `loki.config`
@@ -1194,9 +1168,25 @@ singleBinary:
   # -- Init containers to add to the single binary pods
   initContainers: []
   # -- Volume mounts to add to the single binary pods
-  extraVolumeMounts: []
+  extraVolumeMounts:
+    - name: storage
+      mountPath: /var/loki
   # -- Volumes to add to the single binary pods
-  extraVolumes: []
+  extraVolumes:
+    - name: storage
+      persistentVolumeClaim:
+        claimName: loki-data
+  podSecurityContext:
+    fsGroup: 10001
+    runAsGroup: 10001
+    runAsNonRoot: true
+    runAsUser: 10001
+  containerSecurityContext:
+    readOnlyRootFilesystem: false
+    capabilities:
+      drop:
+        - ALL
+    allowPrivilegeEscalation: false
   # -- Resource requests and limits for the single binary
   resources:
     limits:
@@ -1217,7 +1207,9 @@ singleBinary:
   # -- Tolerations for single binary pods
   tolerations: []
   persistence:
-    enabled: false
+    enabled: true
+    existingClaim: loki-data
+    storageClassName: ""
 # Use either this ingress or the gateway, but not both at once.
 # If you enable this, make sure to disable the gateway.
 # You'll need to supply authn configuration for your ingress controller.

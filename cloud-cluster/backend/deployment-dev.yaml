@@ -65,9 +65,9 @@ spec:
             - name: IN_CLUSTER
               value: "true"
             - name: APP_SERVICE_ARGOCD_HEALTH_URL
-              value: "http://onpremise-server:30101/healthz"
+              value: "https://onpremise-server:30101/healthz"
             - name: APP_SERVICE_HARBOR_HEALTH_URL
-              value: "https://onpremise-server:30443/api/v2.0/health"
+              value: "https://onpremise-server:31443/api/v2.0/health"
             - name: APP_SERVICE_GRAFANA_HEALTH_URL
               value: "http://onpremise-server:30601/api/health"
             - name: APP_SERVICE_JENKINS_HEALTH_URL

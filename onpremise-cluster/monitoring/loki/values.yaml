@@ -35,6 +35,15 @@ loki:
     existingClaim: loki-data
     storageClassName: ""
   mode: monolithic
+  storage:
+    type: filesystem
+  extraVolumes:
+    - name: loki-storage
+      persistentVolumeClaim:
+        claimName: loki-data
+  extraVolumeMounts:
+    - name: loki-storage
+      mountPath: /var/loki
   service:
     type: NodePort
     port: 3100

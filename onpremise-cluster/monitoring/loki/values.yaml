@@ -1168,14 +1168,14 @@ singleBinary:
   # -- Init containers to add to the single binary pods
   initContainers: []
   # -- Volume mounts to add to the single binary pods
-  extraVolumeMounts:
-    - name: storage
-      mountPath: /var/loki
-  # -- Volumes to add to the single binary pods
-  extraVolumes:
-    - name: storage
-      persistentVolumeClaim:
-        claimName: loki-data
+  # extraVolumeMounts:
+  #   - name: storage
+  #     mountPath: /var/loki
+  # # -- Volumes to add to the single binary pods
+  # extraVolumes:
+  #   - name: storage
+  #     persistentVolumeClaim:
+  #       claimName: loki-data
   podSecurityContext:
     fsGroup: 10001
     runAsGroup: 10001

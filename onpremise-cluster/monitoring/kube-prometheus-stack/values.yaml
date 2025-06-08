@@ -4349,10 +4349,6 @@ prometheus:
     # Additional VolumeMounts on the output StatefulSet definition.
     volumeMounts: []
 
-    additionalScrapeConfigs:
-      name: custom-scrape-configs
-      key: additional-scrape-configs.yaml
-
     ## If additional scrape configurations are already deployed in a single secret file you can use this section.
     ## Expected values are the secret name and key
     ## Cannot be used with additionalScrapeConfigs

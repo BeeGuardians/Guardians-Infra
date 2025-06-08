@@ -30,6 +30,10 @@ kubectlImage:
   # -- Docker image pull policy
   pullPolicy: IfNotPresent
 loki:
+  persistence:
+    enabled: true
+    existingClaim: loki-data
+    storageClassName: "" 
   mode: monolithic
   service:
     type: NodePort

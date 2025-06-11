@@ -71,4 +71,4 @@ spec:
             - name: ALB_CIDR_1
               value: "52.79.121.176/32"
             - name: ALB_CIDR_2
-              value: "3.37.75.65/32"
+              value: "3.36.249.175/32"

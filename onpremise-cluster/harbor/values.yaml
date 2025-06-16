@@ -1,0 +1,534 @@
+disableChecksums: true
+expose:
+  type: ingress
+  tls:
+    enabled: true
+    certSource: secret
+    secret:
+      secretName: harbor-tls
+      cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURzakNDQXBxZ0F3SUJBZ0lVUmlXSkhBbnJEQzNHU2RjSUpkREs2cEpHY3dZd0RRWUpLb1pJaHZjTkFRRUwKQlFBd2J6RUxNQWtHQTFVRUJoTUNTMUl4RGpBTUJnTlZCQWdNQlZObGIzVnNNUTR3REFZRFZRUUhEQVZUWlc5MQpiREVTTUJBR0ExVUVDZ3dKUjNWaGNtUnBZVzV6TVE4d0RRWURWUVFMREFaRVpYWlBjSE14R3pBWkJnTlZCQU1NCkVtaGhjbUp2Y2k1bGVHRnRjR3hsTG1OdmJUQWVGdzB5TlRBMU1Ea3dPRFV4TkRkYUZ3MHlOakExTURrd09EVXgKTkRkYU1HOHhDekFKQmdOVkJBWVRBa3RTTVE0d0RBWURWUVFJREFWVFpXOTFiREVPTUF3R0ExVUVCd3dGVTJWdgpkV3d4RWpBUUJnTlZCQW9NQ1VkMVlYSmthV0Z1Y3pFUE1BMEdBMVVFQ3d3R1JHVjJUM0J6TVJzd0dRWURWUVFECkRCSm9ZWEppYjNJdVpYaGhiWEJzWlM1amIyMHdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUsKQW9JQkFRREk5SXdOamdUQXN1LzJIYy9TSkt2UmtlNUtSNnZ4d3NJeEZCMTFXVElsUkptYnZVK3ljbEdFSmFURgpsVUdzQ1VlZ1ExYWJMd1RybUhWYzduWmlqYjRsN0lpSGI1ZjRiYi9jTGVGZnhlTU4rSjdjcHV6OU8yeWoxdjVTCkxkUWl2SVFrT0taditScHcwbHliSVBxWjlGeWV3NWViZVQyN0RsY0FoVDRqdTVDNDFxeGpZZjQ1ZW5hMmxTSWEKenJsQ202a3lOZlBqcTJHb1NlZ1ZUd1E5ZXNrTW5XTXhpaXBLSzFabDJaOUVzVnIwYnpFR1l5djFNUk40RjlVbApobk1KbHZuOHRuVlI5NzVnWXBiVGszN1RWbmRTQ3RYcDd2c3MzdXJ1d3RZeXJFOVZtWWJGOHFCTHFzUlpCOTNlCkVrMWhMaDJDUy9tMlVvUUwwUXJBcm0vV2Y0aE5BZ01CQUFHalJqQkVNQ01HQTFVZEVRUWNNQnFDRW1oaGNtSnYKY2k1bGVHRnRjR3hsTG1OdmJZY0V3S2dBQ3pBZEJnTlZIUTRFRmdRVTVLakdhckZYTjk4NC9ycEYxUHMycU5ZUApzYWt3RFFZSktvWklodmNOQVFFTEJRQURnZ0VCQURqVTRpeWlsdzVzNEtQK2MxK3ZCRm8yZGdhYktSd0VOSTNHCm1EejVhYUt4ZmZQWmR2Rk4xTGlFcEY3OWlQOVBWR1cyN3ZieHJBZkRONy9idGcxbTZDWDZ4cDZCZUNDR2tkdFoKcUhEYVRYc25Jc05HcFhmUm9xOFMwcFJvRElqVzhEbFh2RnBuSFd0cjlQZUdSVFNSOFRXUWlwR3NNWVF3L3h4cApxV3BhalRTTUdnMDJCcDVwYWcvRlNOVVZzMThmMG40Tk9QbkpjaXVpZHBnZTNFSEV3L2dxaGpjTGlRbW5PL25SCnJFNWJXWHF6Z2tIVW9QWWJRU1BWNkduUWgySHE4WXY0TGhmNnI2SWdIV0dwa29xdWJpQVJxSnZybkRablFtOCsKV0t3WDFZZzQ4T3lhWTFKMXNZbU5HbkhlUXY0RVFUdlNJTS9IM2kyNU5VWVpIL0dCaVRrPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+      key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRREk5SXdOamdUQXN1LzIKSGMvU0pLdlJrZTVLUjZ2eHdzSXhGQjExV1RJbFJKbWJ2VSt5Y2xHRUphVEZsVUdzQ1VlZ1ExYWJMd1RybUhWYwo3blppamI0bDdJaUhiNWY0YmIvY0xlRmZ4ZU1OK0o3Y3B1ejlPMnlqMXY1U0xkUWl2SVFrT0taditScHcwbHliCklQcVo5RnlldzVlYmVUMjdEbGNBaFQ0anU1QzQxcXhqWWY0NWVuYTJsU0lhenJsQ202a3lOZlBqcTJHb1NlZ1YKVHdROWVza01uV014aWlwS0sxWmwyWjlFc1ZyMGJ6RUdZeXYxTVJONEY5VWxobk1KbHZuOHRuVlI5NzVnWXBiVAprMzdUVm5kU0N0WHA3dnNzM3VydXd0WXlyRTlWbVliRjhxQkxxc1JaQjkzZUVrMWhMaDJDUy9tMlVvUUwwUXJBCnJtL1dmNGhOQWdNQkFBRUNnZ0VBQThmMFlxaDJGdUJWUWpCM29hOEtFUWN0T3hMSlJNYVdkTTJBd1VoRmVKcnUKZnpLUWRtOU80cXo2cGMrK3NGMVF4M2t1cVlxY1JxVTNnQm9pd1hCbit0Y2paRWMwSTdQVjFQMmdBZmRReDNzdgpNZ2Mwc1hIQWtqZEpKcUI0V0Q0V0NESTN5aWF0aEhYdFEwQ2lmWlZPVzM5RndCdGRBTjlaVDduY3YrWUpJUkVzCjN6bkVCRzRIeEFCamJvVm5icGorVEo4VEdibDhBcmRBVlBzL3dJckZRT3lSNzdYZ3gvZmdZYTFDQi9HeEtKOWsKYXpMSkFFMVB0bExldXp1akIyaHV0WmNYQ0pDbElERzc0VURmbm1sTWhTbjRrQ2NTVGdVQlhEbnM3eE9RK0ZCMgpRTlh5bTErZllvMFhhRVRwUGZBb1A4RjNFWjlhOFpYb0RoaDF6cEZBd1FLQmdRRHh5bVFFUlZwbG0yS1JHSGhmCkJUMjgwQU1PRkV0ekk0cUtYUmJPbnVSYmpvWEpidVJEMTVXUXFidDZPTWFpZE00UUU2VWs0WUV4SmZWK3NXVzMKWk5QN2RCR25TN1B1Ui9Dazl5NjZhaGdkZFhjMXBFM0Z6YVBxMlJMY3pTWm9oNGNieFdpZmQxaHdGWHlwT0xldAp3QUxHdjRER2V1S1VCVkw2WU5KVDhGdkdsUUtCZ1FEVXc4K1ZlblYzbkQvc3VGbEV5VzljU3grSWFBengyRVFFCkNEWWVtSHRNQkNZN0xESXZhd1ZZV2IzZ2JQNitxVkFWd05vSk5EMDhyb05ISFpoeGtNSkhKUWo0dVd6dnpOWTUKdzVuMnRTekQxQi9XMHNqaHBHUU00cFNQWnZ6Zlp2RG1HS0FyMUVZaGJ3cTYyR2VraHk2VFduODY1VGRaL0VJMQp2akNseEJwazJRS0JnUUNQZXRTREhFeWFRdXpvd1NhYzdGVklkLzk0R1Y3MGdrQ3gvcStNQ1FubHN0dDlQd3JCCm4ycW5uN0VheEJwTFNSa0d2VUdnY3hqZysyK0VzT3gxT2FYNWIxVVNlMy9ZaEdRdTRHZWdRMWp3RWthZFZGUzYKYmw4NCszdVAvMFV0Zms4VWtiNlY4cEpPWU5ISzhWYytDZFViNzRRUlE5YTBrN3c3eTd6RUJydlBTUUtCZ0VzVwpnL2MwRGFyVjJQV1pKZUFSMnh4T1l1V0lHekZxNnE0bG03djJnbVVVZmMyYVRtZlB0RVkyL2J6cm1vZjlSd2MyClZYeTBFL3lMZGtjdDJiUVNxNDNpTXlWY2cyYXArdHpOL0ZOR0kzTkZOS3RqSG9RTHVVZVcyMmswcG4vTlc2MUkKK1pZZVIxWGJVNFVYaEpSYkpRUGFCMWJvdUQwb3V0RXV1d3AxaC84WkFvR0JBSnp6TkQ0NnNrREptanR1RHFJeApmOEZVbTRsV3VnQ0l5Q25rZnV3WFNyNHprWUpMdzNqT1N6bW9ZZGltSFNxbWhyc0ZBaGxSOFNmSGJ5cGUzcEtVCnVSQ3dWQTErblFMVHNWMDc1d2IzUmVlTDY2QXN0WXd6bDFYYmJCSzE0TnBpTThvRGpTdEVHUVQwMUw0cW11blkKVm9FakN1dDlhK0d2dHJSWDJZNHM0WUNCCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+  ingress:
+    hosts:
+      core: harbor.example.com
+    controller: default
+    kubeVersionOverride: ""
+    className: nginx-onpremise
+    annotations:
+      ingress.kubernetes.io/ssl-redirect: "true"
+      ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      kubernetes.io/ingress.class: nginx-onpremise
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    harbor:
+      annotations: {}
+      labels: {}
+  clusterIP:
+    name: harbor
+    staticClusterIP: ""
+    annotations: {}
+    ports:
+      httpPort: 80
+      httpsPort: 443
+  nodePort:
+    name: harbor
+    ports:
+      http:
+        port: 80
+        nodePort: 30401
+      https:
+        port: 443
+        nodePort: 30402
+  loadBalancer:
+    name: harbor
+    IP: ""
+    ports:
+      httpPort: 80
+      httpsPort: 443
+    annotations: {}
+    sourceRanges: []
+# externalURL: https://harbor.example.com
+externalURL: https://harbor.example.com:30443
+# externalURL: http://192.168.0.11:30401
+internalTLS:
+  enabled: false
+  strong_ssl_ciphers: false
+  certSource: auto
+  trustCa: ""
+  core:
+    secretName: ""
+    crt: ""
+    key: ""
+  jobservice:
+    secretName: ""
+    crt: ""
+    key: ""
+  registry:
+    secretName: ""
+    crt: ""
+    key: ""
+  portal:
+    secretName: ""
+    crt: ""
+    key: ""
+  trivy:
+    secretName: ""
+    crt: ""
+    key: ""
+ipFamily:
+  ipv6:
+    enabled: true
+  ipv4:
+    enabled: true
+persistence:
+  enabled: true
+  resourcePolicy: delete
+  persistentVolumeClaim:
+    registry:
+      existingClaim: ""
+      storageClass: rook-ceph-fs
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 20Gi
+      annotations: {}
+    jobservice:
+      jobLog:
+        existingClaim: ""
+        storageClass: "rook-ceph-fs"
+        subPath: ""
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        annotations: {}
+      storageClass: rook-ceph-fs
+    database:
+      existingClaim: ""
+      storageClass: rook-ceph-fs
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      annotations: {}
+    redis:
+      existingClaim: ""
+      storageClass: rook-ceph-fs
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      annotations: {}
+    trivy:
+      existingClaim: ""
+      storageClass: rook-ceph-fs
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 5Gi
+      annotations: {}
+  imageChartStorage:
+    disableredirect: false
+    type: filesystem
+    filesystem:
+      rootdirectory: /storage
+    azure:
+      accountname: accountname
+      accountkey: base64encodedaccountkey
+      container: containername
+      existingSecret: ""
+    gcs:
+      bucket: bucketname
+      encodedkey: base64-encoded-json-key-file
+      existingSecret: ""
+      useWorkloadIdentity: false
+    s3:
+      region: us-west-1
+      bucket: bucketname
+    swift:
+      authurl: https://storage.myprovider.com/v3/auth
+      username: username
+      password: password
+      container: containername
+      existingSecret: ""
+    oss:
+      accesskeyid: accesskeyid
+      accesskeysecret: accesskeysecret
+      region: regionname
+      bucket: bucketname
+      existingSecret: ""
+imagePullPolicy: IfNotPresent
+imagePullSecrets: null
+updateStrategy:
+  type: RollingUpdate
+logLevel: info
+existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
+harborAdminPassword: admin12345
+caSecretName: ""
+secretKey: not-a-secure-key
+existingSecretSecretKey: ""
+proxy:
+  httpProxy: null
+  httpsProxy: null
+  noProxy: 127.0.0.1,localhost,.local,.internal
+  components:
+    - core
+    - jobservice
+    - trivy
+enableMigrateHelmHook: false
+nginx:
+  image:
+    repository: goharbor/nginx-photon
+    tag: v2.10.0
+  serviceAccountName: ""
+  automountServiceAccountToken: false
+  replicas: 1
+  revisionHistoryLimit: 10
+  extraEnvVars: []
+  nodeSelector: {}
+  tolerations: []
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                  - guardians7
+  topologySpreadConstraints: []
+  podAnnotations: {}
+  podLabels: {}
+  priorityClassName: null
+portal:
+  image:
+    repository: goharbor/harbor-portal
+    tag: v2.10.0
+  serviceAccountName: ""
+  automountServiceAccountToken: false
+  replicas: 1
+  revisionHistoryLimit: 1
+  extraEnvVars: []
+  nodeSelector: {}
+  tolerations: []
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                  - guardians7
+  topologySpreadConstraints: []
+  podAnnotations: {}
+  podLabels: {}
+  serviceAnnotations: {}
+  priorityClassName: null
+core:
+  image:
+    repository: goharbor/harbor-core
+    tag: v2.10.0
+  serviceAccountName: ""
+  automountServiceAccountToken: false
+  replicas: 1
+  revisionHistoryLimit: 1
+  startupProbe:
+    httpGet:
+      path: /api/v2.0/ping
+      port: http-web
+    initialDelaySeconds: 10
+    timeoutSeconds: 10
+    periodSeconds: 10
+    failureThreshold: 90
+
+  readinessProbe:
+    httpGet:
+      path: /api/v2.0/ping
+      port: http-web
+    initialDelaySeconds: 30
+    timeoutSeconds: 10
+    periodSeconds: 10
+    failureThreshold: 5
+
+  livenessProbe:
+    httpGet:
+      path: /api/v2.0/ping
+      port: http-web
+    initialDelaySeconds: 20
+    timeoutSeconds: 10
+    periodSeconds: 10
+    failureThreshold: 6
+
+  extraEnvVars:
+    - name: CORE_HOST
+      value: "0.0.0.0"
+
+  nodeSelector: {}
+  tolerations: []
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                  - guardians7
+  topologySpreadConstraints: []
+  podAnnotations: {}
+  podLabels: {}
+  serviceAnnotations: {}
+  configureUserSettings: null
+  quotaUpdateProvider: db
+  secret: ""
+  existingSecret: ""
+  secretName: ""
+  tokenKey: ""
+  tokenCert: ""
+  xsrfKey: ""
+  existingXsrfSecret: ""
+  existingXsrfSecretKey: CSRF_KEY
+  priorityClassName: null
+  artifactPullAsyncFlushDuration: null
+  gdpr:
+    deleteUser: false
+jobservice:
+  image:
+    repository: goharbor/harbor-jobservice
+    tag: v2.10.0
+  replicas: 1
+  revisionHistoryLimit: 1
+  serviceAccountName: ""
+  automountServiceAccountToken: false
+  maxJobWorkers: 10
+  jobLoggers:
+    - file
+  loggerSweeperDuration: 14
+  notification:
+    webhook_job_max_retry: 3
+    webhook_job_http_client_timeout: 3
+  reaper:
+    max_update_hours: 24
+    max_dangling_hours: 168
+  extraEnvVars: []
+  nodeSelector: {}
+  tolerations: []
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                  - guardians7
+  topologySpreadConstraints: null
+  podAnnotations: {}
+  podLabels: {}
+  secret: ""
+  existingSecret: ""
+  existingSecretKey: ""
+  priorityClassName: null
+registry:
+  serviceAccountName: ""
+  automountServiceAccountToken: false
+  registry:
+    image:
+      repository: goharbor/registry-photon
+      tag: v2.10.0
+    extraEnvVars: []
+  controller:
+    image:
+      repository: goharbor/harbor-registryctl
+      tag: v2.10.0
+    extraEnvVars: []
+  replicas: 1
+  revisionHistoryLimit: 1
+  nodeSelector: {}
+  tolerations: []
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                  - guardians7
+  topologySpreadConstraints: []
+  podAnnotations: {}
+  podLabels: {}
+  priorityClassName: null
+  secret: ""
+  existingSecret: ""
+  existingSecretKey: REGISTRY_HTTP_SECRET
+  relativeurls: false
+  credentials:
+    username: harbor_registry_user
+    password: harbor_registry_password
+    existingSecret: ""
+    htpasswdString: ""
+  middleware:
+    enabled: false
+    type: cloudFront
+    cloudFront:
+      baseurl: example.cloudfront.net
+      keypairid: KEYPAIRID
+      duration: 3000s
+      ipfilteredby: none
+      privateKeySecret: my-secret
+  upload_purging:
+    enabled: true
+    age: 168h
+    interval: 24h
+    dryrun: false
+trivy:
+  enabled: true
+  image:
+    repository: goharbor/trivy-adapter-photon
+    tag: v2.10.0
+  serviceAccountName: ""
+  automountServiceAccountToken: false
+  replicas: 1
+  debugMode: false
+  vulnType: os,library
+  severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+  ignoreUnfixed: false
+  insecure: false
+  gitHubToken: ""
+  skipUpdate: false
+  offlineScan: false
+  securityCheck: vuln
+  timeout: 5m0s
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
+  extraEnvVars: []
+  nodeSelector: {}
+  tolerations: []
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                  - guardians7
+  topologySpreadConstraints: []
+  podAnnotations: {}
+  podLabels: {}
+  priorityClassName: null
+database:
+  type: external
+  external:
+    host: postgres.ns-db.svc.cluster.local
+    port: "5432"
+    username: harbor_user
+    password: harbor_user
+    coreDatabase: registry
+    existingSecret: ""
+    sslmode: disable
+  maxIdleConns: 100
+  maxOpenConns: 900
+  podAnnotations: {}
+  podLabels: {}
+redis:
+  type: internal
+  internal:
+    serviceAccountName: ""
+    automountServiceAccountToken: false
+    image:
+      repository: goharbor/redis-photon
+      tag: v2.10.0
+    extraEnvVars: []
+    nodeSelector: {}
+    tolerations: []
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: NotIn
+                  values:
+                    - guardians7
+    priorityClassName: null
+    jobserviceDatabaseIndex: "1"
+    registryDatabaseIndex: "2"
+    trivyAdapterIndex: "5"
+  external:
+    addr: 192.168.0.2:6379
+    sentinelMasterSet: ""
+    coreDatabaseIndex: "0"
+    jobserviceDatabaseIndex: "1"
+    registryDatabaseIndex: "2"
+    trivyAdapterIndex: "5"
+    username: ""
+    password: ""
+    existingSecret: ""
+  podAnnotations: {}
+  podLabels: {}
+exporter:
+  replicas: 1
+  revisionHistoryLimit: 10
+  extraEnvVars: []
+  podAnnotations: {}
+  podLabels: {}
+  serviceAccountName: ""
+  automountServiceAccountToken: false
+  image:
+    repository: goharbor/harbor-exporter
+    tag: v2.10.0
+  nodeSelector: {}
+  tolerations: []
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values:
+                  - guardians7
+  topologySpreadConstraints: []
+  cacheDuration: 23
+  cacheCleanInterval: 14400
+  priorityClassName: null
+metrics:
+  enabled: true
+  core:
+    path: /metrics
+    port: 8001
+  registry:
+    path: /metrics
+    port: 8001
+  jobservice:
+    path: /metrics
+    port: 8001
+  exporter:
+    path: /metrics
+    port: 8001
+  serviceMonitor:
+    enabled: true
+    interval: 30s
+    additionalLabels:
+      release: prometheus
+    metricRelabelings: []
+    relabelings: []
+trace:
+  enabled: false
+  provider: jaeger
+  sample_rate: 1
+  jaeger:
+    endpoint: http://hostname:14268/api/traces
+  otel:
+    endpoint: hostname:4318
+    url_path: /v1/traces
+    compression: false
+    insecure: true
+    timeout: 10
+cache:
+  enabled: false
+  expireHours: 24

@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jenkins
+  namespace: ns-devops
+spec:
+  serviceName: jenkins
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      serviceAccountName: jenkins
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - guardians7
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:lts
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+            - containerPort: 50000
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          env:
+            - name: JAVA_OPTS
+              value: "-Xmx1g -Xms512m"
+          livenessProbe:
+            httpGet:
+              path: /login
+              port: 8080
+            initialDelaySeconds: 600
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 6
+
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 8080
+            initialDelaySeconds: 600
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+          volumeMounts:
+            - name: jenkins-refresh
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-refresh
+          persistentVolumeClaim:
+            claimName: jenkins-refresh

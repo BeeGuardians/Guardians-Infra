@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: jenkins
+  namespace: ns-monitoring
+  labels:
+    release: prometheus-grafana
+spec:
+  selector:
+    matchLabels:
+      app: jenkins
+  namespaceSelector:
+    matchNames:
+      - ns-devops
+  endpoints:
+    - port: http
+      path: /prometheus
+      interval: 30s
+      scheme: http

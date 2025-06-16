@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: ns-app
+  labels:
+    app: backend
+spec:
+  revisionHistoryLimit: 3
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      serviceAccountName: spring-app-sa
+      containers:
+        - name: backend
+          image: harbor.example.com:30443/guardians/backend:ebfff08
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST
+              value: "postgres.ns-db.svc.cluster.local"
+            - name: DB_PORT
+              value: "30432"
+            - name: DB_NAME
+              value: "guardian"
+            - name: REDIS_HOST
+              value: "redis-service.ns-db.svc.cluster.local"
+            - name: REDIS_PORT
+              value: "30379"
+            - name: MAIL_HOST
+              value: "smtp.gmail.com"
+            - name: MAIL_PORT
+              value: "587"
+            - name: VAULT_URI
+              value: "http://vault.guardians.onprem:30301"
+            - name: VAULT_ROLE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: vault-approle
+                  key: role_id
+            - name: VAULT_SECRET_ID
+              valueFrom:
+                secretKeyRef:
+                  name: vault-approle
+                  key: secret_id
+            - name: AWS_REGION
+              value: "ap-northeast-2"
+            - name: AWS_S3_BUCKET
+              value: "s3-guardians-dev"
+            - name: DEFAULT_PROFILE_URL
+              value: "https://s3-guardians-dev.s3.ap-northeast-2.amazonaws.com/profile/basic_profile.png"
+            - name: COOKIE_SESSION
+              value: "true"
+            - name: IN_CLUSTER
+              value: "true"
+            - name: APP_SERVICE_ARGOCD_HEALTH_URL
+              value: "http://onpremise-server:30101/healthz"
+            - name: APP_SERVICE_HARBOR_HEALTH_URL
+              value: "https://onpremise-server:30443/api/v2.0/health"
+            - name: APP_SERVICE_GRAFANA_HEALTH_URL
+              value: "http://onpremise-server:30601/api/health"
+            - name: APP_SERVICE_JENKINS_HEALTH_URL
+              value: "http://onpremise-server:30501"
+            - name: ALB_CIDR_1
+              value: "52.79.121.176/32"
+            - name: ALB_CIDR_2
+              value: "3.36.249.175/32"

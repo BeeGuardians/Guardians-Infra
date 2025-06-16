@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vault-dashboard
+  namespace: ns-monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  vault-dashboard.json: |
+    {
+      "title": "Vault Comprehensive Dashboard",
+      "panels": [
+        {
+          "type": "stat",
+          "title": "Seal Status",
+          "targets": [{"expr": "vault_core_sealed", "refId": "A"}]
+        },
+        {
+          "type": "graph",
+          "title": "Memory Usage",
+          "targets": [{"expr": "vault_runtime_alloc_bytes", "refId": "B"}]
+        },
+        {
+          "type": "graph",
+          "title": "Lease Expirations",
+          "targets": [{"expr": "rate(vault_expire_lease_total[5m])", "refId": "C"}]
+        },
+        {
+          "type": "graph",
+          "title": "Token Creations",
+          "targets": [{"expr": "rate(vault_token_create_count[5m])", "refId": "D"}]
+        },
+        {
+          "type": "graph",
+          "title": "GC Pause Time",
+          "targets": [{"expr": "vault_runtime_gc_pause_ns", "refId": "E"}]
+        },
+        {
+          "type": "stat",
+          "title": "Leadership Setup Failures (HA)",
+          "targets": [{"expr": "vault_core_leadership_setup_failed", "refId": "F"}]
+        }
+      ],
+      "schemaVersion": 16,
+      "version": 1
+    }

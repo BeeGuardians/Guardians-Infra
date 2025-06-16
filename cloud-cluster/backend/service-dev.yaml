@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-dev
+  namespace: ns-app
+  labels:
+    app: backend-dev
+spec:
+  type: ClusterIP
+  selector:
+    app: backend-dev
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
